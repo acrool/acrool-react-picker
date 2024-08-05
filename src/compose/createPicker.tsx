@@ -1,3 +1,4 @@
+import Logger from '@acrool/js-logger';
 import {AnimatePresence} from 'framer-motion';
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 
@@ -9,7 +10,6 @@ import MotionDrawer from '../MotionDrawer';
 import {PickerProviderContext} from '../PickerProvider';
 import {EKeyboardKey, IValueChange} from '../types';
 import {getVisiblePosition} from '../utils';
-import Logger from "@acrool/js-logger";
 
 interface ICreatePicker<T> extends React.FC<T>{}
 
@@ -95,8 +95,8 @@ function createPicker<V extends {}, P>(MainComponent: React.FC<P & IValueChange<
          * 當視窗關閉時觸發onChange
          */
         const onPickerHide = useCallback(() => {
-            if(typeof args.onChange === 'undefined'){
-                Logger.warning('@acrool/react-picker: createPicker component props onChange is undefined, is no call');
+            if(typeof args?.onChange === 'undefined'){
+                Logger.warning('@acrool/react-picker', 'createPicker component props onChange is undefined, is no call');
                 return;
             }
             if(runTimeValueRef.current){

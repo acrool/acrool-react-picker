@@ -15,7 +15,7 @@ export interface IPickerOptions {
 
 export interface IValueChange<T = string> {
     value?: T
-    onChange: (value: T) => void
+    onChange?: (value: T) => void
 }
 
 export interface IPosition {vertical: 'top'|'bottom', horizontal: 'left'|'right'}
