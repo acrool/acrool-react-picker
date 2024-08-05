@@ -37,6 +37,13 @@ function createPicker<V extends {}, P>(MainComponent: React.FC<P & IValueChange<
 
 
         useEffect(() => {
+            // 同步 Props value 異動
+            setValue(args.value);
+
+        }, [JSON.stringify(args.value)]);
+
+
+        useEffect(() => {
             // 同步 value (為了讓 event listener 可以拿到)
             runTimeValueRef.current = value;
         }, [value]);
