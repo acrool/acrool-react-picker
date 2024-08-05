@@ -1,6 +1,6 @@
 import Logger from '@acrool/js-logger';
 import {AnimatePresence} from 'framer-motion';
-import React, {useCallback, useEffect, useRef, useState} from 'react';
+import React, {ForwardedRef, useCallback, useEffect, useRef, useState} from 'react';
 
 import HotkeyListener from '../listener/HotkeyListener';
 import MousedownListener from '../listener/MousedownListener';
@@ -25,8 +25,9 @@ function createPicker<V extends {}, P>(MainComponent: React.FC<P & IValueChange<
     /**
      * Add framer motion
      * @param args
+     * @param ref
      */
-    const MotionPicker: React.FC<P & IValueChange<V>> = (args) => {
+    const MotionPicker: React.FC<P & IValueChange<V>> = (args, ref?: ForwardedRef<HTMLElement>) => {
         const [isPickerVisible, setPickerVisible] = useState<boolean>(false);
         const [isInputFocus, setInputFocus] = useState<boolean>(false);
 
@@ -146,7 +147,10 @@ function createPicker<V extends {}, P>(MainComponent: React.FC<P & IValueChange<
         >
             <div className={styles.root}>
                 <div ref={mainRef} className={styles.mainEl} onKeyDown={disabledKeydown}>
-                    <MainComponent {...args as P & IValueChange<V>}/>
+                    <MainComponent
+                        {...args as P & IValueChange<V>}
+                        ref={ref}
+                    />
                 </div>
 
                 <AnimatePresence>
