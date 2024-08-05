@@ -149,7 +149,6 @@ function createPicker<V extends {}, P>(MainComponent: React.FC<P & IValueChange<
                 <div ref={mainRef} className={styles.mainEl} onKeyDown={disabledKeydown}>
                     <MainComponent
                         {...args as P & IValueChange<V>}
-                        ref={ref}
                     />
                 </div>
 
