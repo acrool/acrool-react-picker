@@ -1,17 +1,16 @@
 import {AnimatePresence} from 'framer-motion';
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 
-import MotionDrawer from '../MotionDrawer';
-import {PickerProviderContext} from '../PickerProvider';
-
-interface ICreatePicker<T> extends React.FC<T>{}
-
 import HotkeyListener from '../listener/HotkeyListener';
 import MousedownListener from '../listener/MousedownListener';
 import PickerHideListener from '../listener/PickerHideListener';
 import styles from '../modal.module.scss';
+import MotionDrawer from '../MotionDrawer';
+import {PickerProviderContext} from '../PickerProvider';
 import {EKeyboardKey, IValueChange} from '../types';
 import {getVisiblePosition} from '../utils';
+
+interface ICreatePicker<T> extends React.FC<T>{}
 
 
 /**
@@ -40,10 +39,6 @@ function createPicker<V extends {}, P>(MainComponent: React.FC<P & IValueChange<
             // 同步 value (為了讓 event listener 可以拿到)
             runTimeValueRef.current = value;
         }, [value]);
-
-
-
-
 
 
         /**
@@ -108,6 +103,19 @@ function createPicker<V extends {}, P>(MainComponent: React.FC<P & IValueChange<
         }, [value, args.onChange]);
 
 
+        /**
+         * 禁止KeyBoard
+         */
+        const disabledKeydown = useCallback((evt: React.KeyboardEvent) => {
+            if([EKeyboardKey.Escape].includes(evt.key as EKeyboardKey)) {
+                if(isPickerVisible){
+                    evt.stopPropagation();
+                    setPickerVisible(false);
+                }
+            }
+        }, [isPickerVisible]);
+
+
 
         return (<PickerProviderContext.Provider
             value={{
@@ -125,7 +133,7 @@ function createPicker<V extends {}, P>(MainComponent: React.FC<P & IValueChange<
             }}
         >
             <div className={styles.root}>
-                <div ref={mainRef} className={styles.mainEl}>
+                <div ref={mainRef} className={styles.mainEl} onKeyDown={disabledKeydown}>
                     <MainComponent {...args as P & IValueChange<V>}/>
                 </div>
 

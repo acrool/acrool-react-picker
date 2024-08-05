@@ -39,8 +39,8 @@ const MotionDrawer = ({
 
 
     const css = {
-        bottom: position.vertical === 'top' ? 'calc(100% - 1px)': undefined,
-        top: position.vertical === 'bottom' ? 'calc(100% - 1px)': undefined,
+        bottom: position.vertical === 'top' ? 'calc(100% + 2px)': undefined,
+        top: position.vertical === 'bottom' ? 'calc(100% + 2px)': undefined,
         // left: position.horizontal === 'right' ? 'calc(100% - 1px)': undefined,
         // right: position.horizontal === 'left' ? 'calc(100% - 1px)': undefined,
     };
