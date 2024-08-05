@@ -46,6 +46,7 @@ const MotionDrawer = ({
     };
 
     return <motion.div
+        ref={ref}
         transition={{type: 'spring', duration: .2}}
         style={css}
         className={styles.motionAnimationWrapper}

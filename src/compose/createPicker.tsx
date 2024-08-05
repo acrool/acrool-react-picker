@@ -9,9 +9,9 @@ interface ICreatePicker<T> extends React.FC<T>{}
 import HotkeyListener from '../listener/HotkeyListener';
 import MousedownListener from '../listener/MousedownListener';
 import PickerHideListener from '../listener/PickerHideListener';
+import styles from '../modal.module.scss';
 import {EKeyboardKey, IValueChange} from '../types';
 import {getVisiblePosition} from '../utils';
-import styles from '../modal.module.scss';
 
 
 /**

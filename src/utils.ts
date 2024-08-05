@@ -1,4 +1,4 @@
-import {IPosition} from '@/library/acrool-react-picker/types';
+import {IPosition} from './types';
 
 /**
  * 取得適合的顯示位置
