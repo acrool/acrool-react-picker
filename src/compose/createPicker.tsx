@@ -9,6 +9,7 @@ import MotionDrawer from '../MotionDrawer';
 import {PickerProviderContext} from '../PickerProvider';
 import {EKeyboardKey, IValueChange} from '../types';
 import {getVisiblePosition} from '../utils';
+import Logger from "@acrool/js-logger";
 
 interface ICreatePicker<T> extends React.FC<T>{}
 
@@ -93,7 +94,11 @@ function createPicker<V extends {}, P>(MainComponent: React.FC<P & IValueChange<
         /**
          * 當視窗關閉時觸發onChange
          */
-        const onDropdownClose = useCallback(() => {
+        const onPickerHide = useCallback(() => {
+            if(typeof args.onChange === 'undefined'){
+                Logger.warning('@acrool/react-picker: createPicker component props onChange is undefined, is no call');
+                return;
+            }
             if(runTimeValueRef.current){
                 const isDiff = JSON.stringify(value) !== JSON.stringify(runTimeValueRef.current);
                 if(isDiff){
@@ -149,7 +154,7 @@ function createPicker<V extends {}, P>(MainComponent: React.FC<P & IValueChange<
                 </AnimatePresence>
 
                 {/* 註冊事件 */}
-                {isPickerVisible && <PickerHideListener onPickerHide={onDropdownClose}/>}
+                {isPickerVisible && <PickerHideListener onPickerHide={onPickerHide}/>}
 
                 {isPickerVisible && <MousedownListener onMousedown={handleClickOutSite}/>}
                 {isInputFocus && <MousedownListener onMousedown={handleBlurCheck}/>}
