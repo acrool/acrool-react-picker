@@ -232,6 +232,13 @@ There is also a example that you can play with it:
 [![Play react-editext-example](https://raw.githubusercontent.com/acrool/acrool-react-picker/main/play-in-example-button.svg)](https://acrool-react-picker.pages.dev)
 
 
+## Precautions
+
+- The main control controls the opening and closing of the menu. You need to use `onMousedown` instead of `onClick`.
+- The main control needs to use button to have the Tab focus function, where `react-hook-form` is very useful
+- The main control needs to use button. If you want to add a clear button in the inner layer, remember that it cannot be button, because `button > button` is an html structure error, and you need to use `onMousedown` instead of `onClick`.
+
+
 ## Ref warning
 
 `Warning: forwardRef render functions accept exactly two parameters: props and ref. Did you forget to use the ref parameter?`
