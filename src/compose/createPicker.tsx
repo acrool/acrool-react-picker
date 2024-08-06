@@ -1,6 +1,6 @@
 import Logger from '@acrool/js-logger';
 import {AnimatePresence} from 'framer-motion';
-import React, {ForwardedRef, useCallback, useEffect, useRef, useState} from 'react';
+import React, {forwardRef, useCallback, useEffect, useRef, useState} from 'react';
 
 import HotkeyListener from '../listener/HotkeyListener';
 import MousedownListener from '../listener/MousedownListener';
@@ -11,7 +11,6 @@ import {PickerProviderContext} from '../PickerProvider';
 import {EKeyboardKey, IValueChange} from '../types';
 import {getVisiblePosition} from '../utils';
 
-interface ICreatePicker<T> extends React.FC<T>{}
 
 
 /**
@@ -21,15 +20,19 @@ interface ICreatePicker<T> extends React.FC<T>{}
  * @param MainComponent
  * @param DropdownComponent
  */
-function createPicker<V extends {}, P>(MainComponent: React.FC<P & IValueChange<V>>, DropdownComponent: React.FC<P & IValueChange<V>>): ICreatePicker<P> {
+function createPicker<V extends {}, P>(MainComponent: React.FC<P & IValueChange<V>>, DropdownComponent: React.FC<P & IValueChange<V>>) {
+
+    const RefMainComponent = forwardRef(MainComponent as React.ForwardRefRenderFunction<P & IValueChange<V>>) as React.ForwardRefExoticComponent<React.RefAttributes<P & IValueChange<V>>>;
+
     /**
      * Add framer motion
      * @param args
      * @param ref
      */
-    const MotionPicker: React.FC<P & IValueChange<V>> = (args, ref?: ForwardedRef<HTMLElement>) => {
+    const MotionPicker = (args, ref?: React.Ref<P & IValueChange<V>>) => {
         const [isPickerVisible, setPickerVisible] = useState<boolean>(false);
         const [isInputFocus, setInputFocus] = useState<boolean>(false);
+
 
         const [value, setValue] = useState<V>();
         const pickerRef = useRef<HTMLDivElement>(null);
@@ -147,8 +150,9 @@ function createPicker<V extends {}, P>(MainComponent: React.FC<P & IValueChange<
         >
             <div className={styles.root}>
                 <div ref={mainRef} className={styles.mainEl} onKeyDown={disabledKeydown}>
-                    <MainComponent
+                    <RefMainComponent
                         {...args as P & IValueChange<V>}
+                        ref={ref}
                     />
                 </div>
 
@@ -175,7 +179,7 @@ function createPicker<V extends {}, P>(MainComponent: React.FC<P & IValueChange<
         </PickerProviderContext.Provider>);
     };
 
-    return MotionPicker as ICreatePicker<P>;
+    return forwardRef(MotionPicker);
 }
 
 export default createPicker;
