@@ -232,6 +232,22 @@ There is also a example that you can play with it:
 [![Play react-editext-example](https://raw.githubusercontent.com/acrool/acrool-react-picker/main/play-in-example-button.svg)](https://acrool-react-picker.pages.dev)
 
 
+## Ref warning
+
+`Warning: forwardRef render functions accept exactly two parameters: props and ref. Did you forget to use the ref parameter?`
+
+```tsx
+interface IProps {
+  value: string, 
+  onChange:(value: string) => void
+}
+const DateTimeField = (props: IProps) => {}
+
+// fix to 
+const DateTimeFieldAfter = (props: IProps, ref?: ForwardedRef<HTMLElement>) => {}
+```
+
+
 ## License
 
 MIT © [Acrool](https://github.com/acrool) & [Imagine](https://github.com/imagine10255)
