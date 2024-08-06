@@ -107,7 +107,7 @@ function createPicker<V extends {}, P>(MainComponent: React.FC<P & IValueChange<
                 Logger.warning('@acrool/react-picker', 'createPicker component props onChange is undefined, is no call');
                 return;
             }
-            if(runTimeValueRef.current){
+            if(typeof runTimeValueRef.current !== 'undefined'){
                 const isDiff = JSON.stringify(value) !== JSON.stringify(runTimeValueRef.current);
                 if(isDiff){
                     args.onChange(runTimeValueRef.current);
