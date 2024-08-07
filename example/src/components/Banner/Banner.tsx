@@ -41,7 +41,7 @@ const Banner = ({
         <a href={repositoryUrl} target="_blank" rel="noopener noreferrer">
             <Github width={40} height={40}/>
         </a>
-        <DownloadButton type="button" onClick={downloadBanner}>Download Banner</DownloadButton>
+        {/*<DownloadButton type="button" onClick={downloadBanner}>Download Banner</DownloadButton>*/}
 
         <DownloadWrapper ref={ref}>
             <img src="/logo.svg" alt={name}/>

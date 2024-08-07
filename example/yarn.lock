@@ -7,7 +7,7 @@
   resolved "https://registry.yarnpkg.com/@acrool/js-logger/-/js-logger-1.0.23.tgz#2dd951fc3142cef0a9a050f02aaa4d94eab09042"
   integrity sha512-UW4mXflIYYIKx4CaptY6HZmY+I2fRY76Eb/E4ACpEm7LXsZPdbgKwpGlzkky7212us8sPP8PyJnhWU7ftMhLXA==
 
-"@acrool/js-utils@3.2.7":
+"@acrool/js-utils@3.2.7", "@acrool/js-utils@^3.2.7":
   version "3.2.7"
   resolved "https://registry.yarnpkg.com/@acrool/js-utils/-/js-utils-3.2.7.tgz#aaa8d4f1f79b76182e5c144fb5c965ceb0e5aac4"
   integrity sha512-V8+Dz5RuMu+jk82t7px5LTNaKFr3280QPclt+3IjtM334Dn6xs89uV89IpCRa/Hx92tnwgEZJgRyYcpVaGnUAA==
@@ -37,10 +37,14 @@
   dependencies:
     clsx "^2.1.1"
 
-"@acrool/react-table@5.1.2-alpha.1":
-  version "5.1.2-alpha.1"
-  resolved "https://registry.yarnpkg.com/@acrool/react-table/-/react-table-5.1.2-alpha.1.tgz#b622ebcb81eec227f134effcd86ee3ef600081fa"
-  integrity sha512-yZequq3s2hb6unvTZUvPIq58UGrTBJk8B4VbPoRqXyXpEROvCIIjatiSOj6ncRMnDiPK+4hCV7QicTHjz0mkpw==
+"@acrool/react-table@5.1.3":
+  version "5.1.3"
+  resolved "https://registry.yarnpkg.com/@acrool/react-table/-/react-table-5.1.3.tgz#0d4e96bf8e98716c2f10987889ee83b247c6880e"
+  integrity sha512-Hg6MPQ3ulobrDHBS0vxxPmkIFOFYsxIO4Bz2qTIqIeIQZ+COBuDH5snveZCBpGDPTTLhiVksrKU4r+8UyW/mtw==
+  dependencies:
+    "@acrool/js-utils" "^3.2.7"
+    clsx "^2.1.1"
+    throttle-debounce "^5.0.2"
 
 "@ampproject/remapping@^2.2.0":
   version "2.3.0"
@@ -1630,6 +1634,11 @@ svg-parser@^2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/svg-parser/-/svg-parser-2.0.4.tgz#fdc2e29e13951736140b76cb122c8ee6630eb6b5"
   integrity sha512-e4hG1hRwoOdRb37cIMSgzNsxyzKfayW6VOflrwvR+/bzrkyxY/31WkbgnQpgtrNp1SdpJvpUAGTa/ZoiPNDuRQ==
+
+throttle-debounce@^5.0.2:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/throttle-debounce/-/throttle-debounce-5.0.2.tgz#ec5549d84e053f043c9fd0f2a6dd892ff84456b1"
+  integrity sha512-B71/4oyj61iNH0KeCamLuE2rmKuTO5byTOSVwECM5FA7TiAiAW+UqTKZ9ERueC4qvgSttUhdmq1mXC3kJqGX7A==
 
 to-fast-properties@^2.0.0:
   version "2.0.0"
