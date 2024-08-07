@@ -28,6 +28,7 @@
 - Quickly create various Pickers such as Datepicker, timepicker, Select dropdown, etc.
 - Plug and unplug using `framer-motion`
 - Simulate the browser's native drop-down menu behavior (click outside to close, lose focus to close, open the menu when the keyboard is pressed or blank)
+- The agent menu OnChange and value changes can be controlled freely and will be saved when the menu is closed.
 
 
 ## Install
