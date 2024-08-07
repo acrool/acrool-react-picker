@@ -27,7 +27,7 @@
 
 - Quickly create various Pickers such as Datepicker, timepicker, Select dropdown, etc.
 - Plug and unplug using `framer-motion`
-- Quickly create light box effects and send them to the outside to avoid hierarchical problems
+- Simulate the browser's native drop-down menu behavior (click outside to close, lose focus to close, open the menu when the keyboard is pressed or blank)
 
 
 ## Install
