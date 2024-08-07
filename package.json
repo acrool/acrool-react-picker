@@ -1,7 +1,7 @@
 {
   "name": "@acrool/react-picker",
   "version": "0.0.2-alpha.7",
-  "description": "Picker library based for Reactjs",
+  "description": "This is a react method to quickly combine buttons with Picker",
   "keywords": [
     "acrool",
     "react",

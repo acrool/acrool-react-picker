@@ -2,17 +2,12 @@ import styled from 'styled-components';
 import {useRef} from 'react';
 import domtoimage from 'dom-to-image';
 import Github from '../../assets/github.svg?react';
-import {media} from "@acrool/react-grid";
+import {media} from '@acrool/react-grid';
 
 
 interface IProps {
     className?: string
 }
-
-
-
-const repositoryUrl = 'https://github.com/acrool/acrool-react-picker';
-const name = 'Acrool React Picker';
 
 
 
@@ -37,11 +32,16 @@ const Banner = ({
             });
     };
 
+
+    const repositoryUrl = 'https://github.com/acrool/acrool-react-Picker';
+    const name = 'Acrool React Picker';
+
+
     return <BannerRoot className={className}>
         <a href={repositoryUrl} target="_blank" rel="noopener noreferrer">
             <Github width={40} height={40}/>
         </a>
-        {/*<DownloadButton type="button" onClick={downloadBanner}>Download Banner</DownloadButton>*/}
+        <DownloadButton type="button" onClick={downloadBanner}>Download Banner</DownloadButton>
 
         <DownloadWrapper ref={ref}>
             <img src="/logo.svg" alt={name}/>
@@ -51,6 +51,7 @@ const Banner = ({
 };
 
 export default Banner;
+
 
 
 
@@ -66,11 +67,11 @@ const DownloadWrapper = styled.div`
   width: 100%;
   gap: 12px;
   background-color: #000;
-
+  
   > img{
     height: 100px;
   }
-
+  
   > h1{
     word-wrap:break-word;
 
@@ -90,7 +91,6 @@ const DownloadWrapper = styled.div`
 
   `}
 `;
-
 
 
 const DownloadButton = styled.button`
