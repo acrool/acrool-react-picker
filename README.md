@@ -69,13 +69,7 @@ interface IProps extends FCProps {
 
 
 /**
- * 數字選擇器(含數字鍵盤)
- *
- * @param style
- * @param className
- * @param title 標題
- * @param disabled 是否禁用
- * @param ref
+ * Select Number Keyboard
  */
 const SelectNumberKeyboard = ({
     id,
@@ -84,7 +78,7 @@ const SelectNumberKeyboard = ({
   const Picker = usePicker();
 
   /**
-   * 清除
+   * Clean
    */
   const handleClear = (e: React.MouseEvent) => {
     e.stopPropagation();
