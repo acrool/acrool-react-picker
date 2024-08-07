@@ -60,11 +60,8 @@ import {createPicker, usePicker} from '@acrool/react-picker';
 
 
 interface IProps extends FCProps {
-  title?: string
-  name?: string
   value?: number
   options?: number[]
-  disabled?: boolean
   onChange?: (value: number) => void
   placeholder?: string
 }
