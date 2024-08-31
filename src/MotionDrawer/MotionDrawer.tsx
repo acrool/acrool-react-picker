@@ -8,12 +8,15 @@ import styles from './motion-drawer.module.scss';
 
 const defaultMotionProps: IPickerOptions = {
     variants: {
-        initial: {position: 'absolute', zIndex: 999, opacity: 0, transform: 'scale(.8)', transition: {type:'spring'}},
-        show: {opacity: 1, transform: 'scale(1)', transition: {type: 'just'}},
-        exit: {opacity: 0, transform: 'scale(.8)'},
+        initial: {position: 'absolute', zIndex: 999, opacity: 0, scale: .9, transition: {type:'spring'}},
+        show: {opacity: 1, scale: 1, transition: {type: 'just'}},
+        exit: {opacity: 0, scale: .9},
     },
     transition: {
         duration: .1,
+        scale: {
+            duration: .05,
+        }
     }
 };
 

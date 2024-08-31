@@ -31,6 +31,7 @@ export const getVisiblePosition = (mainEl: HTMLDivElement|null, pickerHeight: nu
     return {
         top: vertical === 'bottom' ? `${bottom + scrollTop}px`: `${bottom + scrollTop - (pickerHeight + height)}px`,
         left: `${left + scrollLeft}px`,
+        transformOrigin: vertical === 'bottom' ? 'top':'bottom',
     };
 
 };

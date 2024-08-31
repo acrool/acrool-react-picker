@@ -27,8 +27,13 @@ const Example = () => {
                         use: <Select2
                             value={value}
                             options={[
-                                {text: 'A', value: 'A'},
-                                {text: 'B', value: 'B'},
+                                {text: 'Apple', value: 'A'},
+                                {text: 'Basic', value: 'B'},
+                                {text: 'Cat & Car', value: 'C'},
+                                {text: 'Dog & Desk', value: 'D'},
+                                {text: 'Element', value: 'E'},
+                                {text: 'Fake', value: 'F'},
+                                {text: 'Google', value: 'G'},
                             ]}
                             onChange={newValue => setValue(newValue)}
                         />,
