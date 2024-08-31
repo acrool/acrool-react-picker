@@ -1,6 +1,8 @@
 import Logger from '@acrool/js-logger';
+import ReactPortal from '@acrool/react-portal';
 import {AnimatePresence} from 'framer-motion';
 import React, {forwardRef, useCallback, useEffect, useRef, useState} from 'react';
+import {ulid} from 'ulid';
 
 import HotkeyListener from '../listener/HotkeyListener';
 import MousedownListener from '../listener/MousedownListener';
@@ -9,7 +11,6 @@ import styles from '../modal.module.scss';
 import MotionDrawer from '../MotionDrawer';
 import {PickerProviderContext} from '../PickerProvider';
 import {EKeyboardKey, IValueChange} from '../types';
-import {getVisiblePosition} from '../utils';
 
 
 
@@ -36,7 +37,7 @@ function createPicker<V extends {}, P>(MainComponent: React.FC<P & IValueChange<
 
         const [value, setValue] = useState<V>();
         const pickerRef = useRef<HTMLDivElement>(null);
-        const mainRef = useRef<HTMLDivElement>(null);
+        const anchorRef = useRef<HTMLDivElement>(null);
         const runTimeValueRef = useRef<V|undefined>(value);
 
 
@@ -81,7 +82,7 @@ function createPicker<V extends {}, P>(MainComponent: React.FC<P & IValueChange<
          */
         const handleBlurCheck = useCallback((evt: MouseEvent) => {
             if(!pickerRef.current &&
-                mainRef.current && !mainRef.current.contains(evt.target as Node)
+                anchorRef.current && !anchorRef.current.contains(evt.target as Node)
             ){
                 setInputFocus(false);
             }
@@ -94,7 +95,7 @@ function createPicker<V extends {}, P>(MainComponent: React.FC<P & IValueChange<
          */
         const handleClickOutSite = useCallback((evt: MouseEvent) => {
             if(pickerRef.current && !pickerRef.current.contains(evt.target as Node) &&
-                mainRef.current && !mainRef.current.contains(evt.target as Node)
+                anchorRef.current && !anchorRef.current.contains(evt.target as Node)
             ){
                 setPickerVisible(false);
                 setInputFocus(false);
@@ -149,7 +150,7 @@ function createPicker<V extends {}, P>(MainComponent: React.FC<P & IValueChange<
             }}
         >
             <div className={styles.root}>
-                <div ref={mainRef} className={styles.mainEl} onKeyDown={disabledKeydown}>
+                <div ref={anchorRef} className={styles.mainEl} onKeyDown={disabledKeydown}>
                     <RefMainComponent
                         {...args as P & IValueChange<V>}
                         ref={ref}
@@ -158,12 +159,17 @@ function createPicker<V extends {}, P>(MainComponent: React.FC<P & IValueChange<
 
                 <AnimatePresence>
                     {isPickerVisible &&
-                        <MotionDrawer
-                            ref={pickerRef}
-                            position={getVisiblePosition(mainRef.current)}
+                        <ReactPortal
+                            id={`acrool-react-picker-${ulid().toLowerCase()}`}
+                            className={styles.pickerEl}
                         >
-                            <DropdownComponent {...args as P & IValueChange<V>}/>
-                        </MotionDrawer>
+                            <MotionDrawer
+                                ref={pickerRef}
+                                anchorRef={anchorRef}
+                            >
+                                <DropdownComponent {...args as P & IValueChange<V>}/>
+                            </MotionDrawer>
+                        </ReactPortal>
                     }
                 </AnimatePresence>
 

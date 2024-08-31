@@ -18,7 +18,6 @@ export interface IValueChange<T = string> {
     onChange?: (value: T) => void
 }
 
-export interface IPosition {vertical: 'top'|'bottom', horizontal: 'left'|'right'}
 
 
 export enum EKeyboardKey {

@@ -8,7 +8,7 @@ const Example = () => {
     const [value, setValue] = useState<string>('A');
 
 
-    return <div style={{display: 'flex', gap: '10px', alignItems: 'flex-start', width: '100%'}}>
+    return <div style={{display: 'flex', gap: '10px', alignItems: 'flex-start', width: '100%', paddingTop: '200px', paddingBottom: '1500px'}}>
 
         <AcroolTable
             isDark

@@ -1,15 +1,16 @@
 import {motion} from 'framer-motion';
-import {ForwardedRef, forwardRef, ReactNode} from 'react';
+import {ForwardedRef, forwardRef, ReactNode, RefObject, useEffect, useRef, useState} from 'react';
 
-import {IPickerOptions, IPosition} from '../types';
+import {IPickerOptions} from '../types';
+import {getVisiblePosition, setForwardedRef} from '../utils';
 import styles from './motion-drawer.module.scss';
 
 
 const defaultMotionProps: IPickerOptions = {
     variants: {
-        initial: {position: 'absolute', zIndex: 999, opacity: 0, transition: {type:'spring'}},
-        show: {opacity: 1, transition: {type: 'just'}},
-        exit: {opacity: 0},
+        initial: {position: 'absolute', zIndex: 999, opacity: 0, transform: 'scale(.8)', transition: {type:'spring'}},
+        show: {opacity: 1, transform: 'scale(1)', transition: {type: 'just'}},
+        exit: {opacity: 0, transform: 'scale(.8)'},
     },
     transition: {
         duration: .1,
@@ -20,35 +21,49 @@ const defaultMotionProps: IPickerOptions = {
 
 
 interface IProps {
-    position: IPosition
     children: ReactNode
+    anchorRef: RefObject<HTMLDivElement>
 }
 
 
 /**
  * Motion 動畫
  * @param pickerOptions
- * @param position
  * @param children
  * @param ref
  */
 const MotionDrawer = ({
-    position,
     children,
+    anchorRef,
 }: IProps, ref?: ForwardedRef<HTMLDivElement>) => {
+    const pickerRef = useRef<HTMLDivElement>(null);
+    const [pickerHeight, setPickerHeight] = useState(0);
+
+    useEffect(() => {
+        if (pickerRef.current) {
+            const resizeObserver = new ResizeObserver((entries) => {
+                // We only have one entry, so we can use entries[0].
+                const observedHeight = entries[0].contentRect.height;
+                setPickerHeight(observedHeight);
+            });
+
+            resizeObserver.observe(pickerRef.current);
+
+            return () => {
+                // Cleanup the observer when the component is unmounted
+                resizeObserver.disconnect();
+            };
+        }
+    }, []);
+    
 
 
-    const css = {
-        bottom: position.vertical === 'top' ? 'calc(100% + 2px)': undefined,
-        top: position.vertical === 'bottom' ? 'calc(100% + 2px)': undefined,
-        // left: position.horizontal === 'right' ? 'calc(100% - 1px)': undefined,
-        // right: position.horizontal === 'left' ? 'calc(100% - 1px)': undefined,
-    };
+    const style = getVisiblePosition(anchorRef.current, pickerHeight);
 
     return <motion.div
-        ref={ref}
+        ref={setForwardedRef(ref, pickerRef)}
         transition={{type: 'spring', duration: .2}}
-        style={css}
+        style={style}
         className={styles.motionAnimationWrapper}
         variants={defaultMotionProps.variants}
         initial="initial"
