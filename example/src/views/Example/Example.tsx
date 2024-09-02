@@ -36,7 +36,7 @@ export default Example;
 
 const Select2Wrapper = styled.div`
     position: fixed;
-    top: 500px;
+    top: 200px;
 `;
 
 const ExampleRoot = styled.div`

@@ -1,4 +1,3 @@
-import CSS from 'csstype';
 import {motion} from 'framer-motion';
 import {
     ForwardedRef,
@@ -7,7 +6,6 @@ import {
     RefObject,
     useEffect,
     useRef,
-    useState
 } from 'react';
 
 import {IPickerOptions} from '../types';
@@ -40,11 +38,6 @@ interface IProps {
     anchorRef: RefObject<HTMLDivElement>
 }
 
-interface IPosition {
-    top: string,
-    left: string,
-    transformOrigin: 'top'|'bottom',
-}
 
 /**
  * Motion 動畫
@@ -57,7 +50,6 @@ const MotionDrawer = ({
     anchorRef,
 }: IProps, ref?: ForwardedRef<HTMLDivElement>) => {
     const pickerRef = useRef<HTMLDivElement>(null);
-    const [position, setPosition] = useState<CSS.Properties>({display: 'none'});
 
     useEffect(() => {
         const updatePosition = (entries) => {
@@ -81,11 +73,10 @@ const MotionDrawer = ({
                 const vertical = (bottom + pickerHeight + safePadding) >= screenHeight ? 'top' : 'bottom';
 
 
-                setPosition({
-                    top: vertical === 'bottom' ? `${bottom + scrollTop}px`: `${bottom + scrollTop - (pickerHeight + height)}px`,
-                    left: `${left + scrollLeft}px`,
-                    transformOrigin: vertical === 'bottom' ? 'top':'bottom',
-                });
+                pickerRef.current.style.display = 'block';
+                pickerRef.current.style.top = vertical === 'bottom' ? `${bottom + scrollTop}px`: `${bottom + scrollTop - (pickerHeight + height)}px`;
+                pickerRef.current.style.left = `${left + scrollLeft}px`;
+                pickerRef.current.style.transformOrigin = vertical === 'bottom' ? 'top':'bottom';
             }
         };
 
@@ -110,7 +101,7 @@ const MotionDrawer = ({
     return <motion.div
         ref={setForwardedRef(ref, pickerRef)}
         transition={{type: 'spring', duration: .2}}
-        style={position}
+        style={{display: 'none'}}
 
         className={styles.motionAnimationWrapper}
         variants={defaultMotionProps.variants}
