@@ -168,7 +168,7 @@ const Select2Root = styled.button<{
     flex-direction: row;
     align-items: center;
 
-    height: var(--form-height);
+    height: 40px;
 
     width: 100%;
 

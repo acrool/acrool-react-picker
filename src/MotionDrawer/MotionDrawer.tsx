@@ -1,8 +1,17 @@
+import CSS from 'csstype';
 import {motion} from 'framer-motion';
-import {ForwardedRef, forwardRef, ReactNode, RefObject, useEffect, useRef, useState} from 'react';
+import {
+    ForwardedRef,
+    forwardRef,
+    ReactNode,
+    RefObject,
+    useEffect,
+    useRef,
+    useState
+} from 'react';
 
 import {IPickerOptions} from '../types';
-import {getVisiblePosition, setForwardedRef} from '../utils';
+import {setForwardedRef} from '../utils';
 import styles from './motion-drawer.module.scss';
 
 
@@ -31,6 +40,11 @@ interface IProps {
     anchorRef: RefObject<HTMLDivElement>
 }
 
+interface IPosition {
+    top: string,
+    left: string,
+    transformOrigin: 'top'|'bottom',
+}
 
 /**
  * Motion 動畫
@@ -43,33 +57,61 @@ const MotionDrawer = ({
     anchorRef,
 }: IProps, ref?: ForwardedRef<HTMLDivElement>) => {
     const pickerRef = useRef<HTMLDivElement>(null);
-    const [pickerHeight, setPickerHeight] = useState(0);
+    const [position, setPosition] = useState<CSS.Properties>({display: 'none'});
 
     useEffect(() => {
-        if (pickerRef.current) {
-            const resizeObserver = new ResizeObserver((entries) => {
-                // We only have one entry, so we can use entries[0].
-                const observedHeight = entries[0].contentRect.height;
-                setPickerHeight(observedHeight);
-            });
+        const updatePosition = (entries) => {
+            if (anchorRef.current && pickerRef.current) {
+                const pickerRect = entries?.[0]?.contentRect ?? pickerRef.current.getBoundingClientRect();
+                const pickerHeight = pickerRect.height;
 
+                const anchorRect = anchorRef.current.getBoundingClientRect();
+                const height = anchorRect.height;
+                const bottom = anchorRect.bottom;
+                const left = anchorRect.left;
+                // const right = mainRect.right;
+
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+
+                // const screenWidth = window.innerWidth || document.documentElement.clientWidth;
+                const screenHeight = window.innerHeight || document.documentElement.clientHeight;
+
+                const safePadding = 15;
+                const vertical = (bottom + pickerHeight + safePadding) >= screenHeight ? 'top' : 'bottom';
+
+
+                setPosition({
+                    top: vertical === 'bottom' ? `${bottom + scrollTop}px`: `${bottom + scrollTop - (pickerHeight + height)}px`,
+                    left: `${left + scrollLeft}px`,
+                    transformOrigin: vertical === 'bottom' ? 'top':'bottom',
+                });
+            }
+        };
+
+        if (anchorRef.current && pickerRef.current) {
+            const resizeObserver = new ResizeObserver(updatePosition);
             resizeObserver.observe(pickerRef.current);
 
+            window.addEventListener('scroll', updatePosition);
+            window.addEventListener('resize', updatePosition);
+
             return () => {
-                // Cleanup the observer when the component is unmounted
                 resizeObserver.disconnect();
+                window.removeEventListener('scroll', updatePosition);
+                window.removeEventListener('resize', updatePosition);
             };
         }
-    }, []);
-    
+    }, [anchorRef, pickerRef]);
 
 
-    const style = getVisiblePosition(anchorRef.current, pickerHeight);
+
 
     return <motion.div
         ref={setForwardedRef(ref, pickerRef)}
         transition={{type: 'spring', duration: .2}}
-        style={style}
+        style={position}
+
         className={styles.motionAnimationWrapper}
         variants={defaultMotionProps.variants}
         initial="initial"
