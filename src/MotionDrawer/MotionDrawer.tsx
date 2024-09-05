@@ -73,7 +73,6 @@ const MotionDrawer = ({
                 const vertical = (bottom + pickerHeight + safePadding) >= screenHeight ? 'top' : 'bottom';
 
 
-                pickerRef.current.style.display = 'block';
                 pickerRef.current.style.top = vertical === 'bottom' ? `${bottom + scrollTop}px`: `${bottom + scrollTop - (pickerHeight + height)}px`;
                 pickerRef.current.style.left = `${left + scrollLeft}px`;
                 pickerRef.current.style.transformOrigin = vertical === 'bottom' ? 'top':'bottom';
@@ -81,6 +80,8 @@ const MotionDrawer = ({
         };
 
         if (anchorRef.current && pickerRef.current) {
+            pickerRef.current.style.display = 'block';
+
             const resizeObserver = new ResizeObserver(updatePosition);
             resizeObserver.observe(pickerRef.current);
 

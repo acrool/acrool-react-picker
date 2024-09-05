@@ -8,4 +8,8 @@ export default defineConfig({
         react(),
         svgr(),
     ],
+    server: {
+        port: 3000,
+        host: '0.0.0.0', // for debug
+    },
 });
