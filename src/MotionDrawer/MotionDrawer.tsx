@@ -76,6 +76,9 @@ const MotionDrawer = ({
                 pickerRef.current.style.top = vertical === 'bottom' ? `${bottom + scrollTop}px`: `${bottom + scrollTop - (pickerHeight + height)}px`;
                 pickerRef.current.style.left = `${left + scrollLeft}px`;
                 pickerRef.current.style.transformOrigin = vertical === 'bottom' ? 'top':'bottom';
+
+                // 循環
+                requestAnimationFrame(updatePosition);
             }
         };
 
@@ -85,13 +88,8 @@ const MotionDrawer = ({
             const resizeObserver = new ResizeObserver(updatePosition);
             resizeObserver.observe(pickerRef.current);
 
-            window.addEventListener('scroll', updatePosition);
-            window.addEventListener('resize', updatePosition);
-
             return () => {
                 resizeObserver.disconnect();
-                window.removeEventListener('scroll', updatePosition);
-                window.removeEventListener('resize', updatePosition);
             };
         }
     }, [anchorRef, pickerRef]);
