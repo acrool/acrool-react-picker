@@ -83,7 +83,7 @@ const MotionDrawer = ({
         };
 
         if (anchorRef.current && pickerRef.current) {
-            pickerRef.current.style.display = 'block';
+            pickerRef.current.style.visibility = 'visible';
 
             const resizeObserver = new ResizeObserver(updatePosition);
             resizeObserver.observe(pickerRef.current);
@@ -100,7 +100,7 @@ const MotionDrawer = ({
     return <motion.div
         ref={setForwardedRef(ref, pickerRef)}
         transition={{type: 'spring', duration: .2}}
-        style={{display: 'none'}}
+        style={{visibility: 'hidden'}}
 
         className={styles.motionAnimationWrapper}
         variants={defaultMotionProps.variants}
