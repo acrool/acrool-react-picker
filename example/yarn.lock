@@ -14,10 +14,10 @@
   dependencies:
     dayjs "^1.11.12"
 
-"@acrool/react-dropdown@3.0.13":
-  version "3.0.13"
-  resolved "https://registry.yarnpkg.com/@acrool/react-dropdown/-/react-dropdown-3.0.13.tgz#23d0c9b404b0ab05cfac72d07c0a7bd8060900f8"
-  integrity sha512-9sSLbkZwM/RTB9XMhhWSIgCkPQ+VtyPxzyPDT+pojZZ5PVUDSMapjMZ/3nNqylCHNOr0ulG4SrFONwdiEXunxg==
+"@acrool/react-dropdown@3.0.14-alpha.2":
+  version "3.0.14-alpha.2"
+  resolved "https://registry.yarnpkg.com/@acrool/react-dropdown/-/react-dropdown-3.0.14-alpha.2.tgz#e0702aec2515d497b8789c3c94258194b682c5b8"
+  integrity sha512-Kcp174u6xwOgNrsdkSgAzzkO9I9ipMEQJwVsbMTOSr2xQxBadC7cFFhGzrVPP0tym8lQzAxVuQG1MWE4Sn4p9Q==
   dependencies:
     clsx "2.1.1"
 
@@ -30,10 +30,10 @@
   version "0.0.0"
   uid ""
 
-"@acrool/react-portal@^1.0.2-alpha.1":
-  version "1.0.2-alpha.1"
-  resolved "https://registry.yarnpkg.com/@acrool/react-portal/-/react-portal-1.0.2-alpha.1.tgz#c5a901948bcc472c3bc59eb514f6cd6415915e6a"
-  integrity sha512-dmahnxPVB57NHAchV9vFQiDFPKJc7dEI+fv/Q69X0nbT3bl8BS5cYrwhnfHKVx+H2okeILcbLUtwCxSZy1u9bA==
+"@acrool/react-portal@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@acrool/react-portal/-/react-portal-1.0.2.tgz#4027259c61d50b808513630ae0bf53fbe30bf0a3"
+  integrity sha512-/UviZkdnsfFoBdivsb8l1mbQzbFaudyAtNiq4lBolEDG3XvBDD39IZWch+pDkOs/Vdeebb+deVW3QlrM8r2oeQ==
   dependencies:
     clsx "^2.1.1"
 

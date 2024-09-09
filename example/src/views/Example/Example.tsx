@@ -10,56 +10,96 @@ const Example = () => {
 
     return <ExampleRoot>
 
-        <Select2Wrapper>
-            <Select2
-                value={value}
-                options={[
-                    {text: 'Apple', value: 'A'},
-                    {text: 'Basic', value: 'B'},
-                    {text: 'Cat & Car', value: 'C'},
-                    {text: 'Dog & Desk', value: 'D'},
-                    {text: 'Element', value: 'E'},
-                    {text: 'Fake', value: 'F'},
-                    {text: 'Google', value: 'G'},
-                ]}
-                onChange={newValue => setValue(newValue)}
-            />
+        <Select2
+            isSearchEnable
+            value={value}
+            options={[
+                {text: 'Apple', value: 'A'},
+                {text: 'Basic', value: 'B'},
+                {text: 'Cat & Car', value: 'C'},
+                {text: 'Dog & Desk', value: 'D'},
+                {text: 'Element', value: 'E'},
+                {text: 'Fake', value: 'F'},
+                {text: 'Google', value: 'G'},
+            ]}
+            onChange={newValue => setValue(newValue)}
+        />
+        <Select2
+            value={value}
+            options={[
+                {text: 'Apple', value: 'A'},
+                {text: 'Basic', value: 'B'},
+                {text: 'Cat & Car', value: 'C'},
+                {text: 'Dog & Desk', value: 'D'},
+                {text: 'Element', value: 'E'},
+                {text: 'Fake', value: 'F'},
+                {text: 'Google', value: 'G'},
+            ]}
+            onChange={newValue => setValue(newValue)}
+        />
+        <Select2
+            value={value}
+            options={[
+                {text: 'Apple', value: 'A'},
+                {text: 'Basic', value: 'B'},
+                {text: 'Cat & Car', value: 'C'},
+                {text: 'Dog & Desk', value: 'D'},
+                {text: 'Element', value: 'E'},
+                {text: 'Fake', value: 'F'},
+                {text: 'Google', value: 'G'},
+            ]}
+            onChange={newValue => setValue(newValue)}
+        />
+        {/*<Select2Wrapper>*/}
+        {/*    <Select2*/}
+        {/*        value={value}*/}
+        {/*        options={[*/}
+        {/*            {text: 'Apple', value: 'A'},*/}
+        {/*            {text: 'Basic', value: 'B'},*/}
+        {/*            {text: 'Cat & Car', value: 'C'},*/}
+        {/*            {text: 'Dog & Desk', value: 'D'},*/}
+        {/*            {text: 'Element', value: 'E'},*/}
+        {/*            {text: 'Fake', value: 'F'},*/}
+        {/*            {text: 'Google', value: 'G'},*/}
+        {/*        ]}*/}
+        {/*        onChange={newValue => setValue(newValue)}*/}
+        {/*    />*/}
 
-        </Select2Wrapper>
+        {/*</Select2Wrapper>*/}
 
-        <Select2Wrapper2>
-            <Select2
-                value={value}
-                options={[
-                    {text: 'Apple', value: 'A'},
-                    {text: 'Basic', value: 'B'},
-                    {text: 'Cat & Car', value: 'C'},
-                    {text: 'Dog & Desk', value: 'D'},
-                    {text: 'Element', value: 'E'},
-                    {text: 'Fake', value: 'F'},
-                    {text: 'Google', value: 'G'},
-                ]}
-                onChange={newValue => setValue(newValue)}
-            />
-        </Select2Wrapper2>
+        {/*<Select2Wrapper2>*/}
+        {/*    <Select2*/}
+        {/*        value={value}*/}
+        {/*        options={[*/}
+        {/*            {text: 'Apple', value: 'A'},*/}
+        {/*            {text: 'Basic', value: 'B'},*/}
+        {/*            {text: 'Cat & Car', value: 'C'},*/}
+        {/*            {text: 'Dog & Desk', value: 'D'},*/}
+        {/*            {text: 'Element', value: 'E'},*/}
+        {/*            {text: 'Fake', value: 'F'},*/}
+        {/*            {text: 'Google', value: 'G'},*/}
+        {/*        ]}*/}
+        {/*        onChange={newValue => setValue(newValue)}*/}
+        {/*    />*/}
+        {/*</Select2Wrapper2>*/}
 
-        <Select2Wrapper3>
-            <Padding/>
-            <Select2
-                value={value}
-                options={[
-                    {text: 'Apple', value: 'A'},
-                    {text: 'Basic', value: 'B'},
-                    {text: 'Cat & Car', value: 'C'},
-                    {text: 'Dog & Desk', value: 'D'},
-                    {text: 'Element', value: 'E'},
-                    {text: 'Fake', value: 'F'},
-                    {text: 'Google', value: 'G'},
-                ]}
-                onChange={newValue => setValue(newValue)}
-            />
-            <Padding/>
-        </Select2Wrapper3>
+        {/*<Select2Wrapper3>*/}
+        {/*    <Padding/>*/}
+        {/*    <Select2*/}
+        {/*        value={value}*/}
+        {/*        options={[*/}
+        {/*            {text: 'Apple', value: 'A'},*/}
+        {/*            {text: 'Basic', value: 'B'},*/}
+        {/*            {text: 'Cat & Car', value: 'C'},*/}
+        {/*            {text: 'Dog & Desk', value: 'D'},*/}
+        {/*            {text: 'Element', value: 'E'},*/}
+        {/*            {text: 'Fake', value: 'F'},*/}
+        {/*            {text: 'Google', value: 'G'},*/}
+        {/*        ]}*/}
+        {/*        onChange={newValue => setValue(newValue)}*/}
+        {/*    />*/}
+        {/*    <Padding/>*/}
+        {/*</Select2Wrapper3>*/}
 
 
 
@@ -91,7 +131,7 @@ const Select2Wrapper2 = styled.div`
 `;
 
 const ExampleRoot = styled.div`
-    padding: 500px 0 500px 0;
+    //padding: 500px 0 500px 0;
 `;
 
 
