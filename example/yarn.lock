@@ -14,10 +14,10 @@
   dependencies:
     dayjs "^1.11.12"
 
-"@acrool/react-dropdown@3.0.14-alpha.2":
-  version "3.0.14-alpha.2"
-  resolved "https://registry.yarnpkg.com/@acrool/react-dropdown/-/react-dropdown-3.0.14-alpha.2.tgz#e0702aec2515d497b8789c3c94258194b682c5b8"
-  integrity sha512-Kcp174u6xwOgNrsdkSgAzzkO9I9ipMEQJwVsbMTOSr2xQxBadC7cFFhGzrVPP0tym8lQzAxVuQG1MWE4Sn4p9Q==
+"@acrool/react-dropdown@3.0.14":
+  version "3.0.14"
+  resolved "https://registry.yarnpkg.com/@acrool/react-dropdown/-/react-dropdown-3.0.14.tgz#cdadada83919ca91537925cafc480aa7adc9b4f7"
+  integrity sha512-gvbW9eKT73Tj2v4UXtXDdQz1hQaHL03OuPlch2fYqgjjgDoSWd8GUzxsdtJpfG0vDoFt9fHSLuAtWHCE7ycd/w==
   dependencies:
     clsx "2.1.1"
 
