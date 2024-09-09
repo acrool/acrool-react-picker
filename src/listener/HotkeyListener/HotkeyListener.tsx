@@ -2,7 +2,7 @@ import {useEffect} from 'react';
 
 
 interface HotkeyListenerProps{
-    onKeydown: (e: KeyboardEvent) => void
+    onKeyUp: (e: KeyboardEvent) => void
 }
 
 /**
@@ -11,12 +11,12 @@ interface HotkeyListenerProps{
  * @constructor
  */
 const HotkeyListener = ({
-    onKeydown
+    onKeyUp
 }: HotkeyListenerProps) => {
     useEffect(() => {
-        document.addEventListener('keydown', onKeydown);
+        document.addEventListener('keyup', onKeyUp);
         return () => {
-            document.removeEventListener('keydown', onKeydown);
+            document.removeEventListener('keyup', onKeyUp);
         };
     }, []);
     return null;
