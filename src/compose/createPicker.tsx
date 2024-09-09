@@ -78,20 +78,6 @@ function createPicker<V extends {}, P>(MainComponent: React.FC<P & IValueChange<
         }, []);
 
         /**
-         * ESC 關閉
-         */
-        const handleOnHideHotKey = useCallback((evt: KeyboardEvent) => {
-            if([EKeyboardKey.Escape].includes(evt.key as EKeyboardKey)) {
-                if(isPickerVisible){
-                    evt.stopPropagation();
-                    setPickerVisible(false);
-                }
-            }
-        }, [isPickerVisible]);
-
-
-
-        /**
          * 模擬選單是已關閉狀態 但 還在 Focus狀態，關閉 Focus 狀態
          * @
          */
@@ -135,6 +121,20 @@ function createPicker<V extends {}, P>(MainComponent: React.FC<P & IValueChange<
         }, [value, args.onChange]);
 
 
+        /**
+         * 禁止KeyBoard
+         */
+        const disabledKeyDown = useCallback((evt: React.KeyboardEvent) => {
+            if([EKeyboardKey.Escape].includes(evt.key as EKeyboardKey)) {
+                if(isPickerVisible){
+                    evt.stopPropagation();
+                    setPickerVisible(false);
+                }
+            }
+        }, [isPickerVisible]);
+
+
+
         return (<PickerProviderContext.Provider
             value={{
                 hide: () => requestAnimationFrame(() => setPickerVisible(false)),
@@ -150,7 +150,7 @@ function createPicker<V extends {}, P>(MainComponent: React.FC<P & IValueChange<
                 onChange: setValue,
             }}
         >
-            <div className={styles.root}>
+            <div className={styles.root} onKeyDown={disabledKeyDown}>
                 <div ref={anchorRef} className={styles.mainEl}>
                     <RefMainComponent
                         {...args as P & IValueChange<V>}
@@ -181,7 +181,6 @@ function createPicker<V extends {}, P>(MainComponent: React.FC<P & IValueChange<
                 {isInputFocus && <MousedownListener onMousedown={handleBlurCheck}/>}
                 {isInputFocus && <HotkeyListener onKeyDown={handleOnShowHotKey}/>}
                 {isInputFocus && <HotkeyListener onKeyDown={handleOnBlurHotKey}/>}
-                {isInputFocus && <HotkeyListener onKeyDown={handleOnHideHotKey}/>}
             </div>
 
         </PickerProviderContext.Provider>);

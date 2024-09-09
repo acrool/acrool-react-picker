@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 
 import Select2 from '../../components/Select2';
 import styled from 'styled-components';
@@ -7,6 +7,16 @@ import styled from 'styled-components';
 const Example = () => {
     const [value, setValue] = useState<string>('A');
 
+    const onKeyDown = useCallback(() => {
+        console.log('xxxx');
+    }, []);
+
+    useEffect(() => {
+        document.addEventListener('keydown', onKeyDown);
+        return () => {
+            document.removeEventListener('keydown', onKeyDown);
+        };
+    }, []);
 
     return <ExampleRoot>
 
