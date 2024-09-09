@@ -3,9 +3,10 @@ import {Dropdown, IDropdownOption, isGroupOptions, TOption} from '@acrool/react-
 import {Flex} from '@acrool/react-grid';
 import {createPicker,usePicker} from '@acrool/react-picker';
 import clsx from 'clsx';
-import React, {ForwardedRef, useMemo} from 'react';
+import React, {ForwardedRef, useEffect, useMemo, useRef} from 'react';
 import styled, {css} from 'styled-components';
 
+// import {createPicker, usePicker} from '@/library/acrool-react-picker';
 
 
 export interface IProps<V> {
@@ -77,11 +78,12 @@ const Select2 = <V extends null>({
 
     return <Select2Root
         ref={ref}
-        className="align-items-center justify-content-between column-gap-2"
+        className={clsx('align-items-center justify-content-between column-gap-2')}
         type="button"
         onMouseDown={Picker.toggle}
         isFocus={Picker.isInputFocus}
         onFocus={Picker.inputFocus}
+        // onBlur={Picker.inputBlur}
         disabled={disabled}
         isLink={isLink}
     >
@@ -90,7 +92,7 @@ const Select2 = <V extends null>({
         </Text>
 
         {!isLink && (
-            <ArrowDownIcon/>
+            '>'
         )}
     </Select2Root>;
 };
@@ -103,6 +105,16 @@ const Select2 = <V extends null>({
 const Picker = <V extends null>(args: IProps<V>) => {
     const {placeholder, options, value, onChange, isAvatarEnable, isSearchEnable} = args;
     const Picker = usePicker();
+    const searchForwardedRef = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {
+        window.setTimeout(() => {
+            if(searchForwardedRef.current){
+                searchForwardedRef.current.focus();
+            }
+        }, 10);
+    }, []);
+
 
     /**`
      * 取得加上Placeholder的Options
@@ -130,6 +142,7 @@ const Picker = <V extends null>(args: IProps<V>) => {
         isAvatarEnable={isAvatarEnable}
         isSearchEnable={isSearchEnable}
         isCheckedEnable
+        searchForwardedRef={searchForwardedRef}
         searchTextPlaceholder="type keyword..."
     />;
 };
@@ -146,16 +159,12 @@ export default createPicker(
 const Text = styled.div<{
     isPlaceholderValue: boolean,
 }>`
-    ${props => props.isPlaceholderValue && css`
-      color: #6c757d;
-    `}
+  ${props => props.isPlaceholderValue && css`
+    color: #6c757d;
+  `}
 `;
 
 
-const ArrowDownIcon = styled.div`
-    flex: 0 0 auto;
-    margin-left: 5px;
-`;
 
 
 const Select2Root = styled.button<{
@@ -163,44 +172,44 @@ const Select2Root = styled.button<{
     isLink?: boolean,
     isFocus?: boolean,
 }>`
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 
-    height: 40px;
+  height: var(--form-height);
 
-    width: 100%;
+  width: 100%;
 
-    font-size: 14px;
-    color: var(--form-color);
+  font-size: 14px;
+  color: var(--form-color);
 
-    font-weight: 400;
-    line-height: 21px;
+  font-weight: 400;
+  line-height: 21px;
 
-    background: 0 0;
-    background-clip: padding-box;
+  background: 0 0;
+  background-clip: padding-box;
 
-    border-radius: .25rem;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-    margin-bottom: 0;
-    border: 1px solid #444;
-    padding: 1px 10px;
-
-
-    ${props => props.isLink && css`
-        height: auto;
-        padding: 0;
-        border: none;
-    `}
-
-    ${props => props.isFocus && css`
-        box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
-    `}
+  border-radius: .25rem;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  margin-bottom: 0;
+  border: 1px solid #444;
+  padding: 1px 10px;
 
 
-    ${props => props.disabled && css`
-        opacity: .7;
-        pointer-events: none;
-    `}
+  ${props => props.isLink && css`
+    height: auto;
+    padding: 0;
+    border: none;
+  `}
+
+  ${props => props.isFocus && css`
+    box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+  `}
+
+
+  ${props => props.disabled && css`
+    opacity: .7;
+    pointer-events: none;
+  `}
 `;

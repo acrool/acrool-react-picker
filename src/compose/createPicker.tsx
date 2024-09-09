@@ -125,8 +125,11 @@ function createPicker<V extends {}, P>(MainComponent: React.FC<P & IValueChange<
          * 禁止KeyBoard
          */
         const disabledKeyDown = useCallback((evt: React.KeyboardEvent) => {
+            console.log('esc_1');
             if([EKeyboardKey.Escape].includes(evt.key as EKeyboardKey)) {
+                console.log('esc_1_2');
                 if(isPickerVisible){
+                    console.log('esc_1_3');
                     evt.stopPropagation();
                     setPickerVisible(false);
                 }
