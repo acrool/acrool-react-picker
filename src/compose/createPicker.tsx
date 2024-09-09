@@ -72,6 +72,7 @@ function createPicker<V extends {}, P>(MainComponent: React.FC<P & IValueChange<
          */
         const handleOnShowHotKey = useCallback((evt: KeyboardEvent) => {
             if([EKeyboardKey.ArrowUp, EKeyboardKey.ArrowDown, EKeyboardKey.Enter].includes(evt.key as EKeyboardKey) || evt.code === 'Space') {
+                evt.stopPropagation();
                 setPickerVisible(true);
             }
         }, []);
