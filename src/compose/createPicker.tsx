@@ -123,7 +123,7 @@ function createPicker<V extends {}, P>(MainComponent: React.FC<P & IValueChange<
         /**
          * 禁止KeyBoard
          */
-        const disabledKeyUp = useCallback((evt: React.KeyboardEvent) => {
+        const disabledKeyDown = useCallback((evt: React.KeyboardEvent) => {
             if([EKeyboardKey.Escape].includes(evt.key as EKeyboardKey)) {
                 if(isPickerVisible){
                     evt.stopPropagation();
@@ -150,7 +150,7 @@ function createPicker<V extends {}, P>(MainComponent: React.FC<P & IValueChange<
             }}
         >
             <div className={styles.root}>
-                <div ref={anchorRef} className={styles.mainEl} onKeyUp={disabledKeyUp}>
+                <div ref={anchorRef} className={styles.mainEl} onKeyDown={disabledKeyDown}>
                     <RefMainComponent
                         {...args as P & IValueChange<V>}
                         ref={ref}
@@ -178,8 +178,8 @@ function createPicker<V extends {}, P>(MainComponent: React.FC<P & IValueChange<
 
                 {isPickerVisible && <MousedownListener onMousedown={handleClickOutSite}/>}
                 {isInputFocus && <MousedownListener onMousedown={handleBlurCheck}/>}
-                {isInputFocus && <HotkeyListener onKeyUp={handleOnShowHotKey}/>}
-                {isInputFocus && <HotkeyListener onKeyUp={handleOnBlurHotKey}/>}
+                {isInputFocus && <HotkeyListener onKeyDown={handleOnShowHotKey}/>}
+                {isInputFocus && <HotkeyListener onKeyDown={handleOnBlurHotKey}/>}
             </div>
 
         </PickerProviderContext.Provider>);
