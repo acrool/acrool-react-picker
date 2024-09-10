@@ -11,6 +11,7 @@ import styles from '../modal.module.scss';
 import MotionDrawer from '../MotionDrawer';
 import {PickerProviderContext} from '../PickerProvider';
 import {EKeyboardKey, IValueChange} from '../types';
+import {setForwardedRef} from '../utils';
 
 
 
@@ -37,6 +38,7 @@ function createPicker<V extends {}, P>(MainComponent: React.FC<P & IValueChange<
 
         const [value, setValue] = useState<V>();
         const pickerRef = useRef<HTMLDivElement>(null);
+        const mainRef = useRef<any>(null);
         const anchorRef = useRef<HTMLDivElement>(null);
         const runTimeValueRef = useRef<V|undefined>(value);
 
@@ -56,19 +58,19 @@ function createPicker<V extends {}, P>(MainComponent: React.FC<P & IValueChange<
 
         /**
          * 處理當鍵盤按 Tab 的時候關閉選單與注視
-         * @
          */
         const handleOnBlurHotKey = useCallback((evt: KeyboardEvent) => {
             if([EKeyboardKey.Tab].includes(evt.key as EKeyboardKey)) {
                 setPickerVisible(false);
+                mainRef.current.focus();
                 setInputFocus(false);
+
             }
         }, []);
 
 
         /**
          * 處理當鍵盤按[上 下 空白]的時候開啟選單
-         * @
          */
         const handleOnShowHotKey = useCallback((evt: KeyboardEvent) => {
             if([EKeyboardKey.ArrowUp, EKeyboardKey.ArrowDown, EKeyboardKey.Enter].includes(evt.key as EKeyboardKey) || evt.code === 'Space') {
@@ -79,7 +81,6 @@ function createPicker<V extends {}, P>(MainComponent: React.FC<P & IValueChange<
 
         /**
          * 模擬選單是已關閉狀態 但 還在 Focus狀態，關閉 Focus 狀態
-         * @
          */
         const handleBlurCheck = useCallback((evt: MouseEvent) => {
             if(!pickerRef.current &&
@@ -92,7 +93,6 @@ function createPicker<V extends {}, P>(MainComponent: React.FC<P & IValueChange<
 
         /**
          * 模擬下拉選單 "點擊區域外"，將下拉選單關閉
-         * @
          */
         const handleClickOutSite = useCallback((evt: MouseEvent) => {
             if(pickerRef.current && !pickerRef.current.contains(evt.target as Node) &&
@@ -154,7 +154,7 @@ function createPicker<V extends {}, P>(MainComponent: React.FC<P & IValueChange<
                 <div ref={anchorRef} className={styles.mainEl}>
                     <RefMainComponent
                         {...args as P & IValueChange<V>}
-                        ref={ref}
+                        ref={setForwardedRef(ref, mainRef)}
                     />
                 </div>
 
