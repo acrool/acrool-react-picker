@@ -26,9 +26,16 @@
   resolved "https://registry.yarnpkg.com/@acrool/react-grid/-/react-grid-5.2.2.tgz#8de39e0709625ce22c024a587bc2d632edbd38a5"
   integrity sha512-23+iQrn9tgHW0Bg8oHtbtoxQoruFg2AoEHUCsqklRYjxZdXj0Nik32SfJ1svhGdLIzNwD0GSdl2GrQ5qNKncGA==
 
-"@acrool/react-picker@link:..":
-  version "0.0.0"
-  uid ""
+"@acrool/react-picker@0.0.7-alpha.0":
+  version "0.0.7-alpha.0"
+  resolved "https://registry.yarnpkg.com/@acrool/react-picker/-/react-picker-0.0.7-alpha.0.tgz#e617cda35b5bfdf1a463e9a8799c2ef2fd94e628"
+  integrity sha512-03VKlxu68t+In49Y1Tik2RuEs5r0VbseQIVVUfbM0VPA9SEI8V/nP9oFOW2y6eE91G1nhyTMvvTuOIB65NQSQA==
+  dependencies:
+    "@acrool/js-logger" "^1.0.23"
+    "@acrool/react-portal" "^1.0.2"
+    clsx "^2.1.1"
+    framer-motion "^11.3.19"
+    ulid "^2.3.0"
 
 "@acrool/react-portal@^1.0.2":
   version "1.0.2"
