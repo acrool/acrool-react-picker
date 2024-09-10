@@ -2,6 +2,8 @@ import type { Preview } from "@storybook/react";
 // import './reset.css';
 import '@acrool/react-picker/dist/index.css';
 import '@acrool/react-dropdown/dist/index.css';
+import '@acrool/react-grid/dist/index.css';
+import {GridThemeProvider} from "@acrool/react-grid";
 
 
 const preview: Preview = {
@@ -15,7 +17,9 @@ const preview: Preview = {
   },
   decorators: [
       (Story) => (
-          <Story />
+          <GridThemeProvider>
+            <Story />
+          </GridThemeProvider>
       ),
   ],
 };

@@ -1,15 +1,15 @@
 import {isEmpty} from '@acrool/js-utils/equal';
 import {Dropdown, IDropdownOption, isGroupOptions, TOption} from '@acrool/react-dropdown';
-import {Flex} from '@acrool/react-grid';
+import {Flex, fr} from '@acrool/react-grid';
 import {createPicker,usePicker} from '@acrool/react-picker';
 import clsx from 'clsx';
-import React, {ForwardedRef, useMemo} from 'react';
+import React, {ForwardedRef, useEffect, useMemo, useRef} from 'react';
 import styled, {css} from 'styled-components';
 
+import ArrowDownSvg from './arrow_down.svg?react';
 
 
-export interface IProps<V> {
-    title?: string
+export interface IProps<V>  {
     value?: V
     onChange: (value: V) => void
     name?: string
@@ -29,8 +29,6 @@ export interface IProps<V> {
  * 下拉選單元件
  *
  * @param style
- * @param className
- * @param title 標題
  * @param options 下拉選單項目
  * @param disabled 是否禁用
  * @param value
@@ -65,6 +63,7 @@ const Select2 = <V extends null>({
 
         return current ?
             <Flex className="align-items-center">
+                {/*{isAvatarEnable && <Avatar color={current.color} image={current.avatarUrl} size={15} className="mr-1"/>}*/}
                 {current.text}
             </Flex>
             :placeholder;
@@ -74,10 +73,9 @@ const Select2 = <V extends null>({
 
     // Select
     const isPlaceholderValue = isEmpty(value);
-
     return <Select2Root
         ref={ref}
-        className="align-items-center justify-content-between column-gap-2"
+        className={clsx('align-items-center justify-content-between column-gap-2')}
         type="button"
         onMouseDown={Picker.toggle}
         isFocus={Picker.isInputFocus}
@@ -90,7 +88,9 @@ const Select2 = <V extends null>({
         </Text>
 
         {!isLink && (
-            <ArrowDownIcon/>
+            <ArrowDownIcon>
+                <ArrowDownSvg width={14} height={14}/>
+            </ArrowDownIcon>
         )}
     </Select2Root>;
 };
@@ -103,6 +103,15 @@ const Select2 = <V extends null>({
 const Picker = <V extends null>(args: IProps<V>) => {
     const {placeholder, options, value, onChange, isAvatarEnable, isSearchEnable} = args;
     const Picker = usePicker();
+    const searchForwardedRef = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {
+        window.requestAnimationFrame(() => {
+            if(searchForwardedRef.current){
+                searchForwardedRef.current.focus();
+            }
+        });
+    }, []);
 
     /**`
      * 取得加上Placeholder的Options
@@ -125,11 +134,11 @@ const Picker = <V extends null>(args: IProps<V>) => {
         value={value}
         onClick={handleOnClick}
         onEnter={handleOnClick}
-        isDark
         options={placeholderOptions}
         isAvatarEnable={isAvatarEnable}
         isSearchEnable={isSearchEnable}
         isCheckedEnable
+        searchForwardedRef={searchForwardedRef}
         searchTextPlaceholder="type keyword..."
     />;
 };
@@ -155,6 +164,8 @@ const Text = styled.div<{
 const ArrowDownIcon = styled.div`
     flex: 0 0 auto;
     margin-left: 5px;
+    display: flex;
+    align-items: center;
 `;
 
 
@@ -168,7 +179,7 @@ const Select2Root = styled.button<{
     flex-direction: row;
     align-items: center;
 
-    height: 40px;
+    height: var(--form-height);
 
     width: 100%;
 

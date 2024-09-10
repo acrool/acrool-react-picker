@@ -5,6 +5,12 @@ type TVariantKey = 'initial'|'show'|'exit'
 export type TAnimationVariants = Record<TVariantKey, Variant>;
 
 
+export enum EVertical {
+    bottom = 'bottom',
+    top = 'top',
+}
+
+
 export interface IPickerOptions {
     variants?: TAnimationVariants
     transition?: Transition

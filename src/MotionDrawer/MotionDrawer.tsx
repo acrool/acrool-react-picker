@@ -1,22 +1,16 @@
 import {motion} from 'framer-motion';
-import {
-    ForwardedRef,
-    forwardRef,
-    ReactNode,
-    RefObject,
-    useEffect,
-    useRef,
-} from 'react';
+import {ForwardedRef, forwardRef, ReactNode, RefObject, useLayoutEffect, useRef,} from 'react';
 
-import {IPickerOptions} from '../types';
+import {usePicker} from '../PickerProvider';
+import {EVertical, IPickerOptions} from '../types';
 import {setForwardedRef} from '../utils';
 import styles from './motion-drawer.module.scss';
 
 
 const defaultMotionProps: IPickerOptions = {
     variants: {
-        initial: {position: 'absolute', zIndex: 999, opacity: 0, scale: .95, transition: {type:'spring'}},
-        show: {opacity: 1, scale: 1, transition: {type: 'just'}},
+        initial: {position: 'absolute', zIndex: 999, opacity: 0, transition: {type:'spring'}},
+        show: {opacity: 1,  transition: {type: 'just'}},
         exit: {opacity: 0, scale: .95},
     },
     transition: {
@@ -50,9 +44,15 @@ const MotionDrawer = ({
     anchorRef,
 }: IProps, ref?: ForwardedRef<HTMLDivElement>) => {
     const pickerRef = useRef<HTMLDivElement>(null);
+    const Picker = usePicker();
 
-    useEffect(() => {
+    useLayoutEffect(() => {
+        let vertical: EVertical = EVertical.bottom;
         const updatePosition = (entries) => {
+            if(!Picker.isVisible){
+                return;
+            }
+
             if (anchorRef.current && pickerRef.current) {
                 const pickerRect = entries?.[0]?.contentRect ?? pickerRef.current.getBoundingClientRect();
                 const pickerHeight = pickerRect.height;
@@ -60,6 +60,7 @@ const MotionDrawer = ({
                 const anchorRect = anchorRef.current.getBoundingClientRect();
                 const height = anchorRect.height;
                 const bottom = anchorRect.bottom;
+                const top = anchorRect.top;
                 const left = anchorRect.left;
                 // const right = mainRect.right;
 
@@ -70,12 +71,25 @@ const MotionDrawer = ({
                 const screenHeight = window.innerHeight || document.documentElement.clientHeight;
 
                 const safePadding = 15;
-                const vertical = (bottom + pickerHeight + safePadding) >= screenHeight ? 'top' : 'bottom';
+                const isBottomSafeArea = (bottom + pickerHeight) < screenHeight; // 如果下面空間夠
+                const isTopSafeArea = (top - (pickerHeight + safePadding)) > 0; // 如果下面空間夠
 
+                if(vertical === EVertical.bottom){
+                    if(!isBottomSafeArea && isTopSafeArea){
+                        vertical = EVertical.top;
+                    }
+                }else if(vertical === EVertical.top){
+                    if(isBottomSafeArea && !isTopSafeArea){
+                        vertical = EVertical.bottom;
+                    }else if(!isBottomSafeArea && !isTopSafeArea){
+                        vertical = EVertical.bottom;
+                    }
+                }
 
-                pickerRef.current.style.top = vertical === 'bottom' ? `${bottom + scrollTop}px`: `${bottom + scrollTop - (pickerHeight + height)}px`;
+                pickerRef.current.style.top = vertical === EVertical.bottom ? `${bottom + scrollTop}px`: `${bottom + scrollTop - (pickerHeight + height)}px`;
                 pickerRef.current.style.left = `${left + scrollLeft}px`;
-                pickerRef.current.style.transformOrigin = vertical === 'bottom' ? 'top':'bottom';
+                pickerRef.current.style.transformOrigin = vertical === EVertical.bottom ? 'top':'bottom';
+                pickerRef.current.style.display = 'block';
 
                 // 循環
                 requestAnimationFrame(updatePosition);
@@ -83,7 +97,6 @@ const MotionDrawer = ({
         };
 
         if (anchorRef.current && pickerRef.current) {
-            pickerRef.current.style.display = 'block';
 
             const resizeObserver = new ResizeObserver(updatePosition);
             resizeObserver.observe(pickerRef.current);
@@ -92,24 +105,27 @@ const MotionDrawer = ({
                 resizeObserver.disconnect();
             };
         }
-    }, [anchorRef, pickerRef]);
+    }, [Picker.isVisible, anchorRef, pickerRef]);
 
 
 
+    return <>
+        {/*{children}*/}
+        <motion.div
+            ref={setForwardedRef(ref, pickerRef)}
+            transition={{type: 'spring', duration: .2}}
+            style={{display: 'none'}}
 
-    return <motion.div
-        ref={setForwardedRef(ref, pickerRef)}
-        transition={{type: 'spring', duration: .2}}
-        style={{display: 'none'}}
+            className={styles.motionAnimationWrapper}
+            variants={defaultMotionProps.variants}
+            initial="initial"
+            animate="show"
+            exit="exit"
+        >
+            {children}
+        </motion.div>
+    </>;
 
-        className={styles.motionAnimationWrapper}
-        variants={defaultMotionProps.variants}
-        initial="initial"
-        animate="show"
-        exit="exit"
-    >
-        {children}
-    </motion.div>;
 };
 
 export default forwardRef(MotionDrawer);
