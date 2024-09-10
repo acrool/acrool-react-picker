@@ -19,7 +19,7 @@
     "@acrool/react-grid": "5.2.2",
     "@acrool/react-picker": "link:..",
     "@acrool/react-table": "5.1.3",
-    "@acrool/react-dropdown": "3.0.15-alpha.0",
+    "@acrool/react-dropdown": "3.0.15",
     "@acrool/js-utils": "3.2.7",
     "@types/dom-to-image": "^2.6.7",
     "@types/styled-components": "^5.1.26",

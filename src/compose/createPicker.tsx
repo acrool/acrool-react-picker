@@ -10,7 +10,7 @@ import PickerHideListener from '../listener/PickerHideListener';
 import styles from '../modal.module.scss';
 import MotionDrawer from '../MotionDrawer';
 import {PickerProviderContext} from '../PickerProvider';
-import {EKeyboardKey, IValueChange} from '../types';
+import {EKeyboardKey, EVertical, IValueChange} from '../types';
 import {setForwardedRef} from '../utils';
 
 
@@ -34,6 +34,7 @@ function createPicker<V extends {}, P>(MainComponent: React.FC<P & IValueChange<
     const MotionPicker = (args, ref?: React.Ref<P & IValueChange<V>>) => {
         const [isPickerVisible, setPickerVisible] = useState<boolean>(false);
         const [isInputFocus, setInputFocus] = useState<boolean>(false);
+        const [vertical, setVertical] = useState<EVertical>(EVertical.bottom);
 
 
         const [value, setValue] = useState<V>();
@@ -148,6 +149,9 @@ function createPicker<V extends {}, P>(MainComponent: React.FC<P & IValueChange<
 
                 value: value,
                 onChange: setValue,
+
+                vertical,
+                setVertical,
             }}
         >
             <div className={styles.root} onKeyDown={disabledKeyDown}>

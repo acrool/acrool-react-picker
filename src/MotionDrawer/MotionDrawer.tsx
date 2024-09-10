@@ -85,6 +85,7 @@ const MotionDrawer = ({
                         vertical = EVertical.bottom;
                     }
                 }
+                Picker.setVertical(vertical);
 
                 pickerRef.current.style.top = vertical === EVertical.bottom ? `${bottom + scrollTop}px`: `${bottom + scrollTop - (pickerHeight + height)}px`;
                 pickerRef.current.style.left = `${left + scrollLeft}px`;

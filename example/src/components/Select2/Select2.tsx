@@ -1,7 +1,7 @@
 import {isEmpty} from '@acrool/js-utils/equal';
 import {Dropdown, IDropdownOption, isGroupOptions, TOption} from '@acrool/react-dropdown';
-import {Flex, fr} from '@acrool/react-grid';
-import {createPicker,usePicker} from '@acrool/react-picker';
+import {Flex} from '@acrool/react-grid';
+import {createPicker, EVertical, usePicker} from '@acrool/react-picker';
 import clsx from 'clsx';
 import React, {ForwardedRef, useEffect, useMemo, useRef} from 'react';
 import styled, {css} from 'styled-components';
@@ -140,6 +140,7 @@ const Picker = <V extends null>(args: IProps<V>) => {
         isCheckedEnable
         searchForwardedRef={searchForwardedRef}
         searchTextPlaceholder="type keyword..."
+        isReverse={Picker.vertical === EVertical.top}
     />;
 };
 

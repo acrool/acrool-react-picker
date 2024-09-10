@@ -1,6 +1,8 @@
 import Logger from '@acrool/js-logger';
 import React, {createContext, useContext} from 'react';
 
+import {EVertical} from './types';
+
 
 interface IContextProps<T = any> {
     hide: () => void
@@ -13,6 +15,8 @@ interface IContextProps<T = any> {
     isInputFocus: boolean
 
     value?: T
+    vertical: EVertical
+    setVertical: (vertical: EVertical) => void
     onChange: (value: T) => void
 }
 
@@ -22,12 +26,14 @@ export const PickerProviderContext = createContext<IContextProps>({
     toggle: () => Logger.warning('No toggle method detected, did you embed your app with Acrool/PickerPortal?'),
     isVisible: false,
 
-
     inputFocus: () => Logger.warning('No focus method detected, did you embed your app with Acrool/PickerPortal?'),
     inputBlur: () => Logger.warning('No blur method detected, did you embed your app with Acrool/PickerPortal?'),
     isInputFocus: false,
 
     onChange: () => Logger.warning('No onChange method detected, did you embed your app with Acrool/PickerPortal?'),
+
+    vertical: EVertical.bottom,
+    setVertical: () => Logger.warning('No onChange method detected, did you embed your app with Acrool/PickerPortal?'),
 });
 
 export const PickerProviderConsumer = PickerProviderContext.Consumer;
