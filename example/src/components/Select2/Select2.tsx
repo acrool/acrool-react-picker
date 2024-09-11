@@ -113,7 +113,7 @@ const Picker = <V extends null>(args: IProps<V>) => {
         }, 10);
     }, []);
 
-    /**`
+    /**
      * 取得加上Placeholder的Options
      */
     const placeholderOptions: TOption<V|null>[]|undefined = useMemo(() => {
