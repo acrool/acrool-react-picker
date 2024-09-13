@@ -9,6 +9,10 @@ export enum EVertical {
     bottom = 'bottom',
     top = 'top',
 }
+export enum EHorizontal {
+    left = 'left',
+    right = 'right',
+}
 
 
 export interface IPickerOptions {

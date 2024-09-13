@@ -101,6 +101,14 @@ export const WithFixedVertical: Story = {
                     onChange={onChange}
                 />
             </div>
+            <div style={{position: 'fixed', right: '40px'}}>
+                <Select2
+                    {...args}
+                    value={value}
+                    options={options}
+                    onChange={onChange}
+                />
+            </div>
         </Flex>;
     },
 };

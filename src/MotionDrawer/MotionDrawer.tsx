@@ -2,7 +2,7 @@ import {motion} from 'framer-motion';
 import {ForwardedRef, forwardRef, ReactNode, RefObject, useLayoutEffect, useRef,} from 'react';
 
 import {usePicker} from '../PickerProvider';
-import {EVertical, IPickerOptions} from '../types';
+import {EHorizontal, EVertical, IPickerOptions} from '../types';
 import {setForwardedRef} from '../utils';
 import styles from './motion-drawer.module.scss';
 
@@ -48,6 +48,7 @@ const MotionDrawer = ({
 
     useLayoutEffect(() => {
         let vertical: EVertical = EVertical.bottom;
+        let horizontal: EHorizontal = EHorizontal.left;
         const updatePosition = (entries) => {
             if(!Picker.isVisible){
                 return;
@@ -56,21 +57,26 @@ const MotionDrawer = ({
             if (anchorRef.current && pickerRef.current) {
                 const pickerRect = entries?.[0]?.contentRect ?? pickerRef.current.getBoundingClientRect();
                 const pickerHeight = pickerRect.height;
+                const pickerWidth = pickerRect.width;
 
                 const anchorRect = anchorRef.current.getBoundingClientRect();
                 const height = anchorRect.height;
+                const width = anchorRect.width;
                 const bottom = anchorRect.bottom;
                 const top = anchorRect.top;
                 const left = anchorRect.left;
+                const right = anchorRect.right;
                 // const right = mainRect.right;
 
                 const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
                 const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
 
-                // const screenWidth = window.innerWidth || document.documentElement.clientWidth;
+                const screenWidth = window.innerWidth || document.documentElement.clientWidth;
                 const screenHeight = window.innerHeight || document.documentElement.clientHeight;
 
                 const safePadding = 15;
+
+                // 判斷垂直位置
                 const isBottomSafeArea = (bottom + pickerHeight) < screenHeight; // 如果下面空間夠
                 const isTopSafeArea = (top - (pickerHeight + safePadding)) > 0; // 如果下面空間夠
 
@@ -85,10 +91,26 @@ const MotionDrawer = ({
                         vertical = EVertical.bottom;
                     }
                 }
+
+
+                // 判斷水平位置
+                const isLeftSafeArea = (left + pickerWidth) < screenWidth; // 如果下面空間夠
+                const isRightSafeArea = (right - (pickerWidth + safePadding)) > 0; // 如果下面空間夠
+                if(horizontal === EHorizontal.left){
+                    if(!isLeftSafeArea && isRightSafeArea){
+                        horizontal = EHorizontal.right;
+                    }
+                }else if(horizontal === EHorizontal.right){
+                    if(isLeftSafeArea && !isRightSafeArea){
+                        horizontal = EHorizontal.left;
+                    }else if(!isLeftSafeArea && !isRightSafeArea){
+                        horizontal = EHorizontal.left;
+                    }
+                }
                 Picker.setVertical(vertical);
 
                 pickerRef.current.style.top = vertical === EVertical.bottom ? `${bottom + scrollTop}px`: `${bottom + scrollTop - (pickerHeight + height)}px`;
-                pickerRef.current.style.left = `${left + scrollLeft}px`;
+                pickerRef.current.style.left = horizontal === EHorizontal.left ? `${left + scrollLeft}px`: `${right + scrollLeft - (pickerWidth)}px`;
                 pickerRef.current.style.transformOrigin = vertical === EVertical.bottom ? 'top':'bottom';
                 pickerRef.current.style.display = 'block';
 
