@@ -112,7 +112,6 @@ const MotionDrawer = ({
                 pickerRef.current.style.top = vertical === EVertical.bottom ? `${bottom + scrollTop}px`: `${bottom + scrollTop - (pickerHeight + height)}px`;
                 pickerRef.current.style.left = horizontal === EHorizontal.left ? `${left + scrollLeft}px`: `${right + scrollLeft - (pickerWidth)}px`;
                 pickerRef.current.style.transformOrigin = vertical === EVertical.bottom ? 'top':'bottom';
-                pickerRef.current.style.display = 'block';
 
                 // 循環
                 requestAnimationFrame(updatePosition);
@@ -120,6 +119,7 @@ const MotionDrawer = ({
         };
 
         if (anchorRef.current && pickerRef.current) {
+            pickerRef.current.style.display = 'block'; // 避免移動該設定到上方統一 (https://github.com/acrool/acrool-react-picker/issues/1)
 
             const resizeObserver = new ResizeObserver(updatePosition);
             resizeObserver.observe(pickerRef.current);
