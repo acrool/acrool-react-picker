@@ -63,6 +63,14 @@ function createPicker<V extends {}, P>(
         }, [value]);
 
 
+        useEffect(() => {
+            // on hide Reset
+            if(isPickerVisible){
+                setValue(args.value);
+            }
+        }, [isPickerVisible, args.value]);
+
+
         /**
          * 處理當鍵盤按 Tab 的時候關閉選單與注視
          */
@@ -120,6 +128,7 @@ function createPicker<V extends {}, P>(
                 return;
             }
 
+            // 異動資料
             if(typeof runTimeValueRef.current !== 'undefined' && isEnableHideSave){
                 const isDiff = JSON.stringify(value) !== JSON.stringify(runTimeValueRef.current);
                 if(isDiff){
