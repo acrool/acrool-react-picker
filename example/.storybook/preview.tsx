@@ -1,6 +1,7 @@
 import type { Preview } from "@storybook/react";
 // import './reset.css';
 import '@acrool/react-picker/dist/index.css';
+import '@acrool/react-datepicker/dist/index.css';
 import '@acrool/react-dropdown/dist/index.css';
 import '@acrool/react-grid/dist/index.css';
 import {GridThemeProvider} from "@acrool/react-grid";

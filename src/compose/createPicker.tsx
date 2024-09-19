@@ -10,7 +10,7 @@ import PickerHideListener from '../listener/PickerHideListener';
 import styles from '../modal.module.scss';
 import MotionDrawer from '../MotionDrawer';
 import {PickerProviderContext} from '../PickerProvider';
-import {EKeyboardKey, EVertical, IValueChange} from '../types';
+import {EKeyboardKey, EVertical, IPickerOption, IValueChange} from '../types';
 import {setForwardedRef} from '../utils';
 
 
@@ -21,8 +21,13 @@ import {setForwardedRef} from '../utils';
  * 需要呼叫 show 才會傳送到 portal
  * @param MainComponent
  * @param DropdownComponent
+ * @param options
  */
-function createPicker<V extends {}, P>(MainComponent: React.FC<P & IValueChange<V>>, DropdownComponent: React.FC<P & IValueChange<V>>) {
+function createPicker<V extends {}, P>(
+    MainComponent: React.FC<P & IValueChange<V>>,
+    DropdownComponent: React.FC<P & IValueChange<V>>,
+    options?: IPickerOption
+) {
 
     const RefMainComponent = forwardRef(MainComponent as React.ForwardRefRenderFunction<P & IValueChange<V>>) as React.ForwardRefExoticComponent<React.RefAttributes<P & IValueChange<V>>>;
 
@@ -42,7 +47,8 @@ function createPicker<V extends {}, P>(MainComponent: React.FC<P & IValueChange<
         const mainRef = useRef<any>(null);
         const anchorRef = useRef<HTMLDivElement>(null);
         const runTimeValueRef = useRef<V|undefined>(value);
-
+        const isEnableClickOutSiteHidden = options?.isEnableClickOutSiteHidden !== false;
+        const isEnableHideSave = options?.isEnableHideSave !== false;
 
         useEffect(() => {
             // 同步 Props value 異動
@@ -113,13 +119,14 @@ function createPicker<V extends {}, P>(MainComponent: React.FC<P & IValueChange<
                 Logger.warning('@acrool/react-picker', 'createPicker component props onChange is undefined, is no call');
                 return;
             }
-            if(typeof runTimeValueRef.current !== 'undefined'){
+
+            if(typeof runTimeValueRef.current !== 'undefined' && isEnableHideSave){
                 const isDiff = JSON.stringify(value) !== JSON.stringify(runTimeValueRef.current);
                 if(isDiff){
                     args.onChange(runTimeValueRef.current);
                 }
             }
-        }, [value, args.onChange]);
+        }, [value, args.onChange, isEnableHideSave]);
 
 
         /**
@@ -181,7 +188,7 @@ function createPicker<V extends {}, P>(MainComponent: React.FC<P & IValueChange<
                 {/* 註冊事件 */}
                 {isPickerVisible && <PickerHideListener onPickerHide={onPickerHide}/>}
 
-                {isPickerVisible && <MousedownListener onMousedown={handleClickOutSite}/>}
+                {isEnableClickOutSiteHidden && isPickerVisible && <MousedownListener onMousedown={handleClickOutSite}/>}
                 {isInputFocus && <MousedownListener onMousedown={handleBlurCheck}/>}
                 {isInputFocus && <HotkeyListener onKeyDown={handleOnShowHotKey}/>}
                 {isInputFocus && <HotkeyListener onKeyDown={handleOnBlurHotKey}/>}
