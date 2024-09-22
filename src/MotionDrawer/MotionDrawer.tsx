@@ -123,7 +123,7 @@ const MotionDrawer = ({
             resizeObserver.observe(pickerRef.current);
 
             // 避免移動該設定到上方統一 (https://github.com/acrool/acrool-react-picker/issues/1)
-            // 監聽 Observe之後再出現
+            // 監視 Observe之後再出現
             pickerRef.current.style.display = 'block';
 
             return () => {
