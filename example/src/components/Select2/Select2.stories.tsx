@@ -1,4 +1,5 @@
 import {Flex} from '@acrool/react-grid';
+import {action} from '@storybook/addon-actions';
 import {useArgs} from '@storybook/preview-api';
 import type {Meta, StoryObj} from '@storybook/react';
 import {fn} from '@storybook/test';
@@ -38,6 +39,7 @@ export const Primary: Story = {
         const [{value}, updateArgs] = useArgs<{value: string}>();
 
         function onChange(value: string) {
+            action('onChange')(value);
             updateArgs({value});
         }
 
@@ -58,6 +60,7 @@ export const WithStaticVertical: Story = {
         const [{value}, updateArgs] = useArgs<{value: string}>();
 
         function onChange(value: string) {
+            action('onChange')(value);
             updateArgs({value});
         }
 
@@ -75,11 +78,14 @@ export const WithStaticVertical: Story = {
 };
 
 export const WithFixedVertical: Story = {
-    args: {},
+    args: {
+        isAvatarEnable: false,
+    },
     render: function Render(args) {
         const [{value}, updateArgs] = useArgs<{value: string}>();
 
         function onChange(value: string) {
+            action('onChange')(value);
             updateArgs({value});
         }
 
@@ -115,11 +121,14 @@ export const WithFixedVertical: Story = {
 
 
 export const WithHotkeyTab: Story = {
-    args: {},
+    args: {
+        isSearchEnable: false,
+    },
     render: function Render(args) {
         const [{value}, updateArgs] = useArgs<{value: string}>();
 
         function onChange(value: string) {
+            action('onChange')(value);
             updateArgs({value});
         }
 

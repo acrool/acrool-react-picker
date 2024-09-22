@@ -63,6 +63,10 @@ export const options: TOption<string>[] = [
 ];
 
 
+export const optionsSmall: TOption<string>[] = [
+    ...data.slice(0, 2).map(row => ({text: row.name, value: row.id, avatarUrl: row.avatar})),
+];
+
 export const groupOptions: TOption<string>[] = [
     ...data.slice(0, 2).map(row => ({text: row.name, value: row.id, avatarUrl: row.avatar})),
     {
