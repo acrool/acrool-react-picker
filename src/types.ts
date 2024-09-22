@@ -28,6 +28,10 @@ export interface IValueChange<T = string> {
     onChange?: (value: T) => void
 }
 
+export interface IPickerOption {
+    isEnableHideSave?: boolean
+    isEnableClickOutSiteHidden?: boolean
+}
 
 
 export enum EKeyboardKey {

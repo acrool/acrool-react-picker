@@ -149,6 +149,21 @@ export default createPicker(
 ```
 
 
+## If you need to not hide trigger onChange
+
+```tsx
+
+export default createPicker(
+        SelectNumberKeyboard,
+        Picker,
+    {
+        isEnableHideSave: false,
+        isEnableClickOutSiteHidden: false
+    }
+) as <V extends any>(props: IProps<V>) => JSX.Element;
+```
+
+
 There is also a example that you can play with it:
 
 [![Play react-editext-example](https://raw.githubusercontent.com/acrool/acrool-react-picker/main/play-in-example-button.svg)](https://acrool-react-picker.pages.dev)
