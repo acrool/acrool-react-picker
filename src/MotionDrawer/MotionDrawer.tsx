@@ -112,10 +112,10 @@ const MotionDrawer = ({
                 pickerRef.current.style.top = vertical === EVertical.bottom ? `${bottom + scrollTop}px`: `${bottom + scrollTop - (pickerHeight + height)}px`;
                 pickerRef.current.style.left = horizontal === EHorizontal.left ? `${left + scrollLeft}px`: `${right + scrollLeft - (pickerWidth)}px`;
                 pickerRef.current.style.transformOrigin = vertical === EVertical.bottom ? 'top':'bottom';
-                pickerRef.current.style.visibility = 'visible';
+                pickerRef.current.style.display = 'block';
 
                 // 循環
-                window.requestAnimationFrame(updatePosition);
+                requestAnimationFrame(updatePosition);
             }
         };
 
@@ -125,13 +125,18 @@ const MotionDrawer = ({
 
             // 避免移動該設定到上方統一 (https://github.com/acrool/acrool-react-picker/issues/1)
             // 監視 Observe之後再出現
-            pickerRef.current.style.display = 'block';
+            window.requestAnimationFrame(() => {
+                if (pickerRef.current) {
+                    pickerRef.current.style.display = 'block';
+                }
+            });
+
 
             return () => {
                 resizeObserver.disconnect();
             };
         }
-    }, [Picker.isVisible, anchorRef, pickerRef]);
+    }, [Picker.isVisible]);
 
 
 
@@ -140,7 +145,7 @@ const MotionDrawer = ({
         <motion.div
             ref={setForwardedRef(ref, pickerRef)}
             transition={{type: 'spring', duration: .2}}
-            style={{display: 'none', visibility: 'hidden'}}
+            style={{display: 'none'}}
 
             className={styles.motionAnimationWrapper}
             variants={defaultMotionProps.variants}
