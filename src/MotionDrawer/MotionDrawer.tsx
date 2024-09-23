@@ -112,9 +112,10 @@ const MotionDrawer = ({
                 pickerRef.current.style.top = vertical === EVertical.bottom ? `${bottom + scrollTop}px`: `${bottom + scrollTop - (pickerHeight + height)}px`;
                 pickerRef.current.style.left = horizontal === EHorizontal.left ? `${left + scrollLeft}px`: `${right + scrollLeft - (pickerWidth)}px`;
                 pickerRef.current.style.transformOrigin = vertical === EVertical.bottom ? 'top':'bottom';
+                pickerRef.current.style.visibility = 'visible';
 
                 // 循環
-                requestAnimationFrame(updatePosition);
+                window.requestAnimationFrame(updatePosition);
             }
         };
 
@@ -139,7 +140,7 @@ const MotionDrawer = ({
         <motion.div
             ref={setForwardedRef(ref, pickerRef)}
             transition={{type: 'spring', duration: .2}}
-            style={{display: 'none'}}
+            style={{display: 'none', visibility: 'hidden'}}
 
             className={styles.motionAnimationWrapper}
             variants={defaultMotionProps.variants}
