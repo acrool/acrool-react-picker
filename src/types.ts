@@ -37,6 +37,7 @@ export interface IPickerOption {
 export enum EKeyboardKey {
     Escape = 'Escape',
     Enter = 'Enter',
+    Space = 'Space',
     Tab = 'Tab',
     ArrowUp = 'ArrowUp',
     ArrowDown = 'ArrowDown',

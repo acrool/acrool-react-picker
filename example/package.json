@@ -13,12 +13,13 @@
     "pages:deploy": "NODE_VERSION=18 yarn build-storybook && wrangler pages deploy ./storybook-static"
   },
   "resolutions": {
+    "@acrool/react-hotkey": "^0.x",
     "styled-components": "5.3.9"
   },
   "dependencies": {
     "@acrool/js-utils": "3.2.7",
     "@acrool/react-datepicker": "^3.1.9",
-    "@acrool/react-dropdown": "3.0.15",
+    "@acrool/react-dropdown": "3.0.16",
     "@acrool/react-grid": "5.2.2",
     "@acrool/react-picker": "link:..",
     "@acrool/react-table": "5.1.3",

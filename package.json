@@ -54,6 +54,7 @@
   },
   "dependencies": {
     "@acrool/react-portal": "^1.0.2",
+    "@acrool/react-hotkey": "^0.0.4",
     "@acrool/js-logger": "^1.0.23",
     "clsx": "^2.1.1",
     "ulid": "^2.3.0",
