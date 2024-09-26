@@ -1,16 +1,16 @@
 import Logger from '@acrool/js-logger';
-import {HotkeyListener} from '@acrool/react-hotkey';
 import ReactPortal from '@acrool/react-portal';
 import {AnimatePresence} from 'framer-motion';
 import React, {forwardRef, useCallback, useEffect, useRef, useState} from 'react';
 import {ulid} from 'ulid';
 
+import {HotkeyListener, EKeyboardKey} from '@acrool/react-hotkey';
 import MousedownListener from '../listener/MousedownListener';
 import PickerHideListener from '../listener/PickerHideListener';
 import styles from '../modal.module.scss';
 import MotionDrawer from '../MotionDrawer';
 import {PickerProviderContext} from '../PickerProvider';
-import {EKeyboardKey, EVertical, IPickerOption, IValueChange} from '../types';
+import {EVertical, IPickerOption, IValueChange} from '../types';
 import {setForwardedRef} from '../utils';
 
 
@@ -75,6 +75,7 @@ function createPicker<V extends {}, P>(
          * 處理當鍵盤按 Tab 的時候關閉選單與注視
          */
         const handleOnBlurHotKey = useCallback((evt: React.KeyboardEvent) => {
+            console.log('xxx');
             setPickerVisible(false);
             mainRef.current.focus();
             setInputFocus(false);
@@ -195,13 +196,26 @@ function createPicker<V extends {}, P>(
 
                 {/* Show */}
                 {isInputFocus && <MousedownListener onMousedown={handleBlurCheck}/>}
-                {isInputFocus && <HotkeyListener hotKey={EKeyboardKey.ArrowUp} onKeyDown={handleOnShowHotKey}/>}
-                {isInputFocus && <HotkeyListener hotKey={EKeyboardKey.ArrowDown} onKeyDown={handleOnShowHotKey}/>}
-                {isInputFocus && <HotkeyListener hotKey={EKeyboardKey.Enter} onKeyDown={handleOnShowHotKey}/>}
-                {isInputFocus && <HotkeyListener hotKey={EKeyboardKey.Space} onKeyDown={handleOnShowHotKey}/>}
+                {isInputFocus && <HotkeyListener
+                    hotKey={[
+                        EKeyboardKey.ArrowUp,
+                        EKeyboardKey.ArrowDown,
+                        EKeyboardKey.Enter,
+                        EKeyboardKey.Space,
+                    ]}
+                    onKeyDown={handleOnShowHotKey}
+                    stopPropagation
+                    preventDefault
+                />}
 
                 {/* Hide */}
-                {isInputFocus && <HotkeyListener hotKey={EKeyboardKey.Tab} onKeyDown={handleOnBlurHotKey}/>}
+                {isInputFocus && <HotkeyListener
+                    hotKey={[
+                        EKeyboardKey.Tab, 
+                        EKeyboardKey.ShiftAndTab
+                    ]}
+                    onKeyDown={handleOnBlurHotKey}
+                />}
             </div>
 
         </PickerProviderContext.Provider>);

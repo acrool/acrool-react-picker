@@ -33,12 +33,13 @@ export interface IPickerOption {
     isEnableClickOutSiteHidden?: boolean
 }
 
-
-export enum EKeyboardKey {
-    Escape = 'Escape',
-    Enter = 'Enter',
-    Space = 'Space',
-    Tab = 'Tab',
-    ArrowUp = 'ArrowUp',
-    ArrowDown = 'ArrowDown',
-}
+//
+// export enum EKeyboardKey {
+//     Escape = 'Escape',
+//     Enter = 'Enter',
+//     Space = 'Space',
+//     Tab = 'Tab',
+//     ShiftAndTab = 'Shift+Tab',
+//     ArrowUp = 'ArrowUp',
+//     ArrowDown = 'ArrowDown',
+// }
