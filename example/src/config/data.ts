@@ -1,5 +1,6 @@
 import {asset} from '../utils';
 import {TOption} from '@acrool/react-dropdown';
+import {IDropdownOption} from "@acrool/react-dropdown/dist/types";
 
 export interface IPaginateData {
     id: string,
@@ -58,12 +59,12 @@ export const data: IPaginateData[] = [
 
 
 
-export const options: TOption<string>[] = [
+export const options: IDropdownOption<string>[] = [
     ...data.slice(0, 12).map(row => ({text: row.name, value: row.id, avatarUrl: row.avatar})),
 ];
 
 
-export const optionsSmall: TOption<string>[] = [
+export const optionsSmall: IDropdownOption<string>[] = [
     ...data.slice(0, 2).map(row => ({text: row.name, value: row.id, avatarUrl: row.avatar})),
 ];
 

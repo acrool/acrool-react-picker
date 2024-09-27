@@ -199,21 +199,19 @@ function createPicker<V extends {}, P>(
                     hotKey={[
                         EKeyboardKey.ArrowUp,
                         EKeyboardKey.ArrowDown,
-                        EKeyboardKey.Enter,
                         EKeyboardKey.Space,
                     ]}
                     onKeyDown={handleOnShowHotKey}
-                    stopPropagation
-                    preventDefault
                 />}
 
                 {/* Hide */}
                 {isInputFocus && <HotkeyListener
                     hotKey={[
-                        EKeyboardKey.Tab, 
+                        EKeyboardKey.Tab,
                         EKeyboardKey.ShiftAndTab
                     ]}
                     onKeyDown={handleOnBlurHotKey}
+                    preventDefault={false}
                 />}
             </div>
 

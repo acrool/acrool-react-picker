@@ -4,7 +4,7 @@ import {useArgs} from '@storybook/preview-api';
 import type {Meta, StoryObj} from '@storybook/react';
 import {fn} from '@storybook/test';
 
-import {options} from '../../config/data';
+import {options, optionsSmall} from '../../config/data';
 import Select2 from './Select2';
 
 const meta = {
@@ -132,16 +132,32 @@ export const WithHotkeyTab: Story = {
             updateArgs({value});
         }
 
-        return <Flex className="gap-2 align-items-start">
-            <input type="text" placeholder="input order 1"/>
-            <Select2
-                {...args}
-                value={value}
-                options={options}
-                onChange={onChange}
-            />
-            <input type="text" placeholder="input order 3"/>
-        </Flex>;
+        const handleSubmit = (e: React.FormEvent) => {
+            e.preventDefault();
+
+            action('onSubmit')();
+        };
+
+        return <form onSubmit={handleSubmit}>
+            <Flex className="gap-2 align-items-start">
+                <input type="text" placeholder="input order 1"/>
+                <Select2
+                    {...args}
+                    value={value}
+                    options={options}
+                    onChange={onChange}
+                />
+                <input type="text" placeholder="input order 3"/>
+                <select>
+                    {optionsSmall.map(row => {
+                        return <option value={row.value} key={row.value}>{row.text}</option>;
+                    })}
+
+                </select>
+
+                <button type="submit">Submit</button>
+            </Flex>
+        </form>;
     },
 };
 
