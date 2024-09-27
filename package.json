@@ -53,7 +53,7 @@
     "react-dom": "^18.x"
   },
   "dependencies": {
-    "@acrool/react-portal": "^1.0.2",
+    "@acrool/react-portal": "^1.0.3",
     "@acrool/react-hotkey": "^0.0.6",
     "@acrool/js-logger": "^1.0.23",
     "clsx": "^2.1.1",
