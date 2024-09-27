@@ -75,7 +75,6 @@ function createPicker<V extends {}, P>(
          * 處理當鍵盤按 Tab 的時候關閉選單與注視
          */
         const handleOnBlurHotKey = useCallback((evt: React.KeyboardEvent) => {
-            console.log('xxx');
             setPickerVisible(false);
             mainRef.current.focus();
             setInputFocus(false);

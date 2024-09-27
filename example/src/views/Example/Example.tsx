@@ -8,7 +8,6 @@ const Example = () => {
     const [value, setValue] = useState<string>('A');
 
     const onKeyDown = useCallback(() => {
-        console.log('xxxx');
     }, []);
 
     useEffect(() => {
