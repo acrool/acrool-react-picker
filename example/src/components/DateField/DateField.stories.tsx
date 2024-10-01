@@ -38,7 +38,7 @@ export const Primary: Story = {
             updateArgs({value});
         }
 
-        return <Flex col="column" className="gap-3" style={{width: '250px'}}>
+        return <Flex column className="gap-3" style={{width: '250px'}}>
             <div>Current Value: {value}</div>
             <DateField
                 {...args}

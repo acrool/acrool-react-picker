@@ -39,7 +39,7 @@ export const Primary: Story = {
             updateArgs({value});
         }
 
-        return <Flex col="column" style={{width: '250px'}}>
+        return <Flex column style={{width: '250px'}}>
             <div>Current Value: {value}</div>
             <DateFieldWithConfirm
                 {...args}

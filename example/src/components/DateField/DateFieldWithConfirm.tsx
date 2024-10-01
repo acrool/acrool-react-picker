@@ -93,7 +93,7 @@ const Picker = (props: IProps) => {
         Picker.hide();
     };
 
-    return <Container col="column">
+    return <Container column>
         <Datepicker
             value={Picker.value}
             minYear={props.minYear}

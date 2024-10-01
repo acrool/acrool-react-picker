@@ -60,7 +60,7 @@ export const data: IPaginateData[] = [
 
 
 export const options: IDropdownOption<string>[] = [
-    ...data.slice(0, 12).map(row => ({text: row.name, value: row.id, avatarUrl: row.avatar})),
+    ...data.slice(0, 15).map((row, idx) => ({text: `${row.name}${idx === 14 ? '(END)': ''}`, value: row.id, avatarUrl: row.avatar})),
 ];
 
 

@@ -104,7 +104,8 @@ function createPicker<V extends {}, P>(
          * 模擬下拉選單 "點擊區域外"，將下拉選單關閉
          */
         const handleClickOutSite = useCallback((evt: MouseEvent) => {
-            if(pickerRef.current && !pickerRef.current.contains(evt.target as Node) &&
+            const pickerChild = pickerRef.current?.firstChild as HTMLElement;
+            if(pickerChild && !pickerChild.contains(evt.target as Node) &&
                 anchorRef.current && !anchorRef.current.contains(evt.target as Node)
             ){
                 setPickerVisible(false);

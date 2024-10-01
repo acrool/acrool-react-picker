@@ -74,7 +74,7 @@ export const TextField = <V extends string|number>({
     return (
         <TextFieldRoot onClick={onClick}>
 
-            <Flex col="column" className="w-100">
+            <Flex column className="w-100">
 
                 <Input
                     ref={ref}
