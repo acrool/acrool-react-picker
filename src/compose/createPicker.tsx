@@ -182,6 +182,7 @@ function createPicker<V extends {}, P>(
                             <MotionDrawer
                                 ref={pickerRef}
                                 anchorRef={anchorRef}
+                                isDebug={options?.isDebug}
                             >
                                 <DropdownComponent {...args as P & IValueChange<V>}/>
                             </MotionDrawer>

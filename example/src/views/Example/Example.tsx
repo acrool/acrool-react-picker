@@ -1,9 +1,9 @@
 import {useCallback, useEffect, useState} from 'react';
-
-import Select2 from '../../components/atoms/Select2';
 import styled from 'styled-components';
-import Button from "../../components/atoms/Button";
-import TaskEditModal from "../../modals/TaskEditModal";
+
+import Button from '../../components/atoms/Button';
+import Select2 from '../../components/atoms/Select2';
+import TaskEditModal from '../../modals/TaskEditModal';
 
 
 const Example = () => {
@@ -64,38 +64,41 @@ const Example = () => {
 
         <Button color="primary" size="md" onClick={TaskEditModal.show}>Open Task Edit Modal</Button>
 
-        <Padding/>
-        {/*<Select2Wrapper>*/}
-        {/*    <Select2*/}
-        {/*        value={value}*/}
-        {/*        options={[*/}
-        {/*            {text: 'Apple', value: 'A'},*/}
-        {/*            {text: 'Basic', value: 'B'},*/}
-        {/*            {text: 'Cat & Car', value: 'C'},*/}
-        {/*            {text: 'Dog & Desk', value: 'D'},*/}
-        {/*            {text: 'Element', value: 'E'},*/}
-        {/*            {text: 'Fake', value: 'F'},*/}
-        {/*            {text: 'Google', value: 'G'},*/}
-        {/*        ]}*/}
-        {/*        onChange={newValue => setValue(newValue)}*/}
-        {/*    />*/}
+        <Select2
+            value={value}
+            options={[
+                {text: 'Apple', value: 'A'},
+                {text: 'Basic', value: 'B'},
+                {text: 'Cat & Car', value: 'C'},
+                {text: 'Dog & Desk', value: 'D'},
+                {text: 'Element', value: 'E'},
+                {text: 'Fake', value: 'F'},
+                {text: 'Google', value: 'G'},
+            ]}
+            onChange={newValue => setValue(newValue)}
+        />
 
-        {/*</Select2Wrapper>*/}
+        <Padding/>
+        <Select2Wrapper>
+            (Test Fixed)
+            <Select2
+                value={value}
+                options={[
+                    {text: 'Apple', value: 'A'},
+                    {text: 'Basic', value: 'B'},
+                    {text: 'Cat & Car', value: 'C'},
+                    {text: 'Dog & Desk', value: 'D'},
+                    {text: 'Element', value: 'E'},
+                    {text: 'Fake', value: 'F'},
+                    {text: 'Google', value: 'G'},
+                ]}
+                onChange={newValue => setValue(newValue)}
+            />
+
+        </Select2Wrapper>
 
         {/*<Select2Wrapper2>*/}
-        {/*    <Select2*/}
-        {/*        value={value}*/}
-        {/*        options={[*/}
-        {/*            {text: 'Apple', value: 'A'},*/}
-        {/*            {text: 'Basic', value: 'B'},*/}
-        {/*            {text: 'Cat & Car', value: 'C'},*/}
-        {/*            {text: 'Dog & Desk', value: 'D'},*/}
-        {/*            {text: 'Element', value: 'E'},*/}
-        {/*            {text: 'Fake', value: 'F'},*/}
-        {/*            {text: 'Google', value: 'G'},*/}
-        {/*        ]}*/}
-        {/*        onChange={newValue => setValue(newValue)}*/}
-        {/*    />*/}
+
         {/*</Select2Wrapper2>*/}
 
         {/*<Select2Wrapper3>*/}

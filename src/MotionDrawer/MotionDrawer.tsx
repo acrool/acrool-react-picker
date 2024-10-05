@@ -30,6 +30,7 @@ const defaultMotionProps: IPickerOptions = {
 
 interface IProps {
     children: ReactNode
+    isDebug?: boolean
     anchorRef: RefObject<HTMLDivElement>
 }
 
@@ -42,6 +43,7 @@ interface IProps {
  */
 const MotionDrawer = ({
     children,
+    isDebug = false,
     anchorRef,
 }: IProps, ref?: ForwardedRef<HTMLDivElement>) => {
     const pickerRef = useRef<HTMLDivElement>(null);
@@ -92,6 +94,7 @@ const MotionDrawer = ({
             style={{display: 'none'}}
 
             className={styles.motionAnimationWrapper}
+            data-debug={isDebug ? '': undefined}
             variants={defaultMotionProps.variants}
             initial="initial"
             animate="show"

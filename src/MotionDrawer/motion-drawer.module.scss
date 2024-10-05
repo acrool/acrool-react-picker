@@ -3,7 +3,7 @@
 
     align-items: flex-start;
 
-    //overflow: hidden;
-    //padding: 10px;
-    //margin: -5px -10px;
+    &[data-debug]{
+        background: rgb(255 0 0 / 30%);
+    }
 }

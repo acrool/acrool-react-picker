@@ -163,7 +163,8 @@ const Picker = <V extends null>(args: IProps<V>) => {
 
 export default createPicker(
     Select2,
-    Picker
+    Picker,
+    {isDebug: false}
 ) as <V extends any>(props: IProps<V>) => JSX.Element;
 
 

@@ -22,7 +22,7 @@ export function getScrollParent(element: HTMLElement): HTMLElement | Window {
         const {overflowY, position} = window.getComputedStyle(parent);
         const isScrollable = overflowY === 'auto' || overflowY === 'scroll';
 
-        if (position === 'fixed' || (isScrollable && parent.scrollHeight > parent.clientHeight)) {
+        if (isScrollable && parent.scrollHeight > parent.clientHeight) {
             scrollParentCache.set(element, parent);
             return parent;
         }
