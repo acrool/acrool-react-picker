@@ -146,6 +146,7 @@ const Picker = <V extends null>(args: IProps<V>) => {
 
     return <Dropdown
         value={value}
+        isDark
         onClick={handleOnClick}
         onEnter={handleOnClick}
         className={clsx({'w-100': args.isDropdownBlock})}

@@ -1,7 +1,9 @@
 import {useCallback, useEffect, useState} from 'react';
 
-import Select2 from '../../components/Select2';
+import Select2 from '../../components/atoms/Select2';
 import styled from 'styled-components';
+import Button from "../../components/atoms/Button";
+import TaskEditModal from "../../modals/TaskEditModal";
 
 
 const Example = () => {
@@ -59,6 +61,8 @@ const Example = () => {
             ]}
             onChange={newValue => setValue(newValue)}
         />
+
+        <Button onClick={TaskEditModal.show}>Open Task Edit Modal</Button>
         {/*<Select2Wrapper>*/}
         {/*    <Select2*/}
         {/*        value={value}*/}
