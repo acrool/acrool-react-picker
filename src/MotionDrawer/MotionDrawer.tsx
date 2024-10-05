@@ -1,7 +1,5 @@
-import './motion-drawer-tmp.scss';
-
 import {motion} from 'framer-motion';
-import {ForwardedRef, forwardRef, ReactNode, RefObject, useCallback, useLayoutEffect, useRef,} from 'react';
+import {ForwardedRef, forwardRef, ReactNode, RefObject, useCallback, useEffect, useLayoutEffect, useRef,} from 'react';
 
 import {usePicker} from '../PickerProvider';
 import {IPickerOptions} from '../types';
@@ -12,7 +10,7 @@ import {getScrollParent, updatePosition} from './utils';
 
 const defaultMotionProps: IPickerOptions = {
     variants: {
-        initial: {zIndex: 999, opacity: 0, transition: {type:'spring'}},
+        initial: {position: 'absolute', zIndex: 999, opacity: 0, transition: {type:'spring'}},
         show: {opacity: 1,  transition: {type: 'just'}},
         exit: {opacity: 0, scale: .95},
     },
@@ -55,11 +53,10 @@ const MotionDrawer = ({
     }, [Picker.setVertical]);
 
 
-    useLayoutEffect(() => {
+    useEffect(() => {
 
         if (anchorRef.current && pickerRef.current) {
             const scrollParent = getScrollParent(anchorRef.current);
-            pickerRef.current.style.position = scrollParent === window ? 'absolute' : 'fixed';
 
             if(scrollParent){
                 scrollParent.addEventListener('scroll', handleUpdatePosition);

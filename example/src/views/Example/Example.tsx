@@ -21,48 +21,50 @@ const Example = () => {
 
     return <ExampleRoot>
 
-        <Select2
-            isSearchEnable
-            value={value}
-            options={[
-                {text: 'Apple', value: 'A'},
-                {text: 'Basic', value: 'B'},
-                {text: 'Cat & Car', value: 'C'},
-                {text: 'Dog & Desk', value: 'D'},
-                {text: 'Element', value: 'E'},
-                {text: 'Fake', value: 'F'},
-                {text: 'Google', value: 'G'},
-            ]}
-            onChange={newValue => setValue(newValue)}
-        />
-        <Select2
-            value={value}
-            options={[
-                {text: 'Apple', value: 'A'},
-                {text: 'Basic', value: 'B'},
-                {text: 'Cat & Car', value: 'C'},
-                {text: 'Dog & Desk', value: 'D'},
-                {text: 'Element', value: 'E'},
-                {text: 'Fake', value: 'F'},
-                {text: 'Google', value: 'G'},
-            ]}
-            onChange={newValue => setValue(newValue)}
-        />
-        <Select2
-            value={value}
-            options={[
-                {text: 'Apple', value: 'A'},
-                {text: 'Basic', value: 'B'},
-                {text: 'Cat & Car', value: 'C'},
-                {text: 'Dog & Desk', value: 'D'},
-                {text: 'Element', value: 'E'},
-                {text: 'Fake', value: 'F'},
-                {text: 'Google', value: 'G'},
-            ]}
-            onChange={newValue => setValue(newValue)}
-        />
+        {/*<Select2*/}
+        {/*    isSearchEnable*/}
+        {/*    value={value}*/}
+        {/*    options={[*/}
+        {/*        {text: 'Apple', value: 'A'},*/}
+        {/*        {text: 'Basic', value: 'B'},*/}
+        {/*        {text: 'Cat & Car', value: 'C'},*/}
+        {/*        {text: 'Dog & Desk', value: 'D'},*/}
+        {/*        {text: 'Element', value: 'E'},*/}
+        {/*        {text: 'Fake', value: 'F'},*/}
+        {/*        {text: 'Google', value: 'G'},*/}
+        {/*    ]}*/}
+        {/*    onChange={newValue => setValue(newValue)}*/}
+        {/*/>*/}
+        {/*<Select2*/}
+        {/*    value={value}*/}
+        {/*    options={[*/}
+        {/*        {text: 'Apple', value: 'A'},*/}
+        {/*        {text: 'Basic', value: 'B'},*/}
+        {/*        {text: 'Cat & Car', value: 'C'},*/}
+        {/*        {text: 'Dog & Desk', value: 'D'},*/}
+        {/*        {text: 'Element', value: 'E'},*/}
+        {/*        {text: 'Fake', value: 'F'},*/}
+        {/*        {text: 'Google', value: 'G'},*/}
+        {/*    ]}*/}
+        {/*    onChange={newValue => setValue(newValue)}*/}
+        {/*/>*/}
+        {/*<Select2*/}
+        {/*    value={value}*/}
+        {/*    options={[*/}
+        {/*        {text: 'Apple', value: 'A'},*/}
+        {/*        {text: 'Basic', value: 'B'},*/}
+        {/*        {text: 'Cat & Car', value: 'C'},*/}
+        {/*        {text: 'Dog & Desk', value: 'D'},*/}
+        {/*        {text: 'Element', value: 'E'},*/}
+        {/*        {text: 'Fake', value: 'F'},*/}
+        {/*        {text: 'Google', value: 'G'},*/}
+        {/*    ]}*/}
+        {/*    onChange={newValue => setValue(newValue)}*/}
+        {/*/>*/}
 
-        <Button onClick={TaskEditModal.show}>Open Task Edit Modal</Button>
+        <Button color="primary" size="md" onClick={TaskEditModal.show}>Open Task Edit Modal</Button>
+
+        <Padding/>
         {/*<Select2Wrapper>*/}
         {/*    <Select2*/}
         {/*        value={value}*/}
@@ -121,8 +123,10 @@ const Example = () => {
 
 export default Example;
 
+
+
 const Padding = styled.div`
-    height: 500px;
+    height: 700px;
 `;
 
 const Select2Wrapper3 = styled.div`

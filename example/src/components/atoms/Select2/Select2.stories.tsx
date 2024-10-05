@@ -5,7 +5,7 @@ import type {Meta, StoryObj} from '@storybook/react';
 import {fn} from '@storybook/test';
 import {useEffect} from 'react';
 
-import {options, optionsSmall} from '../../config/data';
+import {options, optionsSmall} from '../../../config/data';
 import OriginSelect from './OriginSelect';
 import Select2 from './Select2';
 

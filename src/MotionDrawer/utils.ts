@@ -18,7 +18,7 @@ export function getScrollParent(element: HTMLElement): HTMLElement | Window {
 
     let parent = element.parentElement;
 
-    while (parent) {
+    while (!!parent) {
         const {overflowY, position} = window.getComputedStyle(parent);
         const isScrollable = overflowY === 'auto' || overflowY === 'scroll';
 
