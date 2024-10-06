@@ -3,8 +3,10 @@ import {action} from '@storybook/addon-actions';
 import {useArgs} from '@storybook/preview-api';
 import type {Meta, StoryObj} from '@storybook/react';
 import {fn} from '@storybook/test';
+import {useEffect} from 'react';
 
-import {options, optionsSmall} from '../../config/data';
+import {options, optionsSmall} from '../../../config/data';
+import OriginSelect from './OriginSelect';
 import Select2 from './Select2';
 
 const meta = {
@@ -43,16 +45,61 @@ export const Primary: Story = {
             updateArgs({value});
         }
 
-        return <Select2
-            {...args}
-            value={value}
-            options={options}
-            onChange={onChange}
-        />;
+        return <Flex style={{marginTop: '500px', marginBottom: '900px'}}>
+            
+            <Select2
+                {...args}
+                value={value}
+                options={options}
+                onChange={onChange}
+            />
+
+
+        </Flex>;
     },
 };
 
 
+
+export const WithInputWidth: Story = {
+    args: {},
+    render: function Render(args) {
+        const [{value}, updateArgs] = useArgs<{value: string}>();
+
+        function onChange(value: string) {
+            action('onChange')(value);
+            updateArgs({value});
+        }
+
+        return <Flex column className="gap-2 align-items-start" style={{width: '300px'}}>
+
+            <Select2
+                {...args}
+                value={value}
+                options={options}
+                onChange={onChange}
+            />
+
+            <Select2
+                {...args}
+                isBlock
+                value={value}
+                options={options}
+                onChange={onChange}
+            />
+
+            <Select2
+                {...args}
+                value={value}
+                isBlock
+                isDropdownBlock
+                options={options}
+                onChange={onChange}
+            />
+
+        </Flex>;
+    },
+};
 
 export const WithStaticVertical: Story = {
     args: {},
@@ -64,7 +111,7 @@ export const WithStaticVertical: Story = {
             updateArgs({value});
         }
 
-        return <Flex className="gap-2 align-items-start" style={{padding: '600px 0'}}>
+        return <Flex className="gap-2 align-items-start" style={{padding: '600px 0', width: '300px'}}>
 
             <Select2
                 {...args}
@@ -89,7 +136,7 @@ export const WithFixedVertical: Story = {
             updateArgs({value});
         }
 
-        return <Flex col="column" className="gap-2 align-items-start">
+        return <Flex column className="gap-2 align-items-start">
 
             <div style={{position: 'fixed', top: '120px'}}>
                 <Select2
@@ -116,6 +163,76 @@ export const WithFixedVertical: Story = {
                 />
             </div>
         </Flex>;
+    },
+};
+
+
+export const WithFixedModalVertical: Story = {
+    args: {
+        isAvatarEnable: false,
+    },
+
+    render: function Render(args) {
+        const [{value}, updateArgs] = useArgs<{value: string}>();
+
+
+        useEffect(() => {
+            // 设置 body 的 overflow: none
+            document.body.style.overflow = 'hidden';
+            document.body.style.overscrollBehaviorX = 'contain';
+            document.body.style.maxWidth = '100vw';
+
+            return () => {
+                // 恢复原来的样式
+                document.body.style.overflow = '';
+                document.body.style.overscrollBehaviorX = '';
+                document.body.style.maxWidth = '';
+            };
+        }, []);
+
+        function onChange(value: string) {
+            action('onChange')(value);
+            updateArgs({value});
+        }
+
+        return <>
+
+            <div style={{
+                position: 'fixed',
+                left: '0',
+                right: '0',
+                top: '0',
+                bottom: '0',
+                overflow: 'hidden',
+                overflowY: 'auto',
+                backgroundColor: '#ccc'
+            }}>
+                <div style={{
+                    width: '500px',
+                    height: '1000px',
+                    padding: '100px',
+                }}>
+                    <Select2
+                        {...args}
+                        value={value}
+                        options={options}
+                        onChange={onChange}
+                    />
+
+                    <div style={{
+                        marginTop: '300px',
+                    }}>
+                        <Select2
+                            {...args}
+                            value={value}
+                            options={options}
+                            onChange={onChange}
+                        />
+                    </div>
+                </div>
+
+            </div>
+        </>;
     },
 };
 

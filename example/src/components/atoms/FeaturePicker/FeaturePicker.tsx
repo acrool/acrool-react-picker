@@ -55,7 +55,7 @@ const WithPicker = <V extends null>(args: PickerProps<V>) => {
     return <DropdownRoot>
 
         {/* 標記版本 */}
-        <Flex col="column">
+        <Flex column>
             <DropTitle>Mark Version</DropTitle>
             <Dropdown
                 isDark

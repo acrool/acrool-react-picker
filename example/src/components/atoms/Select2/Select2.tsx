@@ -3,13 +3,16 @@ import {Dropdown, IDropdownOption, isGroupOptions, TOption} from '@acrool/react-
 import {Flex} from '@acrool/react-grid';
 import {createPicker, EVertical, usePicker} from '@acrool/react-picker';
 import clsx from 'clsx';
+import CSS from 'csstype';
 import React, {ForwardedRef, useEffect, useMemo, useRef} from 'react';
 import styled, {css} from 'styled-components';
 
 import ArrowDownSvg from './arrow_down.svg?react';
 
 
-export interface IProps<V>  {
+export interface IProps<V> {
+    style?: CSS.Properties,
+    className?: string
     value?: V
     onChange: (value: V) => void
     name?: string
@@ -21,6 +24,8 @@ export interface IProps<V>  {
     isSearchEnable?: boolean
     isAvatarEnable?: boolean
     isLink?: boolean
+    isBlock?: boolean
+    isDropdownBlock?: boolean
     ref?: any
 }
 
@@ -29,18 +34,25 @@ export interface IProps<V>  {
  * 下拉選單元件
  *
  * @param style
+ * @param className
  * @param options 下拉選單項目
  * @param disabled 是否禁用
  * @param value
+ * @param placeholder
+ * @param isAvatarEnable
+ * @param isLink
  * @param ref
  */
 const Select2 = <V extends null>({
+    style,
+    className,
     options,
     disabled = false,
     value,
     placeholder,
     isAvatarEnable = false,
     isLink = false,
+    isBlock = false,
 }: IProps<V>, ref?: ForwardedRef<HTMLButtonElement>) => {
 
     const Picker = usePicker();
@@ -75,13 +87,15 @@ const Select2 = <V extends null>({
     const isPlaceholderValue = isEmpty(value);
     return <Select2Root
         ref={ref}
-        className={clsx('align-items-center justify-content-between column-gap-2')}
+        style={style}
+        className={clsx(className, 'align-items-center justify-content-between column-gap-2')}
         type="button"
         onMouseDown={Picker.toggle}
         isFocus={Picker.isInputFocus}
         onFocus={Picker.inputFocus}
         disabled={disabled}
         isLink={isLink}
+        isBlock={isBlock}
     >
         <Text isPlaceholderValue={isPlaceholderValue}>
             {valueText}
@@ -132,8 +146,10 @@ const Picker = <V extends null>(args: IProps<V>) => {
 
     return <Dropdown
         value={value}
+        isDark
         onClick={handleOnClick}
         onEnter={handleOnClick}
+        className={clsx({'w-100': args.isDropdownBlock})}
         options={placeholderOptions}
         isAvatarEnable={isAvatarEnable}
         isSearchEnable={isSearchEnable}
@@ -147,7 +163,8 @@ const Picker = <V extends null>(args: IProps<V>) => {
 
 export default createPicker(
     Select2,
-    Picker
+    Picker,
+    {isDebug: false}
 ) as <V extends any>(props: IProps<V>) => JSX.Element;
 
 
@@ -156,6 +173,7 @@ export default createPicker(
 const Text = styled.div<{
     isPlaceholderValue: boolean,
 }>`
+    white-space:nowrap;
     ${props => props.isPlaceholderValue && css`
       color: #6c757d;
     `}
@@ -174,6 +192,7 @@ const Select2Root = styled.button<{
     disabled?: boolean,
     isLink?: boolean,
     isFocus?: boolean,
+    isBlock?: boolean,
 }>`
     position: relative;
     display: flex;
@@ -181,8 +200,8 @@ const Select2Root = styled.button<{
     align-items: center;
 
     height: var(--form-height);
+    width: ${props => props.isBlock ? '100%': 'auto'};
 
-    width: 100%;
 
     font-size: 14px;
     color: var(--form-color);

@@ -1,3 +1,9 @@
 .motion-animation-wrapper {
     z-index: 1;
+
+    align-items: flex-start;
+
+    &[data-debug]{
+        background: rgb(255 0 0 / 30%);
+    }
 }

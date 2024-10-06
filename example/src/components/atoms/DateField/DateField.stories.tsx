@@ -3,13 +3,12 @@ import {useArgs} from '@storybook/preview-api';
 import type {Meta, StoryObj} from '@storybook/react';
 import {fn} from '@storybook/test';
 
-import {options} from '../../config/data';
 import DateField from './DateField';
 import DateFieldWithConfirm from './DateFieldWithConfirm';
 
 const meta = {
-    title: 'Example/DateFieldWithConfirm',
-    component: DateFieldWithConfirm,
+    title: 'Example/DateField',
+    component: DateField,
     parameters: {
         // layout: 'centered',
         actions: {argTypesRegex: '^on.*'},
@@ -25,7 +24,7 @@ const meta = {
         onChange: fn(),
         value: '',
     },
-} satisfies Meta<typeof DateFieldWithConfirm>;
+} satisfies Meta<typeof DateField>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -39,9 +38,9 @@ export const Primary: Story = {
             updateArgs({value});
         }
 
-        return <Flex col="column" style={{width: '250px'}}>
+        return <Flex column className="gap-3" style={{width: '250px'}}>
             <div>Current Value: {value}</div>
-            <DateFieldWithConfirm
+            <DateField
                 {...args}
                 value={value}
                 onChange={onChange}
@@ -49,5 +48,3 @@ export const Primary: Story = {
         </Flex>;
     },
 };
-
-

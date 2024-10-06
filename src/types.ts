@@ -31,6 +31,7 @@ export interface IValueChange<T = string> {
 export interface IPickerOption {
     isEnableHideSave?: boolean
     isEnableClickOutSiteHidden?: boolean
+    isDebug?: boolean
 }
 
 //
