@@ -83,6 +83,7 @@ const Example = () => {
             (Test Fixed)
             <Select2
                 value={value}
+                isSearchEnable
                 options={[
                     {text: 'Apple', value: 'A'},
                     {text: 'Basic', value: 'B'},

@@ -213,10 +213,11 @@ function createPicker<V extends {}, P>(
 
                 {/* Hide */}
                 {isInputFocus && <HotkeyListener
-                    hotKey={[
-                        EKeyboardKey.Escape,
-                    ]}
+                    hotKey={EKeyboardKey.Escape}
                     onKeyDown={onEscHotkey}
+                    ignoreFormField
+                    stopPropagation
+                    preventDefault
                 />}
             </div>
 
