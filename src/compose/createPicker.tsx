@@ -1,5 +1,5 @@
 import Logger from '@acrool/js-logger';
-import {EKeyboardKey,HotkeyListener} from '@acrool/react-hotkey';
+import {EKeyboardKey, HotkeyListener} from '@acrool/react-hotkey';
 import ReactPortal from '@acrool/react-portal';
 import {AnimatePresence} from 'framer-motion';
 import React, {forwardRef, useCallback, useEffect, useRef, useState} from 'react';
@@ -72,11 +72,19 @@ function createPicker<V extends {}, P>(
 
 
         /**
+         * 處理 Esc 熱鍵關閉 狀態
+         * @param isFocus
+         */
+        const onEscHotkey = useCallback(() => {
+            mainRef.current.focus();
+            setPickerVisible(false);
+        }, []);
+
+        /**
          * 處理當鍵盤按 Tab 的時候關閉選單與注視
          */
-        const handleOnBlurHotKey = useCallback((evt: React.KeyboardEvent) => {
+        const onNavHotKey = useCallback((evt: React.KeyboardEvent) => {
             setPickerVisible(false);
-            mainRef.current.focus();
             setInputFocus(false);
         }, []);
 
@@ -133,20 +141,6 @@ function createPicker<V extends {}, P>(
         }, [value, args.onChange, isEnableHideSave]);
 
 
-        /**
-         * 禁止KeyBoard
-         */
-        const disabledKeyDown = useCallback((evt: React.KeyboardEvent) => {
-            if([EKeyboardKey.Escape].includes(evt.key as EKeyboardKey)) {
-                if(isPickerVisible){
-                    evt.stopPropagation();
-                    setPickerVisible(false);
-                }
-            }
-        }, [isPickerVisible]);
-
-
-
         return (<PickerProviderContext.Provider
             value={{
                 hide: () => requestAnimationFrame(() => setPickerVisible(false)),
@@ -165,7 +159,7 @@ function createPicker<V extends {}, P>(
                 setVertical,
             }}
         >
-            <div className={styles.root} onKeyDown={disabledKeyDown}>
+            <div className={styles.root}>
                 <div ref={anchorRef} className={styles.mainEl}>
                     <RefMainComponent
                         {...args as P & IValueChange<V>}
@@ -204,16 +198,25 @@ function createPicker<V extends {}, P>(
                         EKeyboardKey.Space,
                     ]}
                     onKeyDown={handleOnShowHotKey}
+                    stopPropagation
+                    preventDefault
                 />}
 
-                {/* Hide */}
+                {/* Nav */}
                 {isInputFocus && <HotkeyListener
                     hotKey={[
                         EKeyboardKey.Tab,
                         EKeyboardKey.ShiftAndTab
                     ]}
-                    onKeyDown={handleOnBlurHotKey}
-                    preventDefault={false}
+                    onKeyDown={onNavHotKey}
+                />}
+
+                {/* Hide */}
+                {isInputFocus && <HotkeyListener
+                    hotKey={[
+                        EKeyboardKey.Escape,
+                    ]}
+                    onKeyDown={onEscHotkey}
                 />}
             </div>
 
