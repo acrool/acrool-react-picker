@@ -131,6 +131,34 @@ function createPicker<V extends {}, P>(
             setPickerVisible(true);
         }, []);
 
+
+        /**
+         * 處理關閉視窗
+         */
+        const handleOnHide = useCallback(() => {
+            // focus 是為了讓 Tab 到下一個可以正常
+            requestAnimationFrame(() => {
+                mainRef.current.focus();
+                setPickerVisible(false);
+            });
+        }, []);
+
+        /**
+         * 處理切換開關視窗
+         */
+        const handleOnToggle = useCallback(() => {
+            // focus 是為了讓 Tab 到下一個可以正常
+            setPickerVisible(curr => {
+                if(curr){
+                    requestAnimationFrame(() => {
+                        mainRef.current.focus();
+                    });
+                }
+                return !curr;
+            });
+
+        }, []);
+
         /**
          * 模擬選單是已關閉狀態 但 還在 Focus狀態，關閉 Focus 狀態
          */
@@ -178,9 +206,9 @@ function createPicker<V extends {}, P>(
 
         return (<PickerProviderContext.Provider
             value={{
-                hide: () => requestAnimationFrame(() => setPickerVisible(false)),
+                hide: handleOnHide,
                 show: () => setPickerVisible(true),
-                toggle: () => setPickerVisible(curr => !curr),
+                toggle: handleOnToggle,
                 isVisible: isPickerVisible,
 
                 inputFocus: () => setInputFocus(true),
