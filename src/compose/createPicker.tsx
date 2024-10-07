@@ -1,10 +1,10 @@
 import Logger from '@acrool/js-logger';
-import {EKeyboardKey, HotkeyListener} from '@acrool/react-hotkey';
 import ReactPortal from '@acrool/react-portal';
 import {AnimatePresence} from 'framer-motion';
 import React, {forwardRef, useCallback, useEffect, useRef, useState} from 'react';
 import {ulid} from 'ulid';
 
+import {EKeyboardKey} from '../config';
 import MousedownListener from '../listener/MousedownListener';
 import PickerHideListener from '../listener/PickerHideListener';
 import styles from '../modal.module.scss';
@@ -72,18 +72,51 @@ function createPicker<V extends {}, P>(
 
 
         /**
+         * 處理按鍵
+         */
+        const handleOnKeyDown = useCallback((e: React.KeyboardEvent) => {
+            switch (e.key){
+            case EKeyboardKey.Escape:
+                onEscHotkey(isPickerVisible)(e);
+                break;
+
+            case EKeyboardKey.Tab:
+            case EKeyboardKey.ShiftAndTab:
+                onNavHotKey(e);
+                break;
+
+            case EKeyboardKey.ArrowUp:
+            case EKeyboardKey.ArrowDown:
+            case EKeyboardKey.Space:
+                handleOnShowHotKey(e);
+                break;
+            }
+        }, [isPickerVisible]);
+
+        
+        
+        /**
          * 處理 Esc 熱鍵關閉 狀態
          * @param isFocus
          */
-        const onEscHotkey = useCallback(() => {
-            mainRef.current.focus();
-            setPickerVisible(false);
+        const onEscHotkey = useCallback((isPickerVisible: boolean) => {
+
+            return (e: React.KeyboardEvent) => {
+                if(isPickerVisible){
+                    e.stopPropagation();
+                    e.preventDefault();
+                    mainRef.current.focus();
+                    setPickerVisible(false);
+                }
+            };
         }, []);
 
         /**
          * 處理當鍵盤按 Tab 的時候關閉選單與注視
          */
-        const onNavHotKey = useCallback((evt: React.KeyboardEvent) => {
+        const onNavHotKey = useCallback((e: React.KeyboardEvent) => {
+            mainRef.current.focus();
+
             setPickerVisible(false);
             setInputFocus(false);
         }, []);
@@ -92,7 +125,9 @@ function createPicker<V extends {}, P>(
         /**
          * 處理當鍵盤按[上 下 空白]的時候開啟選單
          */
-        const handleOnShowHotKey = useCallback((evt: React.KeyboardEvent) => {
+        const handleOnShowHotKey = useCallback((e: React.KeyboardEvent) => {
+            e.preventDefault();
+
             setPickerVisible(true);
         }, []);
 
@@ -159,7 +194,10 @@ function createPicker<V extends {}, P>(
                 setVertical,
             }}
         >
-            <div className={styles.root}>
+            <div 
+                className={styles.root}
+                onKeyDown={handleOnKeyDown}
+            >
                 <div ref={anchorRef} className={styles.mainEl}>
                     <RefMainComponent
                         {...args as P & IValueChange<V>}
@@ -191,34 +229,7 @@ function createPicker<V extends {}, P>(
 
                 {/* Show */}
                 {isInputFocus && <MousedownListener onMousedown={handleBlurCheck}/>}
-                {isInputFocus && <HotkeyListener
-                    hotKey={[
-                        EKeyboardKey.ArrowUp,
-                        EKeyboardKey.ArrowDown,
-                        EKeyboardKey.Space,
-                    ]}
-                    onKeyDown={handleOnShowHotKey}
-                    stopPropagation
-                    preventDefault
-                />}
 
-                {/* Nav */}
-                {isInputFocus && <HotkeyListener
-                    hotKey={[
-                        EKeyboardKey.Tab,
-                        EKeyboardKey.ShiftAndTab
-                    ]}
-                    onKeyDown={onNavHotKey}
-                />}
-
-                {/* Hide */}
-                {isInputFocus && <HotkeyListener
-                    hotKey={EKeyboardKey.Escape}
-                    onKeyDown={onEscHotkey}
-                    ignoreFormField
-                    stopPropagation
-                    preventDefault
-                />}
             </div>
 
         </PickerProviderContext.Provider>);

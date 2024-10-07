@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import Select2 from '../../components/atoms/Select2';
 import {ModalLayout} from '../../components/organize/ModalLayout';
 import {optionsSmall} from '../../config/data';
+import DateField from "../../components/atoms/DateField";
 
 
 /**
@@ -74,7 +75,11 @@ const TaskEditModal = createModal(
         };
 
         const renderAssignMerger = () => {
-            return <Skeleton w={200} h={25}/>;
+            return <Select2
+                value="2"
+                options={optionsSmall}
+                onChange={() => {}}
+            />;
 
         };
 
@@ -247,7 +252,7 @@ const TaskEditModal = createModal(
         };
 
         const renderEstimateDateEditor = () => {
-            return <Skeleton w={200} h={25}/>;
+            return <DateField/>;
 
         };
 
@@ -271,6 +276,7 @@ const TaskEditModal = createModal(
             <ModalLayout
                 onCloseModal={handleCloseModel}
                 size={{width: '900px'}}
+                name="TaskEditModal"
             >
 
 
@@ -299,6 +305,7 @@ const TaskEditModal = createModal(
 
                     </Container>
                 </PageRoot>
+
 
             </ModalLayout>
         );

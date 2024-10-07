@@ -119,13 +119,13 @@ const Picker = <V extends null>(args: IProps<V>) => {
     const Picker = usePicker();
     const searchForwardedRef = useRef<HTMLInputElement>(null);
 
-    useEffect(() => {
-        window.setTimeout(() => {
-            if(searchForwardedRef.current){
-                searchForwardedRef.current.focus();
-            }
-        }, 10);
-    }, []);
+    // useEffect(() => {
+    //     window.setTimeout(() => {
+    //         if(searchForwardedRef.current){
+    //             searchForwardedRef.current.focus();
+    //         }
+    //     }, 10);
+    // }, []);
 
     /**
      * 取得加上Placeholder的Options
@@ -144,20 +144,22 @@ const Picker = <V extends null>(args: IProps<V>) => {
         Picker.hide();
     };
 
-    return <Dropdown
-        value={value}
-        isDark
-        onClick={handleOnClick}
-        onEnter={handleOnClick}
-        className={clsx({'w-100': args.isDropdownBlock})}
-        options={placeholderOptions}
-        isAvatarEnable={isAvatarEnable}
-        isSearchEnable={isSearchEnable}
-        isCheckedEnable
-        searchForwardedRef={searchForwardedRef}
-        searchTextPlaceholder="type keyword..."
-        isReverse={Picker.vertical === EVertical.top}
-    />;
+    return <>
+        <Dropdown
+            value={value}
+            isDark
+            onClick={handleOnClick}
+            onEnter={handleOnClick}
+            className={clsx({'w-100': args.isDropdownBlock})}
+            options={placeholderOptions}
+            isAvatarEnable={isAvatarEnable}
+            isSearchEnable={isSearchEnable}
+            isCheckedEnable
+            // searchForwardedRef={searchForwardedRef}
+            searchTextPlaceholder="type keyword..."
+            isReverse={Picker.vertical === EVertical.top}
+        />
+    </>;
 };
 
 
