@@ -105,7 +105,7 @@ function createPicker<V extends {}, P>(
                 if(isPickerVisible){
                     e.stopPropagation();
                     e.preventDefault();
-                    mainRef.current.focus();
+                    mainRef.current?.focus();
                     setPickerVisible(false);
                 }
             };
@@ -115,7 +115,7 @@ function createPicker<V extends {}, P>(
          * 處理當鍵盤按 Tab 的時候關閉選單與注視
          */
         const onNavHotKey = useCallback((e: React.KeyboardEvent) => {
-            mainRef.current.focus();
+            mainRef.current?.focus();
 
             setPickerVisible(false);
             setInputFocus(false);
@@ -138,7 +138,7 @@ function createPicker<V extends {}, P>(
         const handleOnHide = useCallback(() => {
             // focus 是為了讓 Tab 到下一個可以正常
             requestAnimationFrame(() => {
-                mainRef.current.focus();
+                mainRef.current?.focus();
                 setPickerVisible(false);
             });
         }, []);
@@ -151,7 +151,7 @@ function createPicker<V extends {}, P>(
             setPickerVisible(curr => {
                 if(curr){
                     requestAnimationFrame(() => {
-                        mainRef.current.focus();
+                        mainRef.current?.focus();
                     });
                 }
                 return !curr;
