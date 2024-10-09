@@ -222,11 +222,11 @@ function createPicker<V extends {}, P>(
                 setVertical,
             }}
         >
-            <div 
-                className={styles.root}
-                onKeyDown={handleOnKeyDown}
-            >
-                <div ref={anchorRef} className={styles.mainEl}>
+            <>
+                <div ref={anchorRef} 
+                    className={styles.mainEl}
+                    onKeyDown={handleOnKeyDown}
+                >
                     <RefMainComponent
                         {...args as P & IValueChange<V>}
                         ref={setForwardedRef(ref, mainRef)}
@@ -243,6 +243,7 @@ function createPicker<V extends {}, P>(
                                 ref={pickerRef}
                                 anchorRef={anchorRef}
                                 isDebug={options?.isDebug}
+                                onKeyDown={handleOnKeyDown}
                             >
                                 <DropdownComponent {...args as P & IValueChange<V>}/>
                             </MotionDrawer>
@@ -258,7 +259,7 @@ function createPicker<V extends {}, P>(
                 {/* Show */}
                 {isInputFocus && <MousedownListener onMousedown={handleBlurCheck}/>}
 
-            </div>
+            </>
 
         </PickerProviderContext.Provider>);
     };

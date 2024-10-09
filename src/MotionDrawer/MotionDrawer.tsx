@@ -100,6 +100,7 @@ const MotionDrawer = ({
         animate="show"
         exit="exit"
         tabIndex={0}
+        onKeyDown={onKeyDown}
     >
         {children}
     </motion.div>;
