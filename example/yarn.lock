@@ -7,10 +7,10 @@
   resolved "https://registry.yarnpkg.com/@acrool/js-logger/-/js-logger-1.0.23.tgz#2dd951fc3142cef0a9a050f02aaa4d94eab09042"
   integrity sha512-UW4mXflIYYIKx4CaptY6HZmY+I2fRY76Eb/E4ACpEm7LXsZPdbgKwpGlzkky7212us8sPP8PyJnhWU7ftMhLXA==
 
-"@acrool/js-utils@3.2.12-alpha.1":
-  version "3.2.12-alpha.1"
-  resolved "https://registry.yarnpkg.com/@acrool/js-utils/-/js-utils-3.2.12-alpha.1.tgz#12c28f402b9625c151aa1f6e5063cad6ed8c3816"
-  integrity sha512-VpTO8opmB6tEwp0sGDDQW2+DA+BuAFHFQwSiT5RRJzJIJNIt+vDMC24ou0JTHiI4A9DTpvAgYuS18yZCZj/pVQ==
+"@acrool/js-utils@3.2.12":
+  version "3.2.12"
+  resolved "https://registry.yarnpkg.com/@acrool/js-utils/-/js-utils-3.2.12.tgz#ebab43062442808be9a190ef004c3ea2fa368ce4"
+  integrity sha512-G8b/Kf8r+sD2yWW5/tTzD5MA2cpC9caNu35jCp6f97W61aPyOLJIxIdFL29o+DFCMd80IuHhK7hXy3S4VsG6/A==
   dependencies:
     dayjs "^1.x"
 
@@ -21,26 +21,36 @@
   dependencies:
     dayjs "^1.11.12"
 
-"@acrool/react-dropdown@link:../../acrool-react-dropdown":
-  version "0.0.0"
-  uid ""
+"@acrool/react-dropdown@^3.0.19":
+  version "3.0.19"
+  resolved "https://registry.yarnpkg.com/@acrool/react-dropdown/-/react-dropdown-3.0.19.tgz#61b93d9cb04d8285bc2ffae73453153d20ba8581"
+  integrity sha512-UZhUkRHOzDL3v8qIWrerRld2EQfN32y8dayz8j5fnPY9eTdO+HVoj+/hvhw4rH2JEZ3vM3f0d0jTmg0IuMXuWA==
+  dependencies:
+    clsx "^2.1.1"
 
 "@acrool/react-grid@5.2.4":
   version "5.2.4"
   resolved "https://registry.yarnpkg.com/@acrool/react-grid/-/react-grid-5.2.4.tgz#8ad917b1270170bef18f3cf264fdd15364eb516b"
   integrity sha512-ywv43YWf1pJDPZMqKApq4CYz9saoTO3w03EaEd0din88gThNJXs9J2+MpGoeAVvsAmfulODephWLu5rqD2G0rg==
 
-"@acrool/react-hotkey@0.0.7-test.0", "@acrool/react-hotkey@^0.0.7-test.2":
+"@acrool/react-hotkey@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@acrool/react-hotkey/-/react-hotkey-0.0.7.tgz#f7be1064c944a443f23bdba6120f334d89733a41"
+  integrity sha512-3NvldQVY3769k5P3E8tGigpdFFJ+jFaASTK3ahSoccyTtF5wAb9RgFj32aYAsDUIM7tpzJP2GLapeDhhxA6xgA==
+  dependencies:
+    "@acrool/js-logger" "^1.0.23"
+
+"@acrool/react-hotkey@^0.0.7-test.2":
   version "0.0.7-test.2"
   resolved "https://registry.yarnpkg.com/@acrool/react-hotkey/-/react-hotkey-0.0.7-test.2.tgz#3d00badfc90e0233bd88c1461bdb47cc9c45fd91"
   integrity sha512-0z1WRSxhvH5GPIjDqJ5YiFzS2v9ofeUK5lgVuCTedYXqtgQdYiU0DagHdR6WYUmdwoBjEJLDrlRHwvrV67aWXA==
   dependencies:
     "@acrool/js-logger" "^1.0.23"
 
-"@acrool/react-modal@0.0.9-alpha.10":
-  version "0.0.9-alpha.10"
-  resolved "https://registry.yarnpkg.com/@acrool/react-modal/-/react-modal-0.0.9-alpha.10.tgz#0066de204b1a0286e4bf4821e28fe3fbd9c52ace"
-  integrity sha512-An3nrTZ8nVCFMcAZew1KqEdDkl/URGnYQnn7Qxu0gsSqEq2vc+nIy/Rc+cf0q/pOEyQIHsyRFDft/rx2Fon3Vg==
+"@acrool/react-modal@0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@acrool/react-modal/-/react-modal-0.0.9.tgz#d9de7cd95ca542679b2aef8d5990d824cd9346d6"
+  integrity sha512-qo1TfUEsj6sWrdm5jNqj+y6A0pDllcDAWznQQ4S2v3Zl9GG49Vxb42dVdRdORu5Bev4qKM+Ije7rc/hw/b8O4A==
   dependencies:
     "@acrool/js-logger" "^1.0.23"
     "@acrool/react-portal" "^1.0.3"
@@ -59,10 +69,10 @@
   dependencies:
     clsx "^2.1.1"
 
-"@acrool/react-skeleton@^0.0.3-alpha.0":
-  version "0.0.3-alpha.0"
-  resolved "https://registry.yarnpkg.com/@acrool/react-skeleton/-/react-skeleton-0.0.3-alpha.0.tgz#ff1a3acfabe5370b95ecbaab734b818f3c55b4b3"
-  integrity sha512-EciSR+/MatF7bhS9/d6VS+BWcc8GJH+sioWZDNoUzN8THy6JYhZVCngITKy7YdsKZ/ScOluxzZZTe/FApMCpSQ==
+"@acrool/react-skeleton@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@acrool/react-skeleton/-/react-skeleton-0.0.3.tgz#94f5c35f1540e8354aae4417b674db59786936d1"
+  integrity sha512-gOsqktA6owW9kXcr6fB8xcqxsDRAJ7f6Sh4tgiubqWFszUhezolbUQB+c+v2M9z4fb7ojeCbTnLi0jFAmnh9WQ==
   dependencies:
     clsx "2.1.1"
 

@@ -60,8 +60,7 @@ const ModalLayout = ({
             </PageRoot>
 
             <HotkeyListener hotKey={EKeyboardKey.Escape} onKeyDown={handleCloseModal}
-                ignoreFormField
-                stopPropagation
+                enabledInFormField
                 preventDefault
             />
         </>
