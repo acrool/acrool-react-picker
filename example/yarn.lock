@@ -40,13 +40,6 @@
   dependencies:
     "@acrool/js-logger" "^1.0.23"
 
-"@acrool/react-hotkey@^0.0.7-test.2":
-  version "0.0.7-test.2"
-  resolved "https://registry.yarnpkg.com/@acrool/react-hotkey/-/react-hotkey-0.0.7-test.2.tgz#3d00badfc90e0233bd88c1461bdb47cc9c45fd91"
-  integrity sha512-0z1WRSxhvH5GPIjDqJ5YiFzS2v9ofeUK5lgVuCTedYXqtgQdYiU0DagHdR6WYUmdwoBjEJLDrlRHwvrV67aWXA==
-  dependencies:
-    "@acrool/js-logger" "^1.0.23"
-
 "@acrool/react-modal@0.0.9":
   version "0.0.9"
   resolved "https://registry.yarnpkg.com/@acrool/react-modal/-/react-modal-0.0.9.tgz#d9de7cd95ca542679b2aef8d5990d824cd9346d6"
