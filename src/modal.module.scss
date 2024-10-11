@@ -1,17 +1,3 @@
-.root *,
-.root *::before,
-.root *::after{
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    line-height: normal;
-}
-
-
-.root{
-    position: relative;
-    width: 100%;
-}
-
 .main-el{
     display: contents;
 }

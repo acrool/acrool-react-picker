@@ -1,5 +1,5 @@
 import {motion} from 'framer-motion';
-import {ForwardedRef, forwardRef, ReactNode, RefObject, useCallback, useEffect, useLayoutEffect, useRef,} from 'react';
+import React, {ForwardedRef, forwardRef, ReactNode, RefObject, useCallback, useEffect, useRef,} from 'react';
 
 import {usePicker} from '../PickerProvider';
 import {IPickerOptions} from '../types';
@@ -32,6 +32,7 @@ interface IProps {
     children: ReactNode
     isDebug?: boolean
     anchorRef: RefObject<HTMLDivElement>
+    onKeyDown?: (e: React.KeyboardEvent) => void
 }
 
 
@@ -45,6 +46,7 @@ const MotionDrawer = ({
     children,
     isDebug = false,
     anchorRef,
+    onKeyDown,
 }: IProps, ref?: ForwardedRef<HTMLDivElement>) => {
     const pickerRef = useRef<HTMLDivElement>(null);
     const Picker = usePicker();
@@ -86,23 +88,22 @@ const MotionDrawer = ({
 
 
 
-    return <>
-        {/*{children}*/}
-        <motion.div
-            ref={setForwardedRef(ref, pickerRef)}
-            transition={{type: 'spring', duration: .2}}
-            style={{display: 'none'}}
+    return  <motion.div
+        ref={setForwardedRef(ref, pickerRef)}
+        transition={{type: 'spring', duration: .2}}
+        style={{display: 'none'}}
 
-            className={styles.motionAnimationWrapper}
-            data-debug={isDebug ? '': undefined}
-            variants={defaultMotionProps.variants}
-            initial="initial"
-            animate="show"
-            exit="exit"
-        >
-            {children}
-        </motion.div>
-    </>;
+        className={styles.motionAnimationWrapper}
+        data-debug={isDebug ? '': undefined}
+        variants={defaultMotionProps.variants}
+        initial="initial"
+        animate="show"
+        exit="exit"
+        tabIndex={0}
+        onKeyDown={onKeyDown}
+    >
+        {children}
+    </motion.div>;
 
 };
 

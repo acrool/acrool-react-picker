@@ -1,4 +1,5 @@
 import {FCChildrenProps} from '@acrool/react-grid';
+import {EKeyboardKey, HotkeyListener,} from '@acrool/react-hotkey';
 import {useModal} from '@acrool/react-modal';
 import React from 'react';
 import styled, {css} from 'styled-components';
@@ -15,6 +16,7 @@ interface IProps extends FCChildrenProps {
     onBackModal?: () => void
     onCloseModal?: () => void
     size?: IModalSetting
+    name: string
 }
 
 
@@ -29,8 +31,11 @@ const ModalLayout = ({
     onBackModal,
     onCloseModal,
     size,
+    name,
 }: IProps) => {
     const {queueKey} = useModal();
+
+    // const {scopeKeys} = useHotkeyScopeManager();
 
     /**
      * 關閉光箱預設動作
@@ -53,6 +58,12 @@ const ModalLayout = ({
 
                 {children}
             </PageRoot>
+
+            <HotkeyListener hotKey={EKeyboardKey.Escape} onKeyDown={handleCloseModal}
+                ignoreFormField
+                stopPropagation
+                preventDefault
+            />
         </>
     );
 };

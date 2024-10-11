@@ -69,6 +69,7 @@ const DateField = ({
                     Picker.value
             }
         </Text>
+        {Picker.isInputFocus ? 'Focus':'Blur'}
 
         {!isPlaceholderValue &&
             <div role="button" onMouseDown={handleClear}>
@@ -127,45 +128,52 @@ const DateFieldRoot = styled.button<{
     isLink?: boolean,
     isFocus?: boolean,
 }>`
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    white-space:nowrap;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  white-space: nowrap;
 
-    height: var(--form-height);
-    color: var(--form-color);
+  height: var(--form-height);
+  color: var(--form-color);
 
-    width: 100%;
+  width: 100%;
 
-    font-size: 14px;
+  font-size: 14px;
 
-    font-weight: 400;
-    line-height: 21px;
+  font-weight: 400;
+  line-height: 21px;
 
-    background: 0 0;
-    background-clip: padding-box;
+  background: 0 0;
+  background-clip: padding-box;
 
-    border-radius: .25rem;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-    margin-bottom: 0;
-    border: 1px solid #444;
-    padding: 1px 10px;
-    min-height: 22px;
-
-
-    ${props => props.isLink && css`
-        height: auto;
-        padding: 2px;
-        border: none;
-    `}
-
-    ${props => props.isFocus && css`
-        box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
-    `}
+  border-radius: .25rem;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  margin-bottom: 0;
+  border: 1px solid #444;
+  padding: 1px 10px;
+  min-height: 22px;
 
 
-    ${props => props.disabled && css`
+  ${props => props.isLink && css`
+    height: auto;
+    padding: 2px;
+    border: none;
+  `}
+  &:focus {
+    box-shadow: 0 0 0 0.2rem rgba(255, 0, 166, 0.25);
+  }
+
+  ${props => props.isFocus && css`
+    box-shadow: 0 0 0 0.2rem rgba(255, 0, 21, 0.35);
+
+    &:focus {
+      box-shadow: 0 0 0 0.2rem rgba(255, 0, 21, 0.75);
+    }
+  `}
+
+
+  ${props => props.disabled && css`
         opacity: .7;
         pointer-events: none;
     `}
