@@ -14,6 +14,11 @@ export enum EHorizontal {
     right = 'right',
 }
 
+export interface IPosition {
+    vertical: EVertical
+    horizontal: EHorizontal
+}
+
 
 export interface IPickerOptions {
     variants?: TAnimationVariants
@@ -32,6 +37,7 @@ export interface IPickerOption {
     isEnableHideSave?: boolean
     isEnableClickOutSiteHidden?: boolean
     isDebug?: boolean
+    importantPosition?: IPosition
 }
 
 //

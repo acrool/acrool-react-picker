@@ -1,7 +1,7 @@
 
 import {RefObject} from 'react';
 
-import {EHorizontal, EVertical} from '../types';
+import {EHorizontal, EVertical, IPosition} from '../types';
 
 // Cache to store scrollable parent for each element
 const scrollParentCache = new WeakMap();
@@ -37,12 +37,14 @@ export function getScrollParent(element: HTMLElement): HTMLElement | Window {
  * Update the position of the picker element relative to the anchor element.
  * @param anchorRef Reference to the anchor element.
  * @param pickerRef Reference to the picker element.
- * @param setVertical Callback to set vertical alignment.
+ * @param importantPosition 強制指定位置
+ * @param setVertical 設定垂直(top/bottom, 讓選擇棄可以決定順序
  */
 export const updatePosition = (
     anchorRef: RefObject<HTMLElement>,
     pickerRef: RefObject<HTMLElement>,
-    setVertical: (vertical: EVertical) => void
+    setVertical: (vertical: EVertical) => void,
+    importantPosition?: IPosition,
 ) => {
     const anchorEl = (anchorRef.current?.firstChild as HTMLDivElement);
     const pickerEl = pickerRef.current;
@@ -62,7 +64,7 @@ export const updatePosition = (
     const pickerTopHeight = anchorRect.top - safePadding;
     const pickerBottomHeight = screenHeight - anchorRect.bottom - safePadding;
 
-    let vertical: EVertical = pickerBottomHeight >= pickerTopHeight ? EVertical.bottom : EVertical.top;
+    let vertical: EVertical = importantPosition?.vertical ?? (pickerBottomHeight >= pickerTopHeight ? EVertical.bottom : EVertical.top);
     let pickerHeight = vertical === EVertical.bottom ? pickerBottomHeight : pickerTopHeight;
 
     // Horizontal alignment checks
@@ -70,7 +72,7 @@ export const updatePosition = (
     const leftFits = (anchorRect.left + pickerWidth) < screenWidth;
     const rightFits = (anchorRect.right - pickerWidth) > 0;
 
-    let horizontal: EHorizontal = EHorizontal.left;
+    let horizontal: EHorizontal = importantPosition?.horizontal ?? EHorizontal.left;
     if (!leftFits && rightFits) {
         horizontal = EHorizontal.right;
     } else if (!leftFits && !rightFits) {
