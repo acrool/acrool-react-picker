@@ -1,6 +1,6 @@
 import {Dropdown, TOption} from '@acrool/react-dropdown';
 import {Flex} from '@acrool/react-grid';
-import {createPicker, usePicker} from '@acrool/react-picker';
+import {createPicker, usePicker, EHorizontal, EVertical} from '@acrool/react-picker';
 import React, {ForwardedRef} from 'react';
 import styled from 'styled-components';
 
@@ -31,8 +31,11 @@ const WithButton = <V extends null>({
     return <Button
         className={className}
         onClick={Picker.toggle}
+        color="primary"
+        size="md"
     >
-        <ArrowDownSvg width={14} height={14}/>
+        Picker
+        <ArrowDownSvg width={14} height={14} fill="#fff"/>
     </Button>;
 };
 
@@ -76,8 +79,10 @@ const ReleaseVersionPicker = createPicker(
     WithButton,
     WithPicker,
     {
-        // ignoreCompare: true,
-        // isEnableHideSave: false,
+        importantPosition: {
+            vertical: EVertical.top,
+            horizontal: EHorizontal.right,
+        }
     }
 );
 
