@@ -59,7 +59,7 @@ const MotionDrawer = ({
             Picker.importantPosition,
         );
 
-    }, []);
+    }, [Picker.setVertical, Picker.importantPosition]);
 
 
     useEffect(() => {
