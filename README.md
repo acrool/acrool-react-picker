@@ -192,6 +192,20 @@ const DateTimeFieldAfter = (props: IProps, ref?: ForwardedRef<HTMLElement>) => {
 ```
 
 
+## There is an onClick event in the outer layer, causing the picker to click and trigger
+
+It should be set in the outer layer to prevent bubbling.
+
+```tsx
+const handleOnClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+}
+
+return <DropdownRoot onClick={handleOnClick}>
+        <DropTitle>{i18n('page.workspaceTask.action.subTask', {def: 'SubTask'})}</DropTitle>
+    </DropdownRoot>;
+```
+
 ## License
 
 MIT © [Acrool](https://github.com/acrool) & [Imagine](https://github.com/imagine10255)
