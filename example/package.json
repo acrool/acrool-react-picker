@@ -13,23 +13,24 @@
     "pages:deploy": "NODE_VERSION=18 yarn build-storybook && wrangler pages deploy ./storybook-static --project-name=acrool-react-picker --branch main"
   },
   "resolutions": {
-    "styled-components": "5.3.9"
+    "styled-components": "5.3.9",
+    "framer-motion": "11.11.9"
   },
   "dependencies": {
     "@acrool/js-utils": "3.2.12",
-    "@acrool/react-modal": "0.0.9",
+    "@acrool/react-modal": "0.0.9-test.11",
     "@acrool/react-datepicker": "^3.1.9",
-    "@acrool/react-dropdown": "^3.0.19",
+    "@acrool/react-dropdown": "^3.0.20-alpha.2",
     "@acrool/react-hotkey": "^0.0.7",
-    "@acrool/react-grid": "5.2.4",
+    "@acrool/react-grid": "5.2.5-alpha.0",
     "@acrool/react-skeleton": "^0.0.3",
     "@acrool/react-picker": "link:..",
     "@types/dom-to-image": "^2.6.7",
     "@types/styled-components": "^5.1.26",
     "dom-to-image": "^2.6.0",
-    "framer-motion": "^11.3.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "framer-motion": "^11.11.9",
+    "react": "link:../node_modules/react",
+    "react-dom": "link:../node_modules/react-dom",
     "styled-components": "5.3.9"
   },
   "devDependencies": {

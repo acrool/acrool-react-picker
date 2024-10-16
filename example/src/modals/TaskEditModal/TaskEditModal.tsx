@@ -4,10 +4,10 @@ import {Skeleton} from '@acrool/react-skeleton';
 import React from 'react';
 import styled from 'styled-components';
 
+import DateField from '../../components/atoms/DateField';
 import Select2 from '../../components/atoms/Select2';
 import {ModalLayout} from '../../components/organize/ModalLayout';
 import {optionsSmall} from '../../config/data';
-import DateField from "../../components/atoms/DateField";
 
 
 /**
@@ -311,7 +311,7 @@ const TaskEditModal = createModal(
         );
     },
     {
-        variants: animation.fadeInDown,
+        ...animation.fadeInDown,
         className: 'pb-4',
     }
 );

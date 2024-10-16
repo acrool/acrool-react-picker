@@ -21,17 +21,17 @@
   dependencies:
     dayjs "^1.11.12"
 
-"@acrool/react-dropdown@^3.0.19":
-  version "3.0.19"
-  resolved "https://registry.yarnpkg.com/@acrool/react-dropdown/-/react-dropdown-3.0.19.tgz#61b93d9cb04d8285bc2ffae73453153d20ba8581"
-  integrity sha512-UZhUkRHOzDL3v8qIWrerRld2EQfN32y8dayz8j5fnPY9eTdO+HVoj+/hvhw4rH2JEZ3vM3f0d0jTmg0IuMXuWA==
+"@acrool/react-dropdown@^3.0.20-alpha.2":
+  version "3.0.20-alpha.2"
+  resolved "https://registry.yarnpkg.com/@acrool/react-dropdown/-/react-dropdown-3.0.20-alpha.2.tgz#9b273fa91b38d06e8c7373e571d18a3347629d31"
+  integrity sha512-G7mBt4fTdOEAwHAo2ry3QMFuIPFvU0m0b7+c5QdkVdz8QNLGWOp42EL1hn3HPKqAsfOdS8hhAmdj0kcJOkrVOA==
   dependencies:
     clsx "^2.1.1"
 
-"@acrool/react-grid@5.2.4":
-  version "5.2.4"
-  resolved "https://registry.yarnpkg.com/@acrool/react-grid/-/react-grid-5.2.4.tgz#8ad917b1270170bef18f3cf264fdd15364eb516b"
-  integrity sha512-ywv43YWf1pJDPZMqKApq4CYz9saoTO3w03EaEd0din88gThNJXs9J2+MpGoeAVvsAmfulODephWLu5rqD2G0rg==
+"@acrool/react-grid@5.2.5-alpha.0":
+  version "5.2.5-alpha.0"
+  resolved "https://registry.yarnpkg.com/@acrool/react-grid/-/react-grid-5.2.5-alpha.0.tgz#7da9768ce8d95dd97a403b48ae47d590711a4e26"
+  integrity sha512-9HVqXgyBwrOBOYltufu0ALXAiOXSnM4T7ch67nOh0GrDcFVKQO7NIw7wTIH/pgE8pNefDx3yWhOfisSQS4g+mg==
 
 "@acrool/react-hotkey@^0.0.7":
   version "0.0.7"
@@ -40,15 +40,14 @@
   dependencies:
     "@acrool/js-logger" "^1.0.23"
 
-"@acrool/react-modal@0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@acrool/react-modal/-/react-modal-0.0.9.tgz#d9de7cd95ca542679b2aef8d5990d824cd9346d6"
-  integrity sha512-qo1TfUEsj6sWrdm5jNqj+y6A0pDllcDAWznQQ4S2v3Zl9GG49Vxb42dVdRdORu5Bev4qKM+Ije7rc/hw/b8O4A==
+"@acrool/react-modal@0.0.9-test.11":
+  version "0.0.9-test.11"
+  resolved "https://registry.yarnpkg.com/@acrool/react-modal/-/react-modal-0.0.9-test.11.tgz#35ccf4ee3b22f7e722d589c428de0063543170be"
+  integrity sha512-Fv6LTCZIrIzYNHkw3hf4P30qXrNNxEZDv0Hu6kEz3ubt29ubzpYdBhC2C/8lAmSRDEL7mZN2j/t2JEQd/JEDkA==
   dependencies:
     "@acrool/js-logger" "^1.0.23"
     "@acrool/react-portal" "^1.0.3"
     clsx "^2.1.1"
-    framer-motion "^11.3.19"
     ulid "^2.3.0"
 
 "@acrool/react-picker@link:..":
@@ -3600,17 +3599,10 @@ forwarded@0.2.0:
   resolved "https://registry.yarnpkg.com/forwarded/-/forwarded-0.2.0.tgz#2269936428aad4c15c7ebe9779a84bf0b2a81811"
   integrity sha512-buRG0fpBtRHSTCOASe6hD258tEubFoRLb4ZNA6NxMVHNw2gOcwHo9wyablzMzOA5z9xA9L1KNjk/Nt6MT9aYow==
 
-framer-motion@^11.3.0:
-  version "11.3.0"
-  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-11.3.0.tgz#dd2fe041577c520b2bf1b136b3ed31f866308f54"
-  integrity sha512-hjYjMUQaWuqilwRr5kC0CunHZFVMtKWHy/IdL/LPRBD0C491DKTvYwQRJ5qRXEAOT+Rth7Vi4XBe4TA4bFOn3A==
-  dependencies:
-    tslib "^2.4.0"
-
-framer-motion@^11.3.19:
-  version "11.3.21"
-  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-11.3.21.tgz#bdf06cf3ced9f14ddf055e098c1566795f353466"
-  integrity sha512-D+hfIsvzV8eL/iycld4K+tKlg2Q2LdwnrcBEohtGw3cG1AIuNYATbT5RUqIM1ndsAk+EfGhoSGf0UaiFodc5Tw==
+framer-motion@11.11.9, framer-motion@^11.11.9:
+  version "11.11.9"
+  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-11.11.9.tgz#a60ddf5abbd924812df923068628537a5c6ad8b9"
+  integrity sha512-XpdZseuCrZehdHGuW22zZt3SF5g6AHJHJi7JwQIigOznW4Jg1n0oGPMJQheMaKLC+0rp5gxUKMRYI6ytd3q4RQ==
   dependencies:
     tslib "^2.4.0"
 
@@ -4842,13 +4834,13 @@ react-docgen@^7.0.0:
     resolve "^1.22.1"
     strip-indent "^4.0.0"
 
-"react-dom@^16.8.0 || ^17.0.0 || ^18.0.0", react-dom@^18.2.0:
-  version "18.3.1"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-18.3.1.tgz#c2265d79511b57d479b3dd3fdfa51536494c5cb4"
-  integrity sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw==
-  dependencies:
-    loose-envify "^1.1.0"
-    scheduler "^0.23.2"
+"react-dom@^16.8.0 || ^17.0.0 || ^18.0.0":
+  version "0.0.0"
+  uid ""
+
+"react-dom@link:../node_modules/react-dom":
+  version "0.0.0"
+  uid ""
 
 react-element-to-jsx-string@^15.0.0:
   version "15.0.0"
@@ -4879,12 +4871,13 @@ react-is@^18.0.0:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.3.1.tgz#e83557dc12eae63a99e003a46388b1dcbb44db7e"
   integrity sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==
 
-"react@^16.8.0 || ^17.0.0 || ^18.0.0", react@^18.2.0:
-  version "18.3.1"
-  resolved "https://registry.yarnpkg.com/react/-/react-18.3.1.tgz#49ab892009c53933625bd16b2533fc754cab2891"
-  integrity sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==
-  dependencies:
-    loose-envify "^1.1.0"
+"react@^16.8.0 || ^17.0.0 || ^18.0.0":
+  version "0.0.0"
+  uid ""
+
+"react@link:../node_modules/react":
+  version "0.0.0"
+  uid ""
 
 readable-stream@^3.4.0:
   version "3.6.2"
@@ -5496,10 +5489,15 @@ tslib@^2.0.1:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.7.0.tgz#d9b40c5c40ab59e8738f297df3087bf1a2690c01"
   integrity sha512-gLXCKdN1/j47AiHiOkJN69hJmcbGTHI0ImLmbYLHykhgeN0jVGola9yVjFgzCUklsZQMW55o+dW7IXv3RCXDzA==
 
-tslib@^2.0.3, tslib@^2.2.0, tslib@^2.4.0:
+tslib@^2.0.3, tslib@^2.2.0:
   version "2.6.3"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.6.3.tgz#0438f810ad7a9edcde7a241c3d80db693c8cbfe0"
   integrity sha512-xNvxJEOUiWPGhUuUdQgAJPKOOJfGnIyKySOc09XkKsgdUV/3E2zvwZYdejjmRgPCgcym1juLH3226yA7sEFJKQ==
+
+tslib@^2.4.0:
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.8.0.tgz#d124c86c3c05a40a91e6fdea4021bd31d377971b"
+  integrity sha512-jWVzBLplnCmoaTr13V9dYbiQ99wvZRd0vNWaDRg+aVYRcjDF3nDksxFDE/+fkXnKhpnUUkmx5pK/v8mCtLVqZA==
 
 tween-functions@^1.2.0:
   version "1.2.0"
