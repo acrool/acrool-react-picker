@@ -1,7 +1,7 @@
 import Logger from '@acrool/js-logger';
 import React, {createContext, useContext} from 'react';
 
-import {EVertical} from './types';
+import {EVertical, IPosition} from './types';
 
 
 interface IContextProps<T = any> {
@@ -15,8 +15,12 @@ interface IContextProps<T = any> {
     isInputFocus: boolean
 
     value?: T
+
+    importantPosition?: IPosition
+
     vertical: EVertical
     setVertical: (vertical: EVertical) => void
+
     onChange: (value: T) => void
 }
 

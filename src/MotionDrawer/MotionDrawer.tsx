@@ -52,9 +52,14 @@ const MotionDrawer = ({
     const Picker = usePicker();
 
     const handleUpdatePosition = useCallback(() => {
-        updatePosition(anchorRef, pickerRef, Picker.setVertical);
+        updatePosition(
+            anchorRef,
+            pickerRef,
+            Picker.setVertical,
+            Picker.importantPosition,
+        );
 
-    }, [Picker.setVertical]);
+    }, [Picker.setVertical, Picker.importantPosition]);
 
 
     useEffect(() => {

@@ -218,6 +218,8 @@ function createPicker<V extends {}, P>(
                 value: value,
                 onChange: setValue,
 
+                importantPosition: options?.importantPosition,
+
                 vertical,
                 setVertical,
             }}
