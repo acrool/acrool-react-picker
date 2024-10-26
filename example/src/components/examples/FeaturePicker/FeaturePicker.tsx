@@ -48,7 +48,7 @@ const WithPicker = <V extends null>(args: PickerProps<V>) => {
     const Picker = usePicker();
     const handleOnClick = (value: V|null, isDiff: boolean) => {
         if(args.onChange){
-            args.onChange(value);
+            args.onChange(value as V);
         }
         Picker.hide();
     };

@@ -2,24 +2,16 @@ import {Flex} from '@acrool/react-grid';
 import {useArgs} from '@storybook/preview-api';
 import type {Meta, StoryObj} from '@storybook/react';
 import {fn} from '@storybook/test';
+import {useDarkMode} from 'storybook-dark-mode';
 
 import DateField from './DateField';
-import DateFieldWithConfirm from './DateFieldWithConfirm';
-import {useDarkMode} from "storybook-dark-mode";
 
 const meta = {
     title: 'Example/DateField',
     component: DateField,
     parameters: {
         // layout: 'centered',
-        actions: {argTypesRegex: '^on.*'},
-        docs: {
-            description: {
-                component: 'Demonstrate how to use Select2 + Dropdown to complete the function'
-            },
-        },
     },
-    tags: ['autodocs'],
     argTypes: {},
     args: {
         onChange: fn(),

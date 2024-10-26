@@ -11,14 +11,7 @@ const meta = {
     component: DateFieldWithConfirm,
     parameters: {
         // layout: 'centered',
-        actions: {argTypesRegex: '^on.*'},
-        docs: {
-            description: {
-                component: 'Demonstrate how to use Select2 + Dropdown to complete the function'
-            },
-        },
     },
-    tags: ['autodocs'],
     argTypes: {},
     args: {
         onChange: fn(),

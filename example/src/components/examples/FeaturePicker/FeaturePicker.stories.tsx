@@ -9,14 +9,7 @@ const meta = {
     component: FeaturePicker,
     parameters: {
         layout: 'centered',
-        actions: {argTypesRegex: '^on.*'},
-        docs: {
-            description: {
-                component: 'Demonstrate how to use FeaturePicker + Dropdown to complete the function'
-            },
-        },
     },
-    tags: ['autodocs'],
     argTypes: {},
     args: {
         onChange: fn(),

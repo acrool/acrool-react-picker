@@ -10,14 +10,7 @@ const meta = {
     component: TextPickerField,
     parameters: {
         layout: 'centered',
-        actions: {argTypesRegex: '^on.*'},
-        docs: {
-            description: {
-                component: 'Demonstrate how to use TextPickerField + Dropdown to complete the function'
-            },
-        },
     },
-    tags: ['autodocs'],
     argTypes: {},
     args: {
         onChange: fn(),

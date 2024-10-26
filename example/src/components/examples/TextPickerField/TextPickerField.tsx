@@ -105,8 +105,12 @@ const Picker = (props: IProps) => {
 export default createPicker(
     TextPickerField,
     Picker,
-    {isEnableHideSave: false}
+    {
+        isEnableHideSave: false,
+        isVisibleMask: true,
+    }
 );
+
 
 
 const TextFormContainer = styled.form`
