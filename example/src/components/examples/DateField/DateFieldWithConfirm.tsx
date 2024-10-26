@@ -6,14 +6,17 @@ import clsx from 'clsx';
 import React, {ForwardedRef} from 'react';
 import styled, {css} from 'styled-components';
 
+import Button from '../../atoms/Button';
 import ArrowDownSvg from './date.svg?react';
+
 
 
 interface IProps {
     id?: string
+    isDark?: boolean
     placeholder?: string
     value?: string
-    onChange?: (value: string) => void
+    onChange?: (value?: string) => void
     disabled?: boolean
     minYear?: number
     isVisibleSetToday?: boolean
@@ -25,6 +28,7 @@ interface IProps {
  * 日期區間選擇器
  * @param id
  * @param placeholder
+ * @param value
  * @param disabled
  * @param isLink
  * @param ref
@@ -32,6 +36,7 @@ interface IProps {
 const DateField = ({
     id,
     placeholder,
+    value,
     disabled = false,
     isLink,
 }: IProps, ref?: ForwardedRef<HTMLButtonElement>) => {
@@ -42,12 +47,10 @@ const DateField = ({
      */
     const handleClear = (e: React.MouseEvent) => {
         e.stopPropagation();
-
         Picker.onChange(null);
-
     };
 
-    const isPlaceholderValue = isEmpty(Picker.value);
+    const isPlaceholderValue = isEmpty(value);
 
     return <DateFieldRoot
         ref={ref}
@@ -66,10 +69,9 @@ const DateField = ({
         <Text isPlaceholderValue={isPlaceholderValue}>
             {
                 isPlaceholderValue ? placeholder ?? 'Select date':
-                    Picker.value
+                    value
             }
         </Text>
-        {Picker.isInputFocus ? 'Focus':'Blur'}
 
         {!isPlaceholderValue &&
             <div role="button" onMouseDown={handleClear}>
@@ -85,26 +87,42 @@ const Picker = (props: IProps) => {
     const Picker = usePicker();
 
 
-    return <Datepicker
-        value={Picker.value}
-        minYear={props.minYear}
-        onChange={(date) => {
-            Picker.onChange(date);
-        }}
-        isVisibleSetToday={props.isVisibleSetToday}
-        isDark
-    />;
+    const handleSave = () => {
+        if(props.onChange){
+            props.onChange(Picker.value);
+        }
+        Picker.hide();
+    };
+
+    return <Container column>
+        <Datepicker
+            isDark={props.isDark}
+            value={Picker.value}
+            minYear={props.minYear}
+            onChange={(date) => {
+                Picker.onChange(date);
+            }}
+            isVisibleSetToday={props.isVisibleSetToday}
+        />
+        <Flex className="gap-2">
+            <Button color="primary" size="xs" onClick={handleSave}>OK</Button>
+            <Button color="gray" size="xs" onClick={Picker.hide}>Cancel</Button>
+        </Flex>
+    </Container>;
 };
 
 
 export default createPicker(
     DateField,
-    Picker
+    Picker,
+    {
+        isEnableHideSave: false,
+        isEnableClickOutSiteHidden: false,
+    }
 );
 
 
 const Container = styled(Flex)`
-  background-color: #3a3a3a;
   align-items: center;
   gap: 5px;
   padding: 5px;
@@ -128,52 +146,45 @@ const DateFieldRoot = styled.button<{
     isLink?: boolean,
     isFocus?: boolean,
 }>`
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  white-space: nowrap;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    white-space:nowrap;
 
-  height: var(--form-height);
-  color: var(--form-color);
+    height: var(--form-height);
+    color: var(--form-color);
 
-  width: 100%;
+    width: 100%;
 
-  font-size: 14px;
+    font-size: 14px;
 
-  font-weight: 400;
-  line-height: 21px;
+    font-weight: 400;
+    line-height: 21px;
 
-  background: 0 0;
-  background-clip: padding-box;
+    background: 0 0;
+    background-clip: padding-box;
 
-  border-radius: .25rem;
-  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-  margin-bottom: 0;
-  border: 1px solid #444;
-  padding: 1px 10px;
-  min-height: 22px;
-
-
-  ${props => props.isLink && css`
-    height: auto;
-    padding: 2px;
-    border: none;
-  `}
-  &:focus {
-    box-shadow: 0 0 0 0.2rem rgba(255, 0, 166, 0.25);
-  }
-
-  ${props => props.isFocus && css`
-    box-shadow: 0 0 0 0.2rem rgba(255, 0, 21, 0.35);
-
-    &:focus {
-      box-shadow: 0 0 0 0.2rem rgba(255, 0, 21, 0.75);
-    }
-  `}
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    margin-bottom: 0;
+    border: 1px solid #444;
+    padding: 1px 10px;
+    min-height: 22px;
 
 
-  ${props => props.disabled && css`
+    ${props => props.isLink && css`
+        height: auto;
+        padding: 2px;
+        border: none;
+    `}
+
+    ${props => props.isFocus && css`
+        box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+    `}
+
+
+    ${props => props.disabled && css`
         opacity: .7;
         pointer-events: none;
     `}

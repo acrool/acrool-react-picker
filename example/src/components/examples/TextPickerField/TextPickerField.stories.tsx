@@ -1,20 +1,19 @@
-import {Flex} from '@acrool/react-grid';
 import {useArgs} from '@storybook/preview-api';
 import type {Meta, StoryObj} from '@storybook/react';
 import {fn} from '@storybook/test';
 
-import DateField from './DateField';
-import DateFieldWithConfirm from './DateFieldWithConfirm';
+import TextPickerField from './TextPickerField';
+import {useDarkMode} from "storybook-dark-mode";
 
 const meta = {
-    title: 'Example/DateField',
-    component: DateField,
+    title: 'Example/TextPickerField',
+    component: TextPickerField,
     parameters: {
-        // layout: 'centered',
+        layout: 'centered',
         actions: {argTypesRegex: '^on.*'},
         docs: {
             description: {
-                component: 'Demonstrate how to use Select2 + Dropdown to complete the function'
+                component: 'Demonstrate how to use TextPickerField + Dropdown to complete the function'
             },
         },
     },
@@ -24,7 +23,7 @@ const meta = {
         onChange: fn(),
         value: '',
     },
-} satisfies Meta<typeof DateField>;
+} satisfies Meta<typeof TextPickerField>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -32,19 +31,20 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
     args: {},
     render: function Render(args) {
+        const isDark = useDarkMode();
         const [{value}, updateArgs] = useArgs<{value: string}>();
 
         function onChange(value: string) {
             updateArgs({value});
         }
 
-        return <Flex column className="gap-3" style={{width: '250px'}}>
-            <div>Current Value: {value}</div>
-            <DateField
-                {...args}
-                value={value}
-                onChange={onChange}
-            />
-        </Flex>;
+        return <TextPickerField
+            {...args}
+            isDark={isDark}
+            value={value}
+            onChange={onChange}
+        />;
     },
 };
+
+

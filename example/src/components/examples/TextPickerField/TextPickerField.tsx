@@ -5,8 +5,8 @@ import clsx from 'clsx';
 import React, {ForwardedRef, useEffect, useRef} from 'react';
 import styled, {css} from 'styled-components';
 
-import Button from '../Button';
-import TextField from '../TextField';
+import Button from '../../atoms/Button';
+import TextField from '../../atoms/TextField';
 
 
 

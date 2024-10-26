@@ -1,14 +1,11 @@
-import {Flex} from '@acrool/react-grid';
 import {action} from '@storybook/addon-actions';
 import {useArgs} from '@storybook/preview-api';
 import type {Meta, StoryObj} from '@storybook/react';
 
-import Button from '../../components/atoms/Button';
-import TaskEditModal from './TaskEditModal';
-import {ModalPortal as OriginModalPortal} from "@acrool/react-modal";
+import TaskEditModal from './InModal';
 
 const meta = {
-    title: 'Example/TaskEditModal',
+    title: 'Organize/InModal',
     component: TaskEditModal,
     parameters: {
         layout: 'centered',
@@ -37,9 +34,6 @@ export const Primary: Story = {
             updateArgs({value});
         }
 
-        return <Flex style={{marginTop: '500px', marginBottom: '900px'}}>
-            <Button color="primary" size="md" onClick={TaskEditModal.show}>Open Task Edit Modal</Button>
-
-        </Flex>;
+        return <TaskEditModal/>;
     },
 };
