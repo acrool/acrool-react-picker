@@ -1,8 +1,8 @@
 import {isEmpty} from '@acrool/js-utils/equal';
 import {Datepicker} from '@acrool/react-datepicker';
-import {Flex} from '@acrool/react-grid';
 import {createPicker, usePicker} from '@acrool/react-picker';
 import clsx from 'clsx';
+import CSS from 'csstype';
 import React, {ForwardedRef} from 'react';
 import styled, {css} from 'styled-components';
 
@@ -10,7 +10,10 @@ import ArrowDownSvg from './date.svg?react';
 
 
 interface IProps {
+    style?: CSS.Properties,
+    className?: string
     id?: string
+    isDark?: boolean
     placeholder?: string
     value?: string
     onChange?: (value: string) => void
@@ -30,6 +33,8 @@ interface IProps {
  * @param ref
  */
 const DateField = ({
+    style,
+    className,
     id,
     placeholder,
     disabled = false,
@@ -51,10 +56,12 @@ const DateField = ({
 
     return <DateFieldRoot
         ref={ref}
-        className={clsx('align-items-center justify-content-between column-gap-2')}
+        style={style}
+        className={clsx(className, 'align-items-center justify-content-between column-gap-2')}
         id={id}
         type="button"
-        onClick={Picker.toggle}
+        onMouseDown={Picker.toggle}
+        // onClick={Picker.toggle}
         isFocus={Picker.isInputFocus}
         onFocus={Picker.inputFocus}
         // onBlur={Picker.inputBlur}
@@ -86,13 +93,13 @@ const Picker = (props: IProps) => {
 
 
     return <Datepicker
+        isDark={props.isDark}
         value={Picker.value}
         minYear={props.minYear}
         onChange={(date) => {
             Picker.onChange(date);
         }}
         isVisibleSetToday={props.isVisibleSetToday}
-        isDark
     />;
 };
 
@@ -103,19 +110,12 @@ export default createPicker(
 );
 
 
-const Container = styled(Flex)`
-  background-color: #3a3a3a;
-  align-items: center;
-  gap: 5px;
-  padding: 5px;
-`;
-
-
 
 
 const Text = styled.div<{
     isPlaceholderValue: boolean,
 }>`
+    white-space:nowrap;
     ${props => props.isPlaceholderValue && css`
       color: #6c757d;
     `}

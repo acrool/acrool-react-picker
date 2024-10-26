@@ -1,16 +1,14 @@
-import {Flex} from '@acrool/react-grid';
+import {action} from '@storybook/addon-actions';
 import {useArgs} from '@storybook/preview-api';
 import type {Meta, StoryObj} from '@storybook/react';
-import {fn} from '@storybook/test';
 
-import DateField from './DateField';
-import DateFieldWithConfirm from './DateFieldWithConfirm';
+import TaskEditModal from './InModal';
 
 const meta = {
-    title: 'Example/DateField',
-    component: DateField,
+    title: 'Organize/InModal',
+    component: TaskEditModal,
     parameters: {
-        // layout: 'centered',
+        layout: 'centered',
         actions: {argTypesRegex: '^on.*'},
         docs: {
             description: {
@@ -20,11 +18,8 @@ const meta = {
     },
     tags: ['autodocs'],
     argTypes: {},
-    args: {
-        onChange: fn(),
-        value: '',
-    },
-} satisfies Meta<typeof DateField>;
+    args: {},
+} satisfies Meta<typeof TaskEditModal>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -35,16 +30,10 @@ export const Primary: Story = {
         const [{value}, updateArgs] = useArgs<{value: string}>();
 
         function onChange(value: string) {
+            action('onChange')(value);
             updateArgs({value});
         }
 
-        return <Flex column className="gap-3" style={{width: '250px'}}>
-            <div>Current Value: {value}</div>
-            <DateField
-                {...args}
-                value={value}
-                onChange={onChange}
-            />
-        </Flex>;
+        return <TaskEditModal/>;
     },
 };

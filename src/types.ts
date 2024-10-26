@@ -1,7 +1,7 @@
 import {Transition, Variant} from 'framer-motion';
 
 
-type TVariantKey = 'initial'|'show'|'exit'
+type TVariantKey = 'initial'|'animate'|'exit'
 export type TAnimationVariants = Record<TVariantKey, Variant>;
 
 
@@ -20,11 +20,9 @@ export interface IPosition {
 }
 
 
-export interface IPickerOptions {
+export interface IMotionOptions {
     variants?: TAnimationVariants
     transition?: Transition
-    className?: string
-    isEnableHideWithClickMask?: boolean
 }
 
 
@@ -36,17 +34,7 @@ export interface IValueChange<T = string> {
 export interface IPickerOption {
     isEnableHideSave?: boolean
     isEnableClickOutSiteHidden?: boolean
+    isVisibleMask?: boolean
     isDebug?: boolean
     importantPosition?: IPosition
 }
-
-//
-// export enum EKeyboardKey {
-//     Escape = 'Escape',
-//     Enter = 'Enter',
-//     Space = 'Space',
-//     Tab = 'Tab',
-//     ShiftAndTab = 'Shift+Tab',
-//     ArrowUp = 'ArrowUp',
-//     ArrowDown = 'ArrowDown',
-// }

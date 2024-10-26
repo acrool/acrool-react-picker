@@ -13,6 +13,7 @@ import ArrowDownSvg from './arrow_down.svg?react';
 export interface IProps<V> {
     style?: CSS.Properties,
     className?: string
+    isDark?: boolean
     value?: V
     onChange: (value: V) => void
     name?: string
@@ -46,6 +47,7 @@ export interface IProps<V> {
 const Select2 = <V extends null>({
     style,
     className,
+    isDark,
     options,
     disabled = false,
     value,
@@ -147,7 +149,7 @@ const Picker = <V extends null>(args: IProps<V>) => {
     return <>
         <Dropdown
             value={value}
-            isDark
+            isDark={args.isDark}
             onClick={handleOnClick}
             onEnter={handleOnClick}
             className={clsx({'w-100': args.isDropdownBlock})}

@@ -49,6 +49,7 @@ function createPicker<V extends {}, P>(
         const runTimeValueRef = useRef<V|undefined>(value);
         const isEnableClickOutSiteHidden = options?.isEnableClickOutSiteHidden !== false;
         const isEnableHideSave = options?.isEnableHideSave !== false;
+        const isVisibleMask = options?.isVisibleMask;
 
         useEffect(() => {
             // 同步 Props value 異動
@@ -246,6 +247,7 @@ function createPicker<V extends {}, P>(
                                 anchorRef={anchorRef}
                                 isDebug={options?.isDebug}
                                 onKeyDown={handleOnKeyDown}
+                                isVisibleMask={isVisibleMask}
                             >
                                 <DropdownComponent {...args as P & IValueChange<V>}/>
                             </MotionDrawer>

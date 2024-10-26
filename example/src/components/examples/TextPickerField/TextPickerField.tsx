@@ -1,134 +1,127 @@
 import {isEmpty} from '@acrool/js-utils/equal';
-import {Datepicker} from '@acrool/react-datepicker';
 import {Flex} from '@acrool/react-grid';
 import {createPicker, usePicker} from '@acrool/react-picker';
 import clsx from 'clsx';
-import React, {ForwardedRef} from 'react';
+import React, {ForwardedRef, useEffect, useRef} from 'react';
 import styled, {css} from 'styled-components';
 
-import Button from '../Button';
-import ArrowDownSvg from './date.svg?react';
+import Button from '../../atoms/Button';
+import TextField from '../../atoms/TextField';
 
 
 
-interface IProps {
-    id?: string
-    placeholder?: string
+
+interface IProps  {
+    name?: string
     value?: string
-    onChange?: (value?: string) => void
     disabled?: boolean
-    minYear?: number
-    isVisibleSetToday?: boolean
-    isLink?:boolean
+    onChange?: (value?: string) => void
+    errorMessage?: string
+    remarkMessage?: string
+    placeholder?: string
+    isLink?: boolean
 }
 
 
+
 /**
- * 日期區間選擇器
- * @param id
- * @param placeholder
- * @param value
- * @param disabled
- * @param isLink
+ * 輸入內容的選擇器
+ *
+ * @param style
+ * @param disabled 是否禁用
  * @param ref
  */
-const DateField = ({
-    id,
-    placeholder,
-    value,
+const TextPickerField = ({
+    name,
     disabled = false,
-    isLink,
+    value,
+    placeholder = '-',
+    isLink = false,
 }: IProps, ref?: ForwardedRef<HTMLButtonElement>) => {
     const Picker = usePicker();
 
-    /**
-     * 清除
-     */
-    const handleClear = (e: React.MouseEvent) => {
-        e.stopPropagation();
-        Picker.onChange(null);
-    };
 
     const isPlaceholderValue = isEmpty(value);
 
-    return <DateFieldRoot
+    return <SelectNumberKeyboardRoot
         ref={ref}
         className={clsx('align-items-center justify-content-between column-gap-2')}
-        id={id}
+        name={name}
         type="button"
         onClick={Picker.toggle}
         isFocus={Picker.isInputFocus}
         onFocus={Picker.inputFocus}
-        // onBlur={Picker.inputBlur}
 
         disabled={disabled}
         isLink={isLink}
-
     >
         <Text isPlaceholderValue={isPlaceholderValue}>
-            {
-                isPlaceholderValue ? placeholder ?? 'Select date':
-                    value
-            }
+            {isPlaceholderValue ? placeholder: value}
         </Text>
 
-        {!isPlaceholderValue &&
-            <div role="button" onMouseDown={handleClear}>
-                <ArrowDownSvg width={14} height={14}/>
-            </div>
-        }
 
-    </DateFieldRoot>;
-
+    </SelectNumberKeyboardRoot>;
 };
+
 
 const Picker = (props: IProps) => {
     const Picker = usePicker();
+    const textRef = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {
+        setTimeout(() => {
+            if(textRef.current){
+                textRef.current.focus();
+            }
+        }, 100);
+    }, []);
 
 
-    const handleSave = () => {
+
+    const handleSubmitHandler = (e: React.FormEvent) => {
+        e.preventDefault();
+
         if(props.onChange){
             props.onChange(Picker.value);
         }
         Picker.hide();
     };
 
-    return <Container column>
-        <Datepicker
-            value={Picker.value}
-            minYear={props.minYear}
-            onChange={(date) => {
-                Picker.onChange(date);
-            }}
-            isVisibleSetToday={props.isVisibleSetToday}
-            isDark
+
+    return <TextFormContainer onSubmit={handleSubmitHandler}>
+        <TextField
+            ref={textRef}
+            value={Picker.value ?? ''}
+            onChange={Picker.onChange}
+            placeholder={props.placeholder}
         />
         <Flex className="gap-2">
-            <Button color="primary" size="xs" onClick={handleSave}>OK</Button>
-            <Button color="gray" size="xs" onClick={Picker.hide}>Cancel</Button>
+            <Button color="primary" size="xs" isBlock type="submit">Save</Button>
+            <Button color="gray" size="xs" isBlock onClick={Picker.hide}>Cancel</Button>
         </Flex>
-    </Container>;
+    </TextFormContainer>;
 };
 
-
 export default createPicker(
-    DateField,
+    TextPickerField,
     Picker,
     {
         isEnableHideSave: false,
-        isEnableClickOutSiteHidden: false,
+        isVisibleMask: true,
     }
 );
 
 
-const Container = styled(Flex)`
-  background-color: #3a3a3a;
-  align-items: center;
-  gap: 5px;
-  padding: 5px;
+
+const TextFormContainer = styled.form`
+    background-color: #212529;
+    border: 1px solid #6c757d;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px;
+    border-radius: 8px;
 `;
-
-
 
 
 const Text = styled.div<{
@@ -140,8 +133,7 @@ const Text = styled.div<{
 `;
 
 
-
-const DateFieldRoot = styled.button<{
+const SelectNumberKeyboardRoot = styled.button<{
     disabled?: boolean,
     isLink?: boolean,
     isFocus?: boolean,
@@ -150,7 +142,7 @@ const DateFieldRoot = styled.button<{
     display: flex;
     flex-direction: row;
     align-items: center;
-    white-space:nowrap;
+    justify-content: flex-end;
 
     height: var(--form-height);
     color: var(--form-color);
@@ -174,13 +166,13 @@ const DateFieldRoot = styled.button<{
 
 
     ${props => props.isLink && css`
-        height: auto;
-        padding: 2px;
-        border: none;
+          height: auto;
+          padding: 0;
+          border: none;
     `}
 
     ${props => props.isFocus && css`
-        box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+      box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
     `}
 
 
@@ -189,4 +181,3 @@ const DateFieldRoot = styled.button<{
         pointer-events: none;
     `}
 `;
-

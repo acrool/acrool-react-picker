@@ -2,29 +2,10 @@ import {motion} from 'framer-motion';
 import React, {ForwardedRef, forwardRef, ReactNode, RefObject, useCallback, useEffect, useRef,} from 'react';
 
 import {usePicker} from '../PickerProvider';
-import {IPickerOptions} from '../types';
 import {setForwardedRef} from '../utils';
+import {maskMotionProps, pickerMotionProps} from './config';
 import styles from './motion-drawer.module.scss';
 import {getScrollParent, updatePosition} from './utils';
-
-
-const defaultMotionProps: IPickerOptions = {
-    variants: {
-        initial: {position: 'absolute', zIndex: 999, opacity: 0, transition: {type:'spring'}},
-        show: {opacity: 1,  transition: {type: 'just'}},
-        exit: {opacity: 0, scale: .95},
-    },
-    transition: {
-        duration: .1,
-        opacity: {
-            duration: .3,
-        },
-        scale: {
-            duration: .05,
-        }
-    }
-};
-
 
 
 
@@ -33,11 +14,15 @@ interface IProps {
     isDebug?: boolean
     anchorRef: RefObject<HTMLDivElement>
     onKeyDown?: (e: React.KeyboardEvent) => void
+    isVisibleMask?: boolean,
 }
 
 
 /**
  * Motion 動畫
+ * @param isDebug
+ * @param anchorRef
+ * @param onKeyDown
  * @param pickerOptions
  * @param children
  * @param ref
@@ -47,6 +32,7 @@ const MotionDrawer = ({
     isDebug = false,
     anchorRef,
     onKeyDown,
+    isVisibleMask,
 }: IProps, ref?: ForwardedRef<HTMLDivElement>) => {
     const pickerRef = useRef<HTMLDivElement>(null);
     const Picker = usePicker();
@@ -93,22 +79,33 @@ const MotionDrawer = ({
 
 
 
-    return  <motion.div
-        ref={setForwardedRef(ref, pickerRef)}
-        transition={{type: 'spring', duration: .2}}
-        style={{display: 'none'}}
+    return <>
+        {isVisibleMask &&
+            <motion.div
+                className={styles.motionMaskWrapper}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                {...maskMotionProps}
+            />
+        }
+        <motion.div
+            ref={setForwardedRef(ref, pickerRef)}
+            style={{display: 'none'}}
+            className={styles.motionAnimationWrapper}
+            
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            tabIndex={0}
 
-        className={styles.motionAnimationWrapper}
-        data-debug={isDebug ? '': undefined}
-        variants={defaultMotionProps.variants}
-        initial="initial"
-        animate="show"
-        exit="exit"
-        tabIndex={0}
-        onKeyDown={onKeyDown}
-    >
-        {children}
-    </motion.div>;
+            {...pickerMotionProps}
+            onKeyDown={onKeyDown}
+            data-debug={isDebug ? '': undefined}
+        >
+            {children}
+        </motion.div>
+    </>;
 
 };
 

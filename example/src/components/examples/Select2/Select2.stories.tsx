@@ -8,20 +8,14 @@ import {useEffect} from 'react';
 import {options, optionsSmall} from '../../../config/data';
 import OriginSelect from './OriginSelect';
 import Select2 from './Select2';
+import {useDarkMode} from "storybook-dark-mode";
 
 const meta = {
     title: 'Example/Select2',
     component: Select2,
     parameters: {
         layout: 'centered',
-        actions: {argTypesRegex: '^on.*'},
-        docs: {
-            description: {
-                component: 'Demonstrate how to use Select2 + Dropdown to complete the function'
-            },
-        },
     },
-    tags: ['autodocs'],
     argTypes: {},
     args: {
         onChange: fn(),
@@ -64,6 +58,7 @@ export const Primary: Story = {
 export const WithInputWidth: Story = {
     args: {},
     render: function Render(args) {
+        const isDark = useDarkMode();
         const [{value}, updateArgs] = useArgs<{value: string}>();
 
         function onChange(value: string) {
@@ -75,6 +70,7 @@ export const WithInputWidth: Story = {
 
             <Select2
                 {...args}
+                isDark={isDark}
                 value={value}
                 options={options}
                 onChange={onChange}
@@ -82,6 +78,7 @@ export const WithInputWidth: Story = {
 
             <Select2
                 {...args}
+                isDark={isDark}
                 isBlock
                 value={value}
                 options={options}
@@ -90,6 +87,7 @@ export const WithInputWidth: Story = {
 
             <Select2
                 {...args}
+                isDark={isDark}
                 value={value}
                 isBlock
                 isDropdownBlock
@@ -104,6 +102,7 @@ export const WithInputWidth: Story = {
 export const WithStaticVertical: Story = {
     args: {},
     render: function Render(args) {
+        const isDark = useDarkMode();
         const [{value}, updateArgs] = useArgs<{value: string}>();
 
         function onChange(value: string) {
@@ -115,6 +114,7 @@ export const WithStaticVertical: Story = {
 
             <Select2
                 {...args}
+                isDark={isDark}
                 value={value}
                 options={options}
                 onChange={onChange}
@@ -129,6 +129,7 @@ export const WithFixedVertical: Story = {
         isAvatarEnable: false,
     },
     render: function Render(args) {
+        const isDark = useDarkMode();
         const [{value}, updateArgs] = useArgs<{value: string}>();
 
         function onChange(value: string) {
@@ -141,6 +142,7 @@ export const WithFixedVertical: Story = {
             <div style={{position: 'fixed', top: '120px'}}>
                 <Select2
                     {...args}
+                    isDark={isDark}
                     value={value}
                     options={options}
                     onChange={onChange}
@@ -149,6 +151,7 @@ export const WithFixedVertical: Story = {
             <div style={{position: 'fixed', bottom: '120px'}}>
                 <Select2
                     {...args}
+                    isDark={isDark}
                     value={value}
                     options={options}
                     onChange={onChange}
@@ -173,6 +176,7 @@ export const WithFixedModalVertical: Story = {
     },
 
     render: function Render(args) {
+        const isDark = useDarkMode();
         const [{value}, updateArgs] = useArgs<{value: string}>();
 
 
@@ -214,6 +218,7 @@ export const WithFixedModalVertical: Story = {
                 }}>
                     <Select2
                         {...args}
+                        isDark={isDark}
                         value={value}
                         options={options}
                         onChange={onChange}
@@ -224,6 +229,7 @@ export const WithFixedModalVertical: Story = {
                     }}>
                         <Select2
                             {...args}
+                            isDark={isDark}
                             value={value}
                             options={options}
                             onChange={onChange}
