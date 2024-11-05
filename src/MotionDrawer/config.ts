@@ -16,7 +16,7 @@ export const pickerMotionProps: IMotionOptions = {
     variants: {
         initial: {position: 'absolute', zIndex: 999, opacity: .5},
         animate: {opacity: 1},
-        exit: {opacity: 0, scale: .95},
+        exit: {opacity: .6, scale: .95, transition: {type: 'just', duration: .1}},
     },
     transition: {
         type: 'just',
