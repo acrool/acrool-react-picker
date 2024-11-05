@@ -14,12 +14,12 @@ export const maskMotionProps: IMotionOptions = {
 
 export const pickerMotionProps: IMotionOptions = {
     variants: {
-        initial: {position: 'absolute', zIndex: 999, opacity: 0, transition: {type:'spring'}},
-        animate: {opacity: 1,  transition: {type: 'just'}},
+        initial: {position: 'absolute', zIndex: 999, opacity: .5},
+        animate: {opacity: 1},
         exit: {opacity: 0, scale: .95},
     },
     transition: {
-        type: 'spring',
+        type: 'just',
         duration: .2,
     }
 };
