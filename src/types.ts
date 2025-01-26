@@ -39,6 +39,7 @@ export interface IPickerOption {
     isEnableHideSave?: boolean
     isEnableClickOutSiteHidden?: boolean
     isDisabledAutoPosition?: boolean,
+    isDisabledHideAutoFocus?: boolean,
     isVisibleMask?: boolean
     isDebug?: boolean
     importantPosition?: IPosition

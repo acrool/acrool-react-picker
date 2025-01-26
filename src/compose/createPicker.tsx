@@ -140,10 +140,12 @@ function createPicker<V extends {}, P>(
         const handleOnHide = useCallback(() => {
             // focus 是為了讓 Tab 到下一個可以正常
             requestAnimationFrame(() => {
-                mainRef.current?.focus();
+                if(!options?.isDisabledHideAutoFocus){
+                    mainRef.current?.focus();
+                }
                 setPickerVisible(false);
             });
-        }, []);
+        }, [options?.isDisabledHideAutoFocus]);
 
         /**
          * 處理切換開關視窗
