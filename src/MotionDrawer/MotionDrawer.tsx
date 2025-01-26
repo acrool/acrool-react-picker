@@ -50,6 +50,9 @@ const MotionDrawer = ({
 
     useEffect(() => {
 
+        if(!Picker.isVisible){
+            return;
+        }
         if (anchorRef.current && pickerRef.current) {
             const scrollParent = getScrollParent(anchorRef.current);
 
@@ -82,6 +85,7 @@ const MotionDrawer = ({
     return <>
         {isVisibleMask &&
             <motion.div
+                key="mask"
                 className={styles.motionMaskWrapper}
                 initial="initial"
                 animate="animate"
@@ -89,7 +93,9 @@ const MotionDrawer = ({
                 {...maskMotionProps}
             />
         }
+
         <motion.div
+            key="main"
             ref={setForwardedRef(ref, pickerRef)}
             style={{display: 'none'}}
             className={styles.motionAnimationWrapper}

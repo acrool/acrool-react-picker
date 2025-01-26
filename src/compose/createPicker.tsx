@@ -16,7 +16,7 @@ import {setForwardedRef} from '../utils';
 
 
 /**
- * 產生帶 framer-motion 功能的Picker
+ * 產生帶 motion/react 功能的Picker
  *
  * 需要呼叫 show 才會傳送到 portal
  * @param MainComponent
