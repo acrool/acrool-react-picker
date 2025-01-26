@@ -140,7 +140,9 @@ function createPicker<V extends {}, P>(
         const handleOnHide = useCallback(() => {
             // focus 是為了讓 Tab 到下一個可以正常
             requestAnimationFrame(() => {
-                if(!options?.isDisabledHideAutoFocus){
+                if(options?.isDisabledHideAutoFocus){
+                    setInputFocus(false);
+                }else{
                     mainRef.current?.focus();
                 }
                 setPickerVisible(false);
