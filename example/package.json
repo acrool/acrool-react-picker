@@ -14,7 +14,7 @@
     "motion": "11.x"
   },
   "dependencies": {
-    "@acrool/js-utils": "^3.2.12",
+    "@acrool/js-utils": "^3.2.14",
     "@acrool/react-modal": "1.0.0",
     "@acrool/react-hotkey": "^0.0.7",
     "@acrool/react-grid": "^5.2.5-alpha.1",
