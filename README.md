@@ -40,8 +40,10 @@ yarn add framer-motion @acrool/react-picker
 in your packages. (Make the version of styled-component you use match the version of styled-component used in acrool-react-gird)
 
 ```json
-"resolutions": {
+{
+  "resolutions": {
     "framer-motion": "^11.x"
+  }
 }
 ```
 

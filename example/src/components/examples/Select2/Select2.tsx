@@ -36,12 +36,14 @@ export interface IProps<V> {
  *
  * @param style
  * @param className
+ * @param isDark
  * @param options 下拉選單項目
  * @param disabled 是否禁用
  * @param value
  * @param placeholder
  * @param isAvatarEnable
  * @param isLink
+ * @param isBlock
  * @param ref
  */
 const Select2 = <V extends null>({
@@ -98,6 +100,7 @@ const Select2 = <V extends null>({
         disabled={disabled}
         isLink={isLink}
         isBlock={isBlock}
+        isDark={isDark}
     >
         <Text isPlaceholderValue={isPlaceholderValue}>
             {valueText}
@@ -197,7 +200,12 @@ const Select2Root = styled.button<{
     isLink?: boolean,
     isFocus?: boolean,
     isBlock?: boolean,
+    isDark?: boolean
 }>`
+  ${props => props.isDark && css`
+    --form-color: #ccc;
+  `}
+  
     position: relative;
     display: flex;
     flex-direction: row;

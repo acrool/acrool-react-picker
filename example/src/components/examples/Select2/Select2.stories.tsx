@@ -4,11 +4,10 @@ import {useArgs} from '@storybook/preview-api';
 import type {Meta, StoryObj} from '@storybook/react';
 import {fn} from '@storybook/test';
 import {useEffect} from 'react';
+import {useDarkMode} from 'storybook-dark-mode';
 
 import {options, optionsSmall} from '../../../config/data';
-import OriginSelect from './OriginSelect';
 import Select2 from './Select2';
-import {useDarkMode} from "storybook-dark-mode";
 
 const meta = {
     title: 'Example/Select2',
@@ -33,6 +32,7 @@ export const Primary: Story = {
     args: {},
     render: function Render(args) {
         const [{value}, updateArgs] = useArgs<{value: string}>();
+        const isDark = useDarkMode();
 
         function onChange(value: string) {
             action('onChange')(value);
@@ -43,6 +43,7 @@ export const Primary: Story = {
             
             <Select2
                 {...args}
+                isDark={isDark}
                 value={value}
                 options={options}
                 onChange={onChange}
@@ -209,7 +210,6 @@ export const WithFixedModalVertical: Story = {
                 bottom: '0',
                 overflow: 'hidden',
                 overflowY: 'auto',
-                backgroundColor: '#ccc'
             }}>
                 <div style={{
                     width: '500px',
@@ -249,6 +249,7 @@ export const WithHotkeyTab: Story = {
     },
     render: function Render(args) {
         const [{value}, updateArgs] = useArgs<{value: string}>();
+        const isDark = useDarkMode();
 
         function onChange(value: string) {
             action('onChange')(value);
@@ -267,6 +268,7 @@ export const WithHotkeyTab: Story = {
                 <Select2
                     {...args}
                     value={value}
+                    isDark={isDark}
                     options={options}
                     onChange={onChange}
                 />

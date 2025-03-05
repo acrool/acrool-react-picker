@@ -145,7 +145,12 @@ const DateFieldRoot = styled.button<{
     disabled?: boolean,
     isLink?: boolean,
     isFocus?: boolean,
+    isDark?: boolean,
 }>`
+  ${props => !props.isDark && css`
+    --form-color: #ccc;
+  `}
+  
     position: relative;
     display: flex;
     flex-direction: row;

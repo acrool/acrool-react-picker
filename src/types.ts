@@ -1,4 +1,5 @@
 import {Transition, Variant} from 'framer-motion';
+import CSS from 'csstype';
 
 
 type TVariantKey = 'initial'|'animate'|'exit'
@@ -23,6 +24,9 @@ export interface IPosition {
 export interface IMotionOptions {
     variants?: TAnimationVariants
     transition?: Transition
+    className?: string
+    style?: CSS.Properties
+
 }
 
 
@@ -34,7 +38,10 @@ export interface IValueChange<T = string> {
 export interface IPickerOption {
     isEnableHideSave?: boolean
     isEnableClickOutSiteHidden?: boolean
+    isDisabledAutoPosition?: boolean,
+    isDisabledHideAutoFocus?: boolean,
     isVisibleMask?: boolean
     isDebug?: boolean
     importantPosition?: IPosition
+    motionProps?: IMotionOptions
 }

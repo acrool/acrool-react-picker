@@ -5,7 +5,7 @@ export const maskMotionProps: IMotionOptions = {
     variants: {
         initial: {opacity: 0, transition: {type:'spring'}},
         animate: {opacity: 1, transition: {type: 'just'}},
-        exit: {opacity: 0},
+        exit: {opacity: 0,  transition: {type: 'just', duration: .1}},
     },
     transition: {
         duration: .3,
@@ -14,12 +14,12 @@ export const maskMotionProps: IMotionOptions = {
 
 export const pickerMotionProps: IMotionOptions = {
     variants: {
-        initial: {position: 'absolute', zIndex: 999, opacity: 0, transition: {type:'spring'}},
-        animate: {opacity: 1,  transition: {type: 'just'}},
-        exit: {opacity: 0, scale: .95},
+        initial: {position: 'absolute', zIndex: 999, opacity: .5},
+        animate: {opacity: 1},
+        exit: {opacity: 0, scale: .95, transition: {type: 'just', duration: .1}},
     },
     transition: {
-        type: 'spring',
+        type: 'just',
         duration: .2,
     }
 };
