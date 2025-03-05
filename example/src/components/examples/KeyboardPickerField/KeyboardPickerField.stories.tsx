@@ -3,11 +3,11 @@ import type {Meta, StoryObj} from '@storybook/react';
 import {fn} from '@storybook/test';
 import {useDarkMode} from 'storybook-dark-mode';
 
-import TextPickerField from './TextPickerField';
+import KeyboardPickerField from './KeyboardPickerField';
 
 const meta = {
-    title: 'Example/TextPickerField',
-    component: TextPickerField,
+    title: 'Example/KeyboardPickerField',
+    component: KeyboardPickerField,
     parameters: {
         layout: 'centered',
     },
@@ -16,7 +16,7 @@ const meta = {
         onChange: fn(),
         value: '',
     },
-} satisfies Meta<typeof TextPickerField>;
+} satisfies Meta<typeof KeyboardPickerField>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -31,7 +31,7 @@ export const Primary: Story = {
             updateArgs({value});
         }
 
-        return <TextPickerField
+        return <KeyboardPickerField
             {...args}
             isDark={isDark}
             value={value}

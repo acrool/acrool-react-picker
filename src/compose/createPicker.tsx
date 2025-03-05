@@ -9,6 +9,7 @@ import MousedownListener from '../listener/MousedownListener';
 import PickerHideListener from '../listener/PickerHideListener';
 import styles from '../modal.module.scss';
 import MotionDrawer from '../MotionDrawer';
+import MotionDrawerWithout from '../MotionDrawer/MotionDrawerWithout';
 import {PickerProviderContext} from '../PickerProvider';
 import {EVertical, IPickerOption, IValueChange} from '../types';
 import {setForwardedRef} from '../utils';
@@ -139,10 +140,14 @@ function createPicker<V extends {}, P>(
         const handleOnHide = useCallback(() => {
             // focus 是為了讓 Tab 到下一個可以正常
             requestAnimationFrame(() => {
-                mainRef.current?.focus();
+                if(options?.isDisabledHideAutoFocus){
+                    setInputFocus(false);
+                }else{
+                    mainRef.current?.focus();
+                }
                 setPickerVisible(false);
             });
-        }, []);
+        }, [options?.isDisabledHideAutoFocus]);
 
         /**
          * 處理切換開關視窗
@@ -205,6 +210,36 @@ function createPicker<V extends {}, P>(
         }, [value, args.onChange, isEnableHideSave]);
 
 
+        /**
+         * 渲染主內容
+         */
+        const renderMotionDrawer = () => {
+
+            if(options?.isDisabledAutoPosition){
+                return <MotionDrawerWithout
+                    ref={pickerRef}
+                    isDebug={options?.isDebug}
+                    onKeyDown={handleOnKeyDown}
+                    isVisibleMask={isVisibleMask}
+                    motionProps={options?.motionProps}
+                >
+                    <DropdownComponent {...args as P & IValueChange<V>}/>
+                </MotionDrawerWithout>;
+            }
+
+            return <MotionDrawer
+                ref={pickerRef}
+                anchorRef={anchorRef}
+                isDebug={options?.isDebug}
+                onKeyDown={handleOnKeyDown}
+                isVisibleMask={isVisibleMask}
+            >
+                <DropdownComponent {...args as P & IValueChange<V>}/>
+            </MotionDrawer>;
+        };
+
+
+
         return (<PickerProviderContext.Provider
             value={{
                 hide: handleOnHide,
@@ -242,15 +277,7 @@ function createPicker<V extends {}, P>(
                             id={`acrool-react-picker-${ulid().toLowerCase()}`}
                             className={styles.pickerEl}
                         >
-                            <MotionDrawer
-                                ref={pickerRef}
-                                anchorRef={anchorRef}
-                                isDebug={options?.isDebug}
-                                onKeyDown={handleOnKeyDown}
-                                isVisibleMask={isVisibleMask}
-                            >
-                                <DropdownComponent {...args as P & IValueChange<V>}/>
-                            </MotionDrawer>
+                            {renderMotionDrawer()}
                         </ReactPortal>
                     }
                 </AnimatePresence>

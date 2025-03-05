@@ -1,12 +1,12 @@
 .motion-animation-wrapper {
-    z-index: 1;
+    z-index: 999;
 
     align-items: flex-start;
+    will-change: opacity;
 
     &[data-debug]{
         background: rgb(255 0 0 / 30%);
     }
-    will-change: opacity;
 }
 
 
