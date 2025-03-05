@@ -11,9 +11,10 @@
   },
   "resolutions": {
     "styled-components": "5.3.9",
-    "motion": "11.x"
+    "framer-motion": "^11.x"
   },
   "dependencies": {
+    "framer-motion": "^11.x",
     "@acrool/js-utils": "^3.2.14",
     "@acrool/react-modal": "1.0.0",
     "@acrool/react-hotkey": "^0.0.7",
