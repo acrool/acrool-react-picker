@@ -12,7 +12,7 @@ import {getScrollParent, updatePosition} from './utils';
 interface IProps {
     children: ReactNode
     isDebug?: boolean
-    anchorRef: RefObject<HTMLDivElement>
+    anchorRef: RefObject<HTMLDivElement|null>
     onKeyDown?: (e: React.KeyboardEvent) => void
     isVisibleMask?: boolean,
 }

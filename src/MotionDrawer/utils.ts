@@ -41,8 +41,8 @@ export function getScrollParent(element: HTMLElement): HTMLElement | Window {
  * @param setVertical 設定垂直(top/bottom, 讓選擇棄可以決定順序
  */
 export const updatePosition = (
-    anchorRef: RefObject<HTMLElement>,
-    pickerRef: RefObject<HTMLElement>,
+    anchorRef: RefObject<HTMLElement|null>,
+    pickerRef: RefObject<HTMLElement|null>,
     setVertical: (vertical: EVertical) => void,
     importantPosition?: IPosition,
 ) => {

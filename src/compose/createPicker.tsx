@@ -30,7 +30,7 @@ function createPicker<V extends {}, P>(
     options?: IPickerOption
 ) {
 
-    const RefMainComponent = forwardRef(MainComponent as React.ForwardRefRenderFunction<P & IValueChange<V>>) as React.ForwardRefExoticComponent<React.RefAttributes<P & IValueChange<V>>>;
+    const RefMainComponent = MainComponent as React.ForwardRefExoticComponent<React.RefAttributes<P & IValueChange<V>>>;
 
     /**
      * Add framer motion
