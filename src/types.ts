@@ -1,5 +1,5 @@
-import {Transition, Variant} from 'framer-motion';
 import CSS from 'csstype';
+import {Transition, Variant} from 'framer-motion';
 
 
 type TVariantKey = 'initial'|'animate'|'exit'
