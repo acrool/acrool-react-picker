@@ -7,10 +7,10 @@
   resolved "https://registry.yarnpkg.com/@acrool/js-logger/-/js-logger-1.0.23.tgz#2dd951fc3142cef0a9a050f02aaa4d94eab09042"
   integrity sha512-UW4mXflIYYIKx4CaptY6HZmY+I2fRY76Eb/E4ACpEm7LXsZPdbgKwpGlzkky7212us8sPP8PyJnhWU7ftMhLXA==
 
-"@acrool/react-portal@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@acrool/react-portal/-/react-portal-1.1.0.tgz#8426d9364683dad27144c48dbe82fabd635d6302"
-  integrity sha512-Cmg9Kn3DbXJtQsgM5a3//4o2PNnhxx33ZyRY/HSZWQ3t1AwbC64/krEuAgMpCgRLn+y/bCuPJ4fE39XkJmJMmQ==
+"@acrool/react-portal@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@acrool/react-portal/-/react-portal-1.1.1.tgz#9e5178d25c328c59fcac0fcf26441e172f4053a8"
+  integrity sha512-BtKuIt9AxSeQuQVhvI7QwXvMz5tdAeLJbjaqIsBFAJ0483H6AQufn4W4UuzZvAerAMJi8Rsz+9D9L2YPetqIiQ==
 
 "@ampproject/remapping@^2.2.0":
   version "2.3.0"

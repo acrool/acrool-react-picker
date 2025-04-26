@@ -21,6 +21,7 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "browser": "./dist/acrool-react-picker.es.js",
       "import": "./dist/acrool-react-picker.es.js"
     },
@@ -53,7 +54,7 @@
     "react-dom": ">=18.0.0 <20.0.0"
   },
   "dependencies": {
-    "@acrool/react-portal": "^1.1.0",
+    "@acrool/react-portal": "^1.1.1",
     "@acrool/js-logger": "^1.0.23",
     "clsx": "^2.1.1",
     "ulid": "^2.3.0",
