@@ -14,7 +14,7 @@ interface IProps {
     isDebug?: boolean
     anchorRef: RefObject<HTMLDivElement|null>
     onKeyDown?: (e: React.KeyboardEvent) => void
-    isVisibleMask?: boolean,
+    isVisibleMask?: boolean
 }
 
 

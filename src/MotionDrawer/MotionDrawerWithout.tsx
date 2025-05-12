@@ -10,12 +10,12 @@ import styles from './motion-drawer.module.scss';
 
 
 interface IProps {
-    pickerOptions?: IPickerOption,
+    pickerOptions?: IPickerOption
     children: ReactNode
     isDebug?: boolean
     onKeyDown?: (e: React.KeyboardEvent) => void
-    isVisibleMask?: boolean,
-    motionProps?: IMotionOptions,
+    isVisibleMask?: boolean
+    motionProps?: IMotionOptions
 }
 
 
