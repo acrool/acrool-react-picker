@@ -12,6 +12,7 @@ export enum EVertical {
 }
 export enum EHorizontal {
     left = 'left',
+    center = 'center',
     right = 'right',
 }
 

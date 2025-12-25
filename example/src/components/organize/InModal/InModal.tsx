@@ -314,7 +314,7 @@ const InModal = () => {
 export default createStateModal(
     InModal,
     {
-        ...animation.generateFadeIn(),
+        animation: animation.generateFadeInFromTop(),
         className: 'pb-4',
     },
 )

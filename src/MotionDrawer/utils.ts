@@ -87,7 +87,9 @@ export const updatePosition = (
 
     pickerEl.style.left = horizontal === EHorizontal.left
         ? `${anchorRect.left + scrollLeft}px`
-        : `${anchorRect.right + scrollLeft - pickerWidth}px`;
+        : horizontal === EHorizontal.center
+            ? `${anchorRect.left + scrollLeft + (anchorRect.width - pickerWidth) / 2}px`
+            : `${anchorRect.right + scrollLeft - pickerWidth}px`;
 
     pickerEl.style.minWidth = `${anchorRect.width}px`;
     pickerEl.style.height = `${pickerHeight}px`;
