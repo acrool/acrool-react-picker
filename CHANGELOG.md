@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.4](https://github.com/acrool/acrool-react-picker/compare/v1.1.3...v1.1.4) (2025-12-25)
+
+
+### Features
+
+* 增加水平對齊選項及優化動畫效果 ([bddca6b](https://github.com/acrool/acrool-react-picker/commit/bddca6bab20173acc9cecc7ec981a1a4430a55f1))
+
 ### [1.1.3](https://github.com/acrool/acrool-react-picker/compare/v1.1.2...v1.1.3) (2025-05-12)
 
 ### [1.1.2](https://github.com/acrool/acrool-react-picker/compare/v1.1.1...v1.1.2) (2025-04-26)
