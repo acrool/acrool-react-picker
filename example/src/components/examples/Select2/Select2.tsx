@@ -1,10 +1,10 @@
 import {isEmpty} from '@acrool/js-utils/equal';
 import {Dropdown, IDropdownOption, isGroupOptions, TOption} from '@acrool/react-dropdown';
 import {Flex} from '@acrool/react-grid';
-import {createPicker, EVertical, usePicker} from '@acrool/react-picker';
+import {createPicker, EHorizontal, EVertical, usePicker} from '@acrool/react-picker';
 import clsx from 'clsx';
 import CSS from 'csstype';
-import React, {ForwardedRef, useEffect, useMemo, useRef} from 'react';
+import React, {ForwardedRef, JSX, useEffect, useMemo, useRef} from 'react';
 import styled, {css} from 'styled-components';
 
 import ArrowDownSvg from './arrow_down.svg?react';
@@ -171,7 +171,13 @@ const Picker = <V extends null>(args: IProps<V>) => {
 export default createPicker(
     Select2,
     Picker,
-    {isDebug: false}
+    {
+        isDebug: false,
+        importantPosition: {
+            horizontal: EHorizontal.center,
+            vertical: EVertical.top,
+        }
+    }
 ) as <V extends any>(props: IProps<V>) => JSX.Element;
 
 
@@ -205,7 +211,7 @@ const Select2Root = styled.button<{
   ${props => props.isDark && css`
     --form-color: #ccc;
   `}
-  
+
     position: relative;
     display: flex;
     flex-direction: row;
