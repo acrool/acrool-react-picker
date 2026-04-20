@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.5](https://github.com/acrool/acrool-react-picker/compare/v1.1.4...v1.1.5) (2026-04-20)
+
 ### [1.1.4](https://github.com/acrool/acrool-react-picker/compare/v1.1.3...v1.1.4) (2025-12-25)
 
 
