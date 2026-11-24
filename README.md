@@ -20,7 +20,9 @@
 </div>
 
 
-`^1.1.0 support react >=18.0.0 <20.0.0`
+`^2.0.0 support react >=18.0.0 <20.0.0, animation by motion (Web Animations API), no framer-motion`
+
+`^1.1.0 support react >=18.0.0 <20.0.0, framer-motion`
 
 
 
