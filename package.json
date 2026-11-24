@@ -56,7 +56,7 @@
     "@acrool/js-logger": "^1.0.26",
     "@acrool/react-portal": "^1.1.2",
     "clsx": "^2.1.1",
-    "framer-motion": "^11.18.2",
+    "motion": "^14.14.0",
     "ulid": "^2.3.0"
   },
   "devDependencies": {

@@ -1,7 +1,7 @@
 
 import {RefObject} from 'react';
 
-import {EHorizontal, EVertical, IPosition} from '../types';
+import {EHorizontal, EVertical, IPickerAnimation, IPosition} from '../types';
 
 // Cache to store scrollable parent for each element
 const scrollParentCache = new WeakMap();
@@ -95,4 +95,33 @@ export const updatePosition = (
     pickerEl.style.height = `${pickerHeight}px`;
     pickerEl.style.transformOrigin = vertical === EVertical.bottom ? 'top' : 'bottom';
     pickerEl.style.flexDirection = vertical === EVertical.bottom ? 'column' : 'column-reverse';
+};
+
+
+/**
+ * 是否不播放動畫
+ * - 環境不支援 Web Animations API (例如測試環境)
+ * - 使用者開啟「減少動態效果」
+ */
+export const checkIsSkipMotion = (): boolean => {
+    if(typeof Element === 'undefined' || typeof Element.prototype.animate !== 'function') return true;
+    return typeof window.matchMedia === 'function'
+        && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+};
+
+
+/**
+ * 不播放動畫時，直接套用進場動畫的最後一格
+ * (例如自訂動畫用 transform 定位，沒有套用版面會跑掉)
+ * @param el
+ * @param animation
+ */
+export const applyFinalKeyframe = (el: HTMLElement, animation?: IPickerAnimation) => {
+    if(!animation) return;
+
+    Object.keys(animation.keyframes).forEach(name => {
+        const value = animation.keyframes[name];
+        const final = Array.isArray(value) ? value[value.length - 1]: value;
+        el.style[name] = String(final);
+    });
 };
