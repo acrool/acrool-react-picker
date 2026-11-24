@@ -1,10 +1,10 @@
-import {motion} from 'framer-motion';
 import React, {ForwardedRef, forwardRef, ReactNode, RefObject, useCallback, useEffect, useRef,} from 'react';
 
 import {usePicker} from '../PickerProvider';
 import {setForwardedRef} from '../utils';
-import {maskMotionProps, pickerMotionProps} from './config';
+import {pickerMotionProps} from './config';
 import styles from './motion-drawer.module.scss';
+import usePresenceMotion from './usePresenceMotion';
 import {getScrollParent, updatePosition} from './utils';
 
 
@@ -19,7 +19,9 @@ interface IProps {
 
 
 /**
- * Motion 動畫
+ * Motion 動畫 (自動定位在錨點旁)
+ *
+ * 需放在 AnimatePresence 內：離場動畫播完才會移除節點
  * @param isDebug
  * @param anchorRef
  * @param onKeyDown
@@ -35,7 +37,10 @@ const MotionDrawer = ({
     isVisibleMask,
 }: IProps, ref?: ForwardedRef<HTMLDivElement>) => {
     const pickerRef = useRef<HTMLDivElement>(null);
+    const maskRef = useRef<HTMLDivElement>(null);
     const Picker = usePicker();
+
+    usePresenceMotion({maskRef, mainRef: pickerRef, motionProps: pickerMotionProps});
 
     const handleUpdatePosition = useCallback(() => {
         updatePosition(
@@ -84,33 +89,24 @@ const MotionDrawer = ({
 
     return <>
         {isVisibleMask &&
-            <motion.div
+            <div
                 key="mask"
+                ref={maskRef}
                 className={styles.motionMaskWrapper}
-                initial="initial"
-                animate="animate"
-                exit="exit"
-                {...maskMotionProps}
             />
         }
 
-        <motion.div
+        <div
             key="main"
             ref={setForwardedRef(ref, pickerRef)}
-            style={{display: 'none'}}
+            style={{...pickerMotionProps.style, display: 'none'}}
             className={styles.motionAnimationWrapper}
-            
-            initial="initial"
-            animate="animate"
-            exit="exit"
             tabIndex={0}
-
-            {...pickerMotionProps}
             onKeyDown={onKeyDown}
             data-debug={isDebug ? '': undefined}
         >
             {children}
-        </motion.div>
+        </div>
     </>;
 
 };

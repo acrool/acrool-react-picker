@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {EHorizontal, EVertical, IPosition} from '../types';
-import {getScrollParent, updatePosition} from './utils';
+import {applyFinalKeyframe, checkIsSkipMotion, getScrollParent, updatePosition} from './utils';
 
 // 用於模擬 DOM 結構
 function createElementWithParent({overflowY = 'auto', scrollHeight = 200, clientHeight = 100} = {}) {
@@ -87,5 +87,46 @@ describe('updatePosition', () => {
     it('anchor 或 picker 不存在時不應報錯', () => {
         const setVertical = jest.fn();
         expect(() => updatePosition({current: null}, {current: null}, setVertical)).not.toThrow();
+    });
+});
+
+describe('checkIsSkipMotion', () => {
+    const originAnimate = Element.prototype.animate;
+
+    afterEach(() => {
+        Element.prototype.animate = originAnimate;
+    });
+
+    it('環境沒有 Web Animations API 時不播放動畫', () => {
+        // @ts-expect-error 模擬不支援的環境
+        delete Element.prototype.animate;
+        expect(checkIsSkipMotion()).toBe(true);
+    });
+
+    it('支援 Web Animations API 而且沒有開啟減少動態效果時播放動畫', () => {
+        Element.prototype.animate = jest.fn();
+        window.matchMedia = jest.fn().mockReturnValue({matches: false});
+        expect(checkIsSkipMotion()).toBe(false);
+    });
+
+    it('使用者開啟減少動態效果時不播放動畫', () => {
+        Element.prototype.animate = jest.fn();
+        window.matchMedia = jest.fn().mockReturnValue({matches: true});
+        expect(checkIsSkipMotion()).toBe(true);
+    });
+});
+
+describe('applyFinalKeyframe', () => {
+    it('套用每個屬性的最後一格', () => {
+        const el = document.createElement('div');
+        applyFinalKeyframe(el, {keyframes: {opacity: [.5, 1], transform: 'translateY(0%)'}});
+        expect(el.style.opacity).toBe('1');
+        expect(el.style.transform).toBe('translateY(0%)');
+    });
+
+    it('沒有動畫設定時不做任何事', () => {
+        const el = document.createElement('div');
+        expect(() => applyFinalKeyframe(el)).not.toThrow();
+        expect(el.getAttribute('style')).toBeNull();
     });
 });

@@ -1,6 +1,6 @@
 import {removeByIndex} from '@acrool/js-utils/array';
 import {isEmpty} from '@acrool/js-utils/equal';
-import {createPicker, usePicker} from '@acrool/react-picker';
+import {createPicker, IMotionOptions, usePicker} from '@acrool/react-picker';
 import clsx from 'clsx';
 import React, {ForwardedRef, useEffect, useRef} from 'react';
 import styled, {css} from 'styled-components';
@@ -23,16 +23,16 @@ interface IProps  {
 
 
 
-const slideInBottom: any = {
-    style: {maxWidth: 'inherit'},
-    variants: {
-        initial: {position: 'fixed', bottom: 0, left: 0, right: 0, translateY: '100%', opacity: .9},
-        animate: {translateY: 0, opacity: 1,  transition: {type: 'just'}},
-        exit: {translateY: '100%', opacity: .9},
+const slideInBottom: IMotionOptions = {
+    style: {maxWidth: 'inherit', position: 'fixed', bottom: 0, left: 0, right: 0},
+    enter: {
+        keyframes: {transform: ['translateY(100%)', 'translateY(0%)'], opacity: [.9, 1]},
+        options: {duration: .3, ease: 'easeOut'},
     },
-    transition: {
-        damping: 0,
-    }
+    exit: {
+        keyframes: {transform: 'translateY(100%)', opacity: .9},
+        options: {duration: .18, ease: 'easeOut'},
+    },
 };
 
 

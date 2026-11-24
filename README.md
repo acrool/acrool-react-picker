@@ -27,7 +27,7 @@
 ## Features
 
 - Quickly create various Pickers such as Datepicker, timepicker, Select dropdown, etc.
-- Plug and unplug using `framer-motion`
+- Plug and unplug using `motion` (`AnimatePresence` + the mini `animate`, Web Animations API)
 - Simulate the browser's native drop-down menu behavior (click outside to close, lose focus to close, open the menu when the keyboard is pressed or blank)
 - The agent menu OnChange and value changes can be controlled freely and will be saved when the menu is closed.
 
@@ -206,6 +206,42 @@ return <DropdownRoot onClick={handleOnClick}>
         <DropTitle>{i18n('page.workspaceTask.action.subTask', {def: 'SubTask'})}</DropTitle>
     </DropdownRoot>;
 ```
+
+## Custom animation
+
+Animations are played by the mini `animate` from `motion` (Web Animations API), and the menu is removed only after the exit animation has finished.
+Use `motionProps` together with `isDisabledAutoPosition` to position and animate the menu yourself:
+
+```tsx
+import {createPicker, IMotionOptions} from '@acrool/react-picker';
+
+const slideInBottom: IMotionOptions = {
+    // static styles that are not animated
+    style: {position: 'fixed', bottom: 0, left: 0, right: 0},
+    // keyframes: a single value animates from the current state, an array is the full keyframe list
+    enter: {
+        keyframes: {transform: ['translateY(100%)', 'translateY(0%)'], opacity: [.9, 1]},
+        options: {duration: .3, ease: 'easeOut'},
+    },
+    exit: {
+        keyframes: {transform: 'translateY(100%)', opacity: .9},
+        options: {duration: .18, ease: 'easeOut'},
+    },
+};
+
+export default createPicker(Main, Dropdown, {
+    motionProps: slideInBottom,
+    isVisibleMask: true,
+    isDisabledAutoPosition: true,
+});
+```
+
+### Migrating from 1.x
+
+- `framer-motion` is replaced by `motion` (installed as a dependency, nothing to add on your side).
+- `motionProps` no longer takes framer-motion `variants` / `transition`. Move the values of `variants.initial` that are not animated into `style`, and describe the animation with `enter` / `exit` as above. Write movement and scaling as `transform` strings.
+- The package no longer bundles `react/jsx-runtime`, so it also renders under Preact (`preact/compat`).
+
 
 ## License
 

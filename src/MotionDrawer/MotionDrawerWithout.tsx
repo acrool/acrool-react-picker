@@ -1,11 +1,10 @@
-import {motion} from 'framer-motion';
+import {clsx} from 'clsx';
 import React, {ForwardedRef, forwardRef, ReactNode, RefObject, useRef,} from 'react';
 
-import {usePicker} from '../PickerProvider';
 import {IMotionOptions, IPickerOption} from '../types';
 import {setForwardedRef} from '../utils';
-import {maskMotionProps} from './config';
 import styles from './motion-drawer.module.scss';
+import usePresenceMotion from './usePresenceMotion';
 
 
 
@@ -20,9 +19,10 @@ interface IProps {
 
 
 /**
- * Motion 動畫
+ * Motion 動畫 (不自動定位，位置與動畫由 motionProps 決定)
+ *
+ * 需放在 AnimatePresence 內：離場動畫播完才會移除節點
  * @param isDebug
- * @param anchorRef
  * @param onKeyDown
  * @param isVisibleMask
  * @param children
@@ -36,32 +36,29 @@ const MotionDrawerWithout = ({
     motionProps,
 }: IProps, ref?: ForwardedRef<HTMLDivElement>) => {
     const pickerRef = useRef<HTMLDivElement>(null);
+    const maskRef = useRef<HTMLDivElement>(null);
+
+    usePresenceMotion({maskRef, mainRef: pickerRef, motionProps});
 
     return <>
         {isVisibleMask &&
-            <motion.div
+            <div
                 key="mask"
+                ref={maskRef}
                 className={styles.motionMaskWrapper}
-                initial="initial"
-                animate="animate"
-                exit="exit"
-                {...maskMotionProps}
             />
         }
 
-        <motion.div
+        <div
             key="main"
             ref={setForwardedRef(ref, pickerRef)}
-            className={styles.motionAnimationWrapper}
+            className={clsx(styles.motionAnimationWrapper, motionProps?.className)}
+            style={motionProps?.style}
             onKeyDown={onKeyDown}
             data-debug={isDebug ? '': undefined}
-            {...motionProps}
-            initial="initial"
-            animate="animate"
-            exit="exit"
         >
             {children}
-        </motion.div>
+        </div>
     </>;
 
 };

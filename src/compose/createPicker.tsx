@@ -1,6 +1,6 @@
 import Logger from '@acrool/js-logger';
 import ReactPortal from '@acrool/react-portal';
-import {AnimatePresence} from 'framer-motion';
+import {AnimatePresence} from 'motion/react';
 import React, {forwardRef, useCallback, useEffect, useRef, useState} from 'react';
 import {ulid} from 'ulid';
 
@@ -33,7 +33,7 @@ function createPicker<V extends {}, P>(
     const RefMainComponent = MainComponent as React.ForwardRefExoticComponent<React.RefAttributes<P & IValueChange<V>>>;
 
     /**
-     * Add framer motion
+     * Add motion (AnimatePresence + motion mini)
      * @param args
      * @param ref
      */
