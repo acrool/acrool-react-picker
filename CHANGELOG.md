@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/acrool/acrool-react-picker/compare/v1.1.5...v2.0.0) (2026-11-24)
+
+
+### ⚠ BREAKING CHANGES
+
+* replace framer-motion with motion mini and externalize jsx-runtime
+
+### Features
+
+* replace framer-motion with motion mini and externalize jsx-runtime ([ba0ae73](https://github.com/acrool/acrool-react-picker/commit/ba0ae73acb942b58a6a2e0e9938ebadfdb3f4325))
+
 ### [1.1.5](https://github.com/acrool/acrool-react-picker/compare/v1.1.4...v1.1.5) (2026-04-20)
 
 ### [1.1.4](https://github.com/acrool/acrool-react-picker/compare/v1.1.3...v1.1.4) (2025-12-25)
