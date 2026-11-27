@@ -1,4 +1,4 @@
-import React, {ForwardedRef, forwardRef, ReactNode, RefObject, useCallback, useEffect, useRef,} from 'react';
+import React, {ForwardedRef, forwardRef, ReactNode, RefObject, useCallback, useEffect, useLayoutEffect, useRef,} from 'react';
 
 import {usePicker} from '../PickerProvider';
 import {setForwardedRef} from '../utils';
@@ -7,6 +7,12 @@ import styles from './motion-drawer.module.scss';
 import usePresenceMotion from './usePresenceMotion';
 import {getScrollParent, updatePosition} from './utils';
 
+
+
+/**
+ * 在 client 用 useLayoutEffect（繪製前執行），SSR 退回 useEffect 以免警告
+ */
+const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
 
 interface IProps {
@@ -53,36 +59,42 @@ const MotionDrawer = ({
     }, [Picker.setVertical, Picker.importantPosition]);
 
 
-    useEffect(() => {
-
+    // 顯示並定位要在瀏覽器繪製前完成：進場動畫在 layout effect 就開始計時 (usePresenceMotion)，
+    // 晚幾格才顯示的話，看到的已經是動畫的後段，選單會像「慢半拍才跳出來」(手機上特別明顯)。
+    // portal 的容器在子層的 layout effect 之後才掛上 document，這時量不到位置，所以延到 microtask：
+    // 容器已經在畫面上，而且仍在繪製前。顯示與定位同時進行，不會先在錯誤的位置閃一下 (#1、#7)
+    useIsomorphicLayoutEffect(() => {
         if(!Picker.isVisible){
             return;
         }
-        if (anchorRef.current && pickerRef.current) {
-            const scrollParent = getScrollParent(anchorRef.current);
 
-            if(scrollParent){
-                scrollParent.addEventListener('scroll', handleUpdatePosition);
-                window.addEventListener('resize', handleUpdatePosition);
-            }
-            // 避免移動該設定到上方統一 (https://github.com/acrool/acrool-react-picker/issues/1)
-            // 監視 Observe之後再出現
-            window.requestAnimationFrame(() => {
-                if (pickerRef.current) {
-                    pickerRef.current.style.display = 'flex';
-                    handleUpdatePosition();
-                }
-            });
+        let isCancelled = false;
+        Promise.resolve().then(() => {
+            if(isCancelled || !pickerRef.current) return;
+            pickerRef.current.style.display = 'flex';
+            handleUpdatePosition();
+        });
+
+        return () => {
+            isCancelled = true;
+        };
+    }, [Picker.isVisible]);
 
 
-            return () => {
-                if(scrollParent) {
-                    scrollParent.removeEventListener('scroll', handleUpdatePosition);
-                    window.removeEventListener('resize', handleUpdatePosition);
-                }
-
-            };
+    // 捲動、改變視窗大小時重新定位
+    useEffect(() => {
+        if(!Picker.isVisible || !anchorRef.current){
+            return;
         }
+
+        const scrollParent = getScrollParent(anchorRef.current);
+        scrollParent.addEventListener('scroll', handleUpdatePosition);
+        window.addEventListener('resize', handleUpdatePosition);
+
+        return () => {
+            scrollParent.removeEventListener('scroll', handleUpdatePosition);
+            window.removeEventListener('resize', handleUpdatePosition);
+        };
     }, [Picker.isVisible]);
 
 
