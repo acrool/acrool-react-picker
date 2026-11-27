@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.1](https://github.com/acrool/acrool-react-picker/compare/v2.0.0...v2.0.1) (2026-11-27)
+
+
+### Bug Fixes
+
+* show and position the picker before the first paint ([55f2a20](https://github.com/acrool/acrool-react-picker/commit/55f2a201a399112d2262b34060844b9459cceb4d))
+
 ## [2.0.0](https://github.com/acrool/acrool-react-picker/compare/v1.1.5...v2.0.0) (2026-11-24)
 
 
