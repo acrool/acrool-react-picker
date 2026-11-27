@@ -58,6 +58,21 @@ describe('createPicker', () => {
         expect(screen.getByTestId('main').contains(screen.getByTestId('dropdown'))).toBe(false);
     });
 
+    it('展開後在下一次繪製前就顯示：不等 requestAnimationFrame，進場動畫才會從第一格開始被看到', async () => {
+        const Picker = createPicker(Main, Dropdown);
+        render(<Picker value="a" onChange={jest.fn()}/>);
+
+        fireEvent.click(screen.getByTestId('main'));
+        // 只清空 microtask，不經過任何一個 animation frame
+        await act(async () => {
+            await Promise.resolve();
+        });
+
+        const wrapper = screen.getByTestId('dropdown').parentElement as HTMLElement;
+        expect(wrapper.isConnected).toBe(true);
+        expect(wrapper.style.display).toBe('flex');
+    });
+
     it('再點一次關閉：沒有 Web Animations API 的環境不等動畫，直接移除', async () => {
         const Picker = createPicker(Main, Dropdown);
         render(<Picker value="a" onChange={jest.fn()}/>);
